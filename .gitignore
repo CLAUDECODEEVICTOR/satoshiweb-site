@@ -1,0 +1,34 @@
+.vercel
+.DS_Store
+.playwright-mcp/
+.superpowers/
+.claude/
+
+# PDF e documenti interni
+*.pdf
+contratto-standard.html
+scheda-agnese.html
+cartellone.html
+script-chiamate.html
+piano-strategico.html
+STRATEGIA.md
+index.backup.html
+Untitled
+
+# Screenshot e immagini di lavoro
+lazzi-*.png
+satoshi-*.png
+unicauto-*.png
+post-lazzi.*
+logo-satoshi.png
+
+# Cartelle interne
+clienti/
+paradise/
+satoshi-videos/
+demo/
+docs/
+iktaworld/
+projects/
+screen\ lazzi/
+screen\ ikta\ world/
