@@ -32,3 +32,5 @@ iktaworld/
 projects/
 screen\ lazzi/
 screen\ ikta\ world/
+.env
+.env.*

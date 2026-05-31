@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preventivo — Satoshi Web</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=clash-display@500,600,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Satoshi', sans-serif;
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 56px 64px;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    border-bottom: 2px solid #F5A623;
+    margin-bottom: 40px;
+  }
+  .logo-block { display: flex; align-items: center; }
+  .logo-icon {
+    width: 72px; height: 72px;
+    background: #0a0a0a;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .logo-icon img { width: 56px; height: 56px; object-fit: contain; }
+
+  .header-meta { text-align: right; }
+  .doc-type {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: #0a0a0a; line-height: 1;
+  }
+  .doc-number { font-size: 0.75rem; color: #888; margin-top: 6px; font-family: monospace; letter-spacing: 0.05em; }
+  .doc-date { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+  /* PARTI */
+  .parti {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+  .parte-block { }
+  .parte-label {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em;
+    color: #F5A623; font-weight: 700; margin-bottom: 10px;
+    font-family: monospace;
+  }
+  .parte-name { font-family: 'Clash Display', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; }
+  .parte-detail { font-size: 0.8rem; color: #555; line-height: 1.7; }
+  .parte-detail span { display: block; }
+
+  /* SEZIONE TITOLO */
+  .section-title {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em;
+    color: #F5A623; font-weight: 700; font-family: monospace;
+    margin-bottom: 14px;
+  }
+
+  /* SCOPE */
+  .scope-box {
+    background: #fafafa;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+  }
+  .scope-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.15rem; font-weight: 600;
+    margin-bottom: 16px;
+    color: #0a0a0a;
+  }
+  .scope-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .scope-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.88rem; color: #333;
+  }
+  .scope-list li::before {
+    content: '→';
+    color: #F5A623; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .scope-not {
+    margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .scope-not-label {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #aaa; font-family: monospace; margin-bottom: 8px;
+  }
+  .scope-not-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .scope-not-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.8rem; color: #aaa;
+  }
+  .scope-not-list li::before { content: '×'; color: #ccc; flex-shrink: 0; }
+
+  /* PRICING */
+  .pricing-box {
+    background: #0a0a0a;
+    border-radius: 12px;
+    padding: 28px 28px;
+    margin-bottom: 32px;
+    color: #f0ede6;
+  }
+  .pricing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.88rem;
+  }
+  .pricing-row:last-of-type { border-bottom: none; }
+  .pricing-row.total {
+    padding-top: 16px;
+    margin-top: 8px;
+    border-top: 1px solid rgba(245,166,35,0.4);
+    border-bottom: none;
+  }
+  .pricing-row .label { color: #aaa; }
+  .pricing-row.total .label {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1rem; font-weight: 600; color: #f0ede6;
+  }
+  .pricing-row .value { font-weight: 600; color: #f0ede6; }
+  .price-original {
+    text-decoration: line-through;
+    color: #555;
+    font-size: 0.8rem;
+    margin-right: 8px;
+    font-weight: 400;
+  }
+  .price-final {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: #F5A623;
+  }
+  .price-note { font-size: 0.7rem; color: #666; margin-top: 2px; }
+  .discount-badge {
+    display: inline-block;
+    background: rgba(245,166,35,0.15);
+    border: 1px solid rgba(245,166,35,0.3);
+    color: #F5A623;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 20px;
+    font-family: monospace;
+    margin-left: 8px;
+  }
+
+  /* PAGAMENTO */
+  .payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .payment-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .payment-step {
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #F5A623; font-family: monospace; font-weight: 700; margin-bottom: 6px;
+  }
+  .payment-amount {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.4rem; font-weight: 700; color: #0a0a0a;
+  }
+  .payment-when { font-size: 0.78rem; color: #888; margin-top: 4px; }
+
+  /* CONDIZIONI */
+  .condizioni-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 32px;
+  }
+  .condizioni-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.82rem; color: #444; line-height: 1.55;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .condizioni-list li:last-child { border-bottom: none; }
+  .cond-num {
+    font-family: monospace; font-size: 0.7rem;
+    color: #F5A623; font-weight: 700;
+    min-width: 20px; margin-top: 1px;
+  }
+
+  /* FIRMA */
+  .firma-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .firma-block { }
+  .firma-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: #888; font-family: monospace; margin-bottom: 60px; }
+  .firma-line { border-top: 1px solid #ccc; padding-top: 8px; }
+  .firma-name { font-size: 0.78rem; color: #555; }
+  .firma-date-label { font-size: 0.7rem; color: #aaa; margin-top: 2px; }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-brand { font-size: 0.7rem; color: #aaa; }
+  .footer-brand strong { color: #F5A623; }
+  .footer-validity { font-size: 0.7rem; color: #aaa; font-family: monospace; }
+
+  /* PRINT */
+  @media print {
+    body { font-size: 13px; }
+    .page { padding: 40px 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-block">
+      <div class="logo-icon"><img src="logo-satoshi.png" alt="Satoshi Web"></div>
+    </div>
+    <div class="header-meta">
+      <div class="doc-type">Preventivo</div>
+      <div class="doc-number">N. 016 / 2026</div>
+      <div class="doc-date">Data: 28 / 05 / 2026</div>
+    </div>
+  </div>
+
+  <!-- PARTI -->
+  <div class="parti">
+    <div class="parte-block">
+      <div class="parte-label">// Fornitore</div>
+      <div class="parte-name">Edoardo De Benedictis</div>
+      <div class="parte-detail">
+        <span>Satoshi Web</span>
+        <span>P.IVA: 18523731000</span>
+        <span>+39 334 198 9193</span>
+        <span>edodbnmarketing@gmail.com</span>
+        <span>satoshiweb.it</span>
+      </div>
+    </div>
+    <div class="parte-block">
+      <div class="parte-label">// Cliente</div>
+      <div class="parte-name">[Nome / Ragione Sociale]</div>
+      <div class="parte-detail">
+        <span>P.IVA / CF: [_______________]</span>
+        <span>Via [_______________]</span>
+        <span>[Città], [CAP]</span>
+        <span>[email@cliente.it]</span>
+        <span>[sito o settore attività]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCOPE -->
+  <div class="section-title">// Scope del progetto</div>
+  <div class="scope-box">
+    <div class="scope-title">Sito Web Custom — 4 Pagine</div>
+    <ul class="scope-list">
+      <li>4 pagine su misura: Home, Chi Siamo, Servizi, Contatti (struttura adattabile)</li>
+      <li>Design personalizzato — nessun template standard, grafica coerente con il brand</li>
+      <li>Copy incluso — testi scritti e ottimizzati da Satoshi Web</li>
+      <li>Versione mobile e desktop ottimizzata</li>
+      <li>Form di contatto funzionante con notifiche email</li>
+      <li>SEO base — meta tag, sitemap, Google Search Console</li>
+      <li>3 modifiche al mese incluse</li>
+      <li>Consegna stimata: 14 giorni lavorativi dal ricevimento dei materiali</li>
+    </ul>
+    <div class="scope-not">
+      <div class="scope-not-label">Non incluso in questo preventivo</div>
+      <ul class="scope-not-list">
+        <li>E-commerce e sistema di pagamento online</li>
+        <li>Fotografie professionali o produzione video</li>
+        <li>Gestione social media e campagne pubblicitarie</li>
+        <li>Pagine aggiuntive oltre le 4 previste</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section-title">// Investimento</div>
+  <div class="pricing-box">
+    <div class="pricing-row">
+      <span class="label">Sito Web Custom 4 pagine</span>
+      <span class="value">
+        <span class="price-original">€ 690</span>
+        <span class="discount-badge">Sconto Partner</span>
+      </span>
+    </div>
+    <div class="pricing-row">
+      <span class="label">Dominio + hosting — 1° anno</span>
+      <span class="value">€ 30</span>
+    </div>
+    <div class="pricing-row">
+      <span class="label">Dominio + hosting — dal 2° anno</span>
+      <span class="value">€ 50 / anno</span>
+    </div>
+    <div class="pricing-row">
+      <span class="label">3 modifiche al mese</span>
+      <span class="value">Incluso</span>
+    </div>
+    <div class="pricing-row total">
+      <div>
+        <span class="label">Totale 1° anno</span>
+        <div class="price-note">Operazione in regime forfettario art. 1 c. 54-89 L. 190/2014 — IVA non applicata</div>
+      </div>
+      <div class="price-final">€ 520</div>
+    </div>
+  </div>
+
+  <!-- PAGAMENTO -->
+  <div class="section-title">// Modalità di pagamento — Bonifico bancario</div>
+  <div class="payment-grid">
+    <div class="payment-card">
+      <div class="payment-step">01 · Alla firma</div>
+      <div class="payment-amount">€ 260</div>
+      <div class="payment-when">50% — Avvio del progetto</div>
+    </div>
+    <div class="payment-card">
+      <div class="payment-step">02 · Al go-live</div>
+      <div class="payment-amount">€ 260</div>
+      <div class="payment-when">50% — Consegna del sito</div>
+    </div>
+  </div>
+
+  <!-- CONDIZIONI -->
+  <div class="section-title">// Condizioni</div>
+  <ul class="condizioni-list">
+    <li>
+      <span class="cond-num">01</span>
+      <span>I tempi di consegna (14 giorni lavorativi) decorrono dal momento in cui il cliente fornisce tutti i materiali necessari: testi, loghi, immagini e indicazioni grafiche. Ritardi nella consegna dei materiali non sono imputabili a Satoshi Web.</span>
+    </li>
+    <li>
+      <span class="cond-num">02</span>
+      <span>Le 3 modifiche mensili incluse riguardano modifiche a contenuti esistenti (testi, immagini, prezzi). Non sono considerate modifiche: aggiunta di nuove pagine, nuove funzionalità o cambi di struttura grafica — questi vengono preventivati separatamente.</span>
+    </li>
+    <li>
+      <span class="cond-num">03</span>
+      <span>La proprietà del sito web e di tutti i materiali prodotti passa al cliente esclusivamente dopo il saldo completo del pagamento.</span>
+    </li>
+    <li>
+      <span class="cond-num">04</span>
+      <span>Il dominio viene registrato e gestito da Satoshi Web. In caso di cessazione del rapporto, le credenziali di accesso vengono trasferite al cliente entro 7 giorni dalla richiesta.</span>
+    </li>
+    <li>
+      <span class="cond-num">05</span>
+      <span>Se il cliente blocca o sospende il progetto per più di 30 giorni consecutivi senza accordo scritto, la seconda tranche (€245) è comunque dovuta.</span>
+    </li>
+    <li>
+      <span class="cond-num">06</span>
+      <span>Questo preventivo è valido per 30 giorni dalla data di emissione. Oltre tale termine, i prezzi potrebbero essere soggetti a variazioni.</span>
+    </li>
+  </ul>
+
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Realizzato da <strong>Satoshi Web</strong> · satoshiweb.it</div>
+    <div class="footer-validity">Preventivo valido 30 giorni dalla data di emissione</div>
+  </div>
+
+</div>
+</body>
+</html>
