@@ -247,6 +247,19 @@
         @media (max-width: 768px) {
           .pricing-cards { display: flex; }
         }
+        /* Extra offerings (app & AI) */
+        .pricing-extra { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+        .pe-item {
+            flex: 1 1 300px; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 1.1rem 1.5rem; transition: var(--transition);
+        }
+        .pe-item:hover { border-color: rgba(245,166,35,0.4); }
+        .pe-info { display: flex; flex-direction: column; gap: 0.2rem; }
+        .pe-name { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; }
+        .pe-price { color: var(--text-muted); font-size: 0.85rem; }
+        .pe-link { color: var(--accent); text-decoration: none; font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
+        .pe-link:hover { text-decoration: underline; }
 
         /* --- LANG TOGGLE --- */
         .nav-right { display: flex; align-items: center; gap: 10px; }
@@ -399,6 +412,34 @@
             transition: var(--transition);
         }
         .btn-outline:hover { border-color: var(--accent); }
+
+        /* Hero pain / agitation line */
+        .hero-pain {
+            color: var(--text);
+            max-width: 560px;
+            font-size: 1.05rem;
+            line-height: 1.55;
+            margin: 0.5rem 0 2.2rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent);
+            text-wrap: pretty;
+        }
+        .hero-pain b { color: var(--accent); font-weight: 600; }
+
+        /* Hero CTA buttons with icons */
+        .hero-btns { flex-wrap: wrap; }
+        .hero-btns .btn-pill, .hero-btns .btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; }
+        .hero-btns svg { flex-shrink: 0; }
+        .hero-link {
+            display: inline-block;
+            margin-top: 1.3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+        .hero-link:hover { color: var(--accent); border-color: var(--accent); }
 
         /* --- HERO CLIENTS (inside hero, below CTA) --- */
         .hero-clients {
@@ -1429,7 +1470,7 @@
             .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
             .hero-btns { flex-direction: column; align-items: stretch; }
             .hero-btns .btn-pill,
-            .hero-btns .btn-outline { text-align: center; }
+            .hero-btns .btn-outline { text-align: center; justify-content: center; }
             .section-padding { padding: 3.5rem 0; }
             .section-padding::before { margin-top: 1.5rem; margin-bottom: 2.5rem; width: 80%; }
             .footer-links { gap: 1.5rem; }
@@ -1541,12 +1582,19 @@
 
             <div>
                 <h1 class="serif reveal stagger-2" data-i18n-html="hero_h1">Smetti di essere <i>invisibile online.</i></h1>
-                <p class="reveal stagger-3" data-i18n="hero_sub">Non solo siti web. Costruiamo il sistema digitale della tua attività: automazioni, AI e strumenti su misura per fare di più, con meno sforzo.</p>
+                <p class="hero-pain reveal stagger-3" data-i18n-html="hero_pain">Ogni giorno qualcuno cerca la tua attività su Google e trova quella del tuo concorrente. Senza un sito ben posizionato online <b>perdi clienti ogni giorno.</b></p>
 
                 <div class="hero-btns reveal stagger-3">
-                    <a href="#contatti" class="btn-pill" style="text-decoration: none;" data-i18n="hero_cta">Prenota una chiamata — 3 minuti →</a>
-                    <a href="#progetti" class="btn-outline" data-i18n="hero_work">Vedi i lavori</a>
+                    <a href="https://wa.me/393341989193?text=Ciao%2C%20ho%20un%27attivit%C3%A0%20e%20vorrei%20portarla%20online" target="_blank" rel="noopener" class="btn-pill" style="text-decoration: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                        <span data-i18n="hero_cta_wa">Scrivici su WhatsApp</span>
+                    </a>
+                    <a href="tel:+393341989193" class="btn-outline">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        <span data-i18n="hero_cta_call">Chiamaci</span>
+                    </a>
                 </div>
+                <a href="#progetti" class="hero-link reveal stagger-3" data-i18n="hero_work">Oppure dai un'occhiata ai lavori →</a>
 
                 <div class="hero-clients reveal stagger-3">
                     <img src="projects/lazzi/logo.png" alt="Lazzi Barbershop" class="client-logo">
@@ -1731,7 +1779,7 @@
                     <img src="projects/lazzi/logo.png" alt="Lazzi Barbershop Logo" class="project-logo" loading="lazy">
                     <p class="mono">SITO WEB + E-COMMERCE</p>
                     <h3 class="serif">Lazzi Barbershop</h3>
-                    <p class="project-desc" data-i18n="proj_lazzi_desc">Sito premium con e-commerce e pagamenti Stripe</p>
+                    <p class="project-desc" data-i18n="proj_lazzi_desc">Sito premium con shop online prodotti barberia</p>
                     <div class="tech-tags">
                         <span class="tag">HTML/CSS/JS</span>
                         <span class="tag">E-Commerce</span>
@@ -2086,16 +2134,16 @@
                     <div class="pt-col-label"></div>
                     <div class="pt-tier">
                         <span class="pt-name" data-i18n="price_plan1">Vetrina</span>
-                        <span class="pt-price">€590<small data-i18n="price_onetm">/una tantum</small></span>
+                        <span class="pt-price">€490<small data-i18n="price_onetm">/una tantum</small></span>
                     </div>
                     <div class="pt-tier pt-featured">
                         <span class="pt-badge" data-i18n="price_badge">Più scelto</span>
                         <span class="pt-name">Pro</span>
-                        <span class="pt-price">€1.190<small data-i18n="price_onetm">/una tantum</small></span>
+                        <span class="pt-price">€990<small data-i18n="price_onetm">/una tantum</small></span>
                     </div>
                     <div class="pt-tier">
                         <span class="pt-name">Pro+AI</span>
-                        <span class="pt-price">€1.890<small data-i18n="price_onetm">/una tantum</small></span>
+                        <span class="pt-price">€1.490<small data-i18n="price_onetm">/una tantum</small></span>
                     </div>
                 </div>
                 <!-- ROWS -->
@@ -2157,7 +2205,7 @@
                 <div class="pc-card">
                     <div class="pc-head">
                         <div class="pc-name" data-i18n="price_plan1">Vetrina</div>
-                        <div class="pc-price">€590<small data-i18n="price_onetm"> /una tantum</small></div>
+                        <div class="pc-price">€490<small data-i18n="price_onetm"> /una tantum</small></div>
                     </div>
                     <div class="pc-features">
                         <div class="pc-feat"><span class="pt-check on">✓</span> <span data-i18n="mc_f1_vetrina">1 pagina multi-sezione</span></div>
@@ -2175,7 +2223,7 @@
                     <div class="pc-head">
                         <span class="pc-badge" data-i18n="price_badge">Più scelto</span>
                         <div class="pc-name">Pro</div>
-                        <div class="pc-price">€1.190<small data-i18n="price_onetm"> /una tantum</small></div>
+                        <div class="pc-price">€990<small data-i18n="price_onetm"> /una tantum</small></div>
                     </div>
                     <div class="pc-features">
                         <div class="pc-feat"><span class="pt-check on">✓</span> <span data-i18n="mc_f1_pro">5 pagine + copy incluso</span></div>
@@ -2192,7 +2240,7 @@
                 <div class="pc-card">
                     <div class="pc-head">
                         <div class="pc-name">Pro+AI</div>
-                        <div class="pc-price">€1.890<small data-i18n="price_onetm"> /una tantum</small></div>
+                        <div class="pc-price">€1.490<small data-i18n="price_onetm"> /una tantum</small></div>
                     </div>
                     <div class="pc-features">
                         <div class="pc-feat"><span class="pt-check on">✓</span> <span data-i18n="mc_f1_proai">5 pagine + blog</span></div>
@@ -2206,6 +2254,24 @@
                 </div>
 
                 <p style="font-size:0.78rem; color: var(--text-muted); text-align:center; line-height:1.5;" data-i18n="price_sub">Pagamento 50% avvio + 50% go-live.</p>
+            </div>
+
+            <!-- Extra offerings: app & AI -->
+            <div class="pricing-extra reveal">
+                <div class="pe-item">
+                    <div class="pe-info">
+                        <span class="pe-name" data-i18n="pe_app_name">App su misura</span>
+                        <span class="pe-price" data-i18n="pe_app_price">a partire da €2.000</span>
+                    </div>
+                    <a href="#contatti" class="pe-link" data-i18n="pe_link">Richiedi →</a>
+                </div>
+                <div class="pe-item">
+                    <div class="pe-info">
+                        <span class="pe-name" data-i18n="pe_ai_name">AI &amp; Automazioni</span>
+                        <span class="pe-price" data-i18n="pe_ai_price">Preventivo personalizzato</span>
+                    </div>
+                    <a href="#contatti" class="pe-link" data-i18n="pe_link">Richiedi →</a>
+                </div>
             </div>
         </section>
 
@@ -2233,7 +2299,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq_1a">Dipende dal progetto: una landing page parte da 400€, un sito completo da&nbsp;800€. Il preventivo è concordato prima di iniziare. Paghi metà alla firma, metà alla consegna.</p>
+                        <p data-i18n="faq_1a">Dipende dal progetto: una landing semplice parte da 100–200€, un sito vetrina semplice da&nbsp;490€, mentre i siti su misura più complessi partono da 790€ con preventivo personalizzato. Il preventivo è concordato prima di iniziare: paghi metà alla firma, metà alla consegna.</p>
                     </div>
                 </div>
                 <div class="faq-item reveal">
@@ -2635,7 +2701,9 @@
                 clients_tagline:'Già scelti da attività locali, federazioni internazionali e realtà istituzionali. Da Civitavecchia e oltre.',
                 hero_h1:'Smetti di essere <i>invisibile online.</i>',
                 hero_sub:'Non solo siti web. Costruiamo il sistema digitale della tua attività: automazioni, AI e strumenti su misura per fare di più, con meno sforzo.',
-                hero_cta:'Prenota una chiamata — 3 minuti →', hero_work:'Vedi i lavori',
+                hero_pain:'Ogni giorno qualcuno cerca la tua attività su Google e trova quella del tuo concorrente. Senza un sito ben posizionato online <b>perdi clienti ogni giorno.</b>',
+                hero_cta_wa:'Scrivici su WhatsApp', hero_cta_call:'Chiamaci',
+                hero_cta:'Prenota una chiamata — 3 minuti →', hero_work:'Oppure dai un\'occhiata ai lavori →',
                 nicchie_mono:'// Settori', nicchie_h2:'Soluzioni diverse per ogni settore.',
                 nicchie_sub:'Ogni attività ha esigenze diverse. Costruiamo in base a quello che serve davvero, non su un template standard.',
                 nicchie_1_h:'Barbieri & Beauty', nicchie_1_p:'Prenotazioni self-service, zero WhatsApp a tutte le ore',
@@ -2652,7 +2720,7 @@
                 proj_mono:'// Progetti', proj_h2:'Lavori recenti',
                 proj_sub:'Ogni progetto è un problema reale risolto. Guarda cosa abbiamo costruito.',
                 proj_visit:'Visita il sito', proj_scroll:'Scorri per vedere altri progetti',
-                proj_lazzi_desc:'Sito premium con e-commerce e pagamenti Stripe',
+                proj_lazzi_desc:'Sito premium con shop online prodotti barberia',
                 proj_ikta_desc:'Federazione internazionale di sport da combattimento. Sito istituzionale multilingua per atleti e affiliati in 30 paesi.',
                 proj_unicauto_desc:"Noleggio supercar e auto sportive premium. Catalogo vetture, prenotazione online e AI Advisor per scegliere l'auto giusta.",
                 proj_antitesi_desc:'Landing page per DJ e producer romano. Biografia, date eventi, set mix in streaming e contatti per booking. Design dark, animazioni fluide, mobile-first.',
@@ -2671,6 +2739,7 @@
                 chip_dash:'Dashboard automatiche', chip_reminders:'Promemoria appuntamenti', chip_custom:'Tool AI su misura',
                 price_mono:'// Prezzi', price_h2:'Scegli il tuo piano.', price_sub:'Pagamento 50% avvio + 50% go-live.',
                 price_badge:'Più scelto', price_plan1:'Vetrina', price_onetm:'/una tantum',
+                pe_app_name:'App su misura', pe_app_price:'a partire da €2.000', pe_ai_name:'AI & Automazioni', pe_ai_price:'Preventivo personalizzato', pe_link:'Richiedi →',
                 price_f1:'Pagine incluse', price_f1s:'sezioni multi-contenuto, copy incluso',
                 price_f2:'Dominio + hosting', price_f2s:'primo anno incluso',
                 price_f3:'SEO locale', price_f3s:'Google Business, schema, sitemap',
@@ -2683,7 +2752,7 @@
                 mc_f2:'Dominio + hosting (1° anno)', mc_f3:'SEO locale', mc_f4:'Sistema prenotazioni',
                 mc_f5:'Pannello modifiche', mc_f6:'Assistente AI', mc_f6_proai:'Assistente AI (chat + WhatsApp)',
                 faq_mono:'// Domande frequenti', faq_h2:'Hai qualche dubbio?',
-                faq_1q:'Quanto costa davvero?', faq_1a:'Dipende dal progetto: una landing page parte da 400€, un sito completo da 800€. Il preventivo è concordato prima di iniziare. Paghi metà alla firma, metà alla consegna.',
+                faq_1q:'Quanto costa davvero?', faq_1a:'Dipende dal progetto: una landing semplice parte da 100–200€, un sito vetrina semplice da 490€, mentre i siti su misura più complessi partono da 790€ con preventivo personalizzato. Il preventivo è concordato prima di iniziare: paghi metà alla firma, metà alla consegna.',
                 faq_2q:'Quanto tempo ci vuole?', faq_2a:'3-5 giorni per il pacchetto Base, 5-7 per il Pro. Ti teniamo aggiornato durante tutto il processo.',
                 faq_3q:'E se non mi piace il risultato?', faq_3a:'Garanzia 30 giorni soddisfatti o rimborsati, senza domande.',
                 faq_4q:'Posso fare modifiche dopo la consegna?', faq_4a:'Sì, le modifiche sono incluse nella manutenzione mensile.',
@@ -2713,7 +2782,9 @@
                 clients_tagline:'Already trusted by local businesses, international federations and institutions. From Civitavecchia and beyond.',
                 hero_h1:'Stop being <i>invisible online.</i>',
                 hero_sub:'Not just websites. We build the digital system of your business: automations, AI and custom tools to do more, with less effort.',
-                hero_cta:'Book a call — 3 minutes →', hero_work:'See our work',
+                hero_pain:'Every day someone searches for your business on Google and finds your competitor instead. Without a well-ranked website, <b>you lose customers every day.</b>',
+                hero_cta_wa:'Message us on WhatsApp', hero_cta_call:'Call us',
+                hero_cta:'Book a call — 3 minutes →', hero_work:'Or take a look at our work →',
                 nicchie_mono:'// Industries', nicchie_h2:'Different solutions for every industry.',
                 nicchie_sub:"Every business has different needs. We build based on what's actually needed, not a standard template.",
                 nicchie_1_h:'Barbers & Beauty', nicchie_1_p:'Self-service bookings, zero WhatsApp at all hours',
@@ -2730,7 +2801,7 @@
                 proj_mono:'// Projects', proj_h2:'Recent Work',
                 proj_sub:"Every project is a real problem solved. See what we've built.",
                 proj_visit:'Visit the site', proj_scroll:'Scroll to see more projects',
-                proj_lazzi_desc:'Premium website with e-commerce and Stripe payments',
+                proj_lazzi_desc:'Premium website with online shop for barber products',
                 proj_ikta_desc:'International combat sports federation. Multilingual institutional website for athletes and affiliates in 30 countries.',
                 proj_unicauto_desc:'Supercar and premium sports car rental. Vehicle catalog, online booking and AI Advisor to choose the right car.',
                 proj_antitesi_desc:'Landing page for a Roman DJ and producer. Biography, event dates, streaming mix sets and booking contacts. Dark design, fluid animations, mobile-first.',
@@ -2749,6 +2820,7 @@
                 chip_dash:'Automated dashboards', chip_reminders:'Appointment reminders', chip_custom:'Custom AI tools',
                 price_mono:'// Pricing', price_h2:'Choose your plan.', price_sub:'Payment 50% upfront + 50% at go-live.',
                 price_badge:'Most popular', price_plan1:'Showcase', price_onetm:'/one-time',
+                pe_app_name:'Custom apps', pe_app_price:'from €2,000', pe_ai_name:'AI & Automation', pe_ai_price:'Custom quote', pe_link:'Get in touch →',
                 price_f1:'Pages included', price_f1s:'multi-content sections, copy included',
                 price_f2:'Domain + hosting', price_f2s:'first year included',
                 price_f3:'Local SEO', price_f3s:'Google Business, schema, sitemap',
@@ -2761,7 +2833,7 @@
                 mc_f2:'Domain + hosting (1st year)', mc_f3:'Local SEO', mc_f4:'Booking system',
                 mc_f5:'Self-edit panel', mc_f6:'AI Assistant', mc_f6_proai:'AI Assistant (chat + WhatsApp)',
                 faq_mono:'// FAQ', faq_h2:'Any questions?',
-                faq_1q:'How much does it really cost?', faq_1a:'It depends on the project: a landing page starts at €400, a full website from €800. The quote is agreed before we start. You pay half on signing, half on delivery.',
+                faq_1q:'How much does it really cost?', faq_1a:'It depends on the project: a simple landing page starts at €100–200, a simple showcase website at €490, while more complex custom sites start at €790 with a tailored quote. The quote is agreed before we start: you pay half on signing, half on delivery.',
                 faq_2q:'How long does it take?', faq_2a:'3-5 days for the Base package, 5-7 for Pro. We keep you updated throughout the process.',
                 faq_3q:"What if I don't like the result?", faq_3a:'30-day satisfaction guarantee or your money back, no questions asked.',
                 faq_4q:'Can I make changes after delivery?', faq_4a:'Yes, changes are included in the monthly maintenance.',
