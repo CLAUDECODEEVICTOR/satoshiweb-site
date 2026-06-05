@@ -1490,6 +1490,15 @@
             .process-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+    <!-- Google Analytics 4 — satoshiweb.it (G-1DDL4FX44N) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1DDL4FX44N"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1DDL4FX44N', { anonymize_ip: true });
+    </script>
 </head>
 <body>
 
@@ -2899,5 +2908,9 @@
 
         (function() { setLang(localStorage.getItem('lang') || 'it'); })();
     </script>
+
+    <!-- Vercel Web Analytics (attiva "Analytics" nella dashboard del progetto Vercel) -->
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
