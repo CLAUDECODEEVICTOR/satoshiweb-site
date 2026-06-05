@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Victor Analytics (nucleo) — tracking comportamentale -->
+    <script src="https://nucleo-wine.vercel.app/t.js" data-site="satoshiweb" defer></script>
     <title>Satoshi Web — Siti Web e AI per Attività Locali | Civitavecchia</title>
     <meta name="description" content="Satoshi Web: siti web professionali con AI integrata per attività locali a Civitavecchia e in tutta Italia. Chatbot H24, prenotazioni automatiche, tool su misura. Contattaci oggi.">
     <meta name="keywords" content="Satoshi Web, satoshiweb, satoshiweb.it, sito web Civitavecchia, agenzia web Civitavecchia, siti web attività locali, AI per attività locali, chatbot per aziende, sito web con intelligenza artificiale">
@@ -2625,6 +2627,11 @@
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
+                    // Victor Analytics — conversione (richiesta contatto/preventivo inviata)
+                    try {
+                        navigator.sendBeacon("https://nucleo-wine.vercel.app/api/track",
+                            new Blob([JSON.stringify({ site: "satoshiweb", event: "conversion", page: location.pathname })], { type: "text/plain" }));
+                    } catch (e) {}
                     form.reset();
                     btn.style.display = "none";
                     feedback.style.display = "block";
