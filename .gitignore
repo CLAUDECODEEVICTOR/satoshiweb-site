@@ -24,12 +24,10 @@ logo-satoshi.png
 
 # Cartelle interne
 clienti/
-paradise/
 satoshi-videos/
 demo/
 docs/
 iktaworld/
-projects/
 screen\ lazzi/
 screen\ ikta\ world/
 .env
