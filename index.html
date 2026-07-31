@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Victor Analytics (nucleo) — tracking comportamentale -->
     <script src="https://nucleo-wine.vercel.app/t.js" data-site="satoshiweb" defer></script>
-    <title>Satoshi Web — Siti, App e Sistemi Automatici per Attività Locali | Civitavecchia</title>
-    <meta name="description" content="Satoshi Web: siti, app e sistemi automatici per attività locali a Civitavecchia e in tutta Italia. Chatbot H24, prenotazioni automatiche, AI e tool su misura. Contattaci oggi.">
-    <meta name="keywords" content="Satoshi Web, satoshiweb, satoshiweb.it, sito web Civitavecchia, agenzia web Civitavecchia, siti web attività locali, AI per attività locali, chatbot per aziende, sito web con intelligenza artificiale">
+    <title>Satoshi Web — App e Sistemi per Attività Locali | Civitavecchia</title>
+    <meta name="description" content="Satoshi Web: app e sistemi su misura per attività locali a Civitavecchia e in tutta Italia. App pubblicate sull'App Store, automazioni, AI e tool su misura. Developer Apple verificato.">
+    <meta name="keywords" content="Satoshi Web, satoshiweb, satoshiweb.it, sviluppo app Civitavecchia, app iOS Android attività locali, app su misura, sistemi gestionali, automazioni AI, developer Apple, app su App Store, siti web attività locali">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Satoshi Web">
     <meta name="geo.region" content="IT-RM">
@@ -17,8 +17,8 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://satoshiweb.it/">
-    <meta property="og:title" content="Satoshi Web — Siti, App e Sistemi Automatici per Attività Locali">
-    <meta property="og:description" content="Siti web professionali con AI integrata per attività locali. Chatbot H24, prenotazioni automatiche, tool su misura. Da Civitavecchia per tutta Italia.">
+    <meta property="og:title" content="Satoshi Web — App e Sistemi per Attività Locali">
+    <meta property="og:description" content="App e sistemi su misura per attività locali. App native pubblicate sull'App Store, automazioni e AI. Developer Apple verificato. Da Civitavecchia per tutta Italia.">
     <meta property="og:image" content="https://satoshiweb.it/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -27,8 +27,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Satoshi Web — Siti, App e Sistemi Automatici per Attività Locali">
-    <meta name="twitter:description" content="Chatbot H24, prenotazioni automatiche, tool AI su misura. Siti web che lavorano per te.">
+    <meta name="twitter:title" content="Satoshi Web — App e Sistemi per Attività Locali">
+    <meta name="twitter:description" content="App native sull'App Store, sistemi e automazioni su misura per la tua attività. Più incassi, meno caos.">
     <meta name="twitter:image" content="https://satoshiweb.it/og-image.png">
 
     <!-- Schema.org JSON-LD -->
@@ -427,6 +427,19 @@
             text-wrap: pretty;
         }
         .hero-pain b { color: var(--accent); font-weight: 600; }
+
+        /* App Store proof badge */
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(245,166,35,0.07);
+            border: 1px solid rgba(245,166,35,0.28);
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-size: 0.72rem; letter-spacing: 0.03em;
+            padding: 0.4rem 0.9rem; border-radius: 50px;
+            margin-bottom: 1.4rem;
+        }
+        .hero-badge svg { flex-shrink: 0; }
 
         /* Hero CTA buttons with icons */
         .hero-btns { flex-wrap: wrap; }
@@ -897,16 +910,20 @@
         .laptop-screenshot {
             aspect-ratio: 16 / 10;
             overflow: hidden;
+            position: relative;
+            container-type: size;
         }
         .laptop-screenshot img {
+            position: absolute;
+            top: 0; left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
+            height: auto;
             display: block;
-            transition: transform 0.5s ease;
+            animation: scrollSite 20s cubic-bezier(.45,0,.55,1) infinite;
+            will-change: transform;
         }
-        .laptop-screenshot:hover img { transform: scale(1.03); }
+        .laptop-screenshot:hover img,
+        .phone-screenshot:hover img { animation-play-state: paused; }
         .laptop-base {
             width: 104%;
             margin-left: -2%;
@@ -962,16 +979,35 @@
             height: 100%;
             overflow: hidden;
             border-radius: 26px;
+            position: relative;
+            container-type: size;
         }
         .phone-screenshot img {
+            position: absolute;
+            top: 0; left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
+            height: auto;
             display: block;
-            transition: transform 0.5s ease;
+            animation: scrollSite 18s cubic-bezier(.45,0,.55,1) infinite;
+            will-change: transform;
         }
-        .phone-screenshot:hover img { transform: scale(1.03); }
+
+        /* Auto-scroll dei siti dentro i mockup */
+        @keyframes scrollSite {
+            0%, 8%    { transform: translateY(0); }
+            48%, 56%  { transform: translateY(calc(-100% + 100cqh)); }
+            96%, 100% { transform: translateY(0); }
+        }
+        /* sfalsa i tempi così le card non scorrono all'unisono */
+        .project-card:nth-of-type(2) .laptop-screenshot img,
+        .project-card:nth-of-type(2) .phone-screenshot img { animation-delay: -6s; }
+        .project-card:nth-of-type(3) .laptop-screenshot img,
+        .project-card:nth-of-type(3) .phone-screenshot img { animation-delay: -12s; }
+        .project-card:nth-of-type(4) .laptop-screenshot img,
+        .project-card:nth-of-type(4) .phone-screenshot img { animation-delay: -3s; }
+        @media (prefers-reduced-motion: reduce) {
+            .laptop-screenshot img, .phone-screenshot img { animation: none !important; transform: none !important; }
+        }
         .phone-home-indicator {
             position: absolute;
             bottom: 6px;
@@ -1405,12 +1441,16 @@
                 box-shadow: none !important;
             }
             .laptop-screenshot img {
+                position: static;
                 width: 100%;
                 height: 110px;
                 object-fit: cover;
                 object-position: top center;
                 display: block;
+                animation: none;
+                transform: none;
             }
+            .laptop-screenshot { container-type: normal; }
             /* AI card: mostra l'animazione come strip decorativa */
             .project-ai-visual {
                 display: flex;
@@ -1592,8 +1632,12 @@
             </svg>
 
             <div>
-                <h1 class="serif reveal stagger-2" data-i18n-html="hero_h1">Smetti di essere <i>invisibile online.</i></h1>
-                <p class="hero-pain reveal stagger-3" data-i18n-html="hero_pain">Ogni giorno qualcuno cerca la tua attività su Google e trova quella del tuo concorrente. Senza un sito ben posizionato online <b>perdi clienti ogni giorno.</b></p>
+                <div class="hero-badge reveal stagger-2">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-2.8 2.29-4.15 2.4-4.22-1.31-1.92-3.35-2.18-4.07-2.21-1.73-.17-3.38 1.02-4.26 1.02-.88 0-2.23-1-3.67-.97-1.89.03-3.63 1.1-4.6 2.79-1.96 3.4-.5 8.43 1.41 11.19.93 1.35 2.04 2.87 3.5 2.81 1.4-.06 1.93-.91 3.63-.91 1.69 0 2.17.91 3.65.88 1.51-.03 2.46-1.38 3.38-2.74 1.07-1.57 1.51-3.09 1.53-3.17-.03-.01-2.94-1.13-2.97-4.47zM14.28 3.95c.78-.94 1.3-2.25 1.16-3.55-1.12.05-2.47.75-3.27 1.69-.72.83-1.35 2.16-1.18 3.43 1.24.1 2.51-.63 3.29-1.57z"/></svg>
+                    <span data-i18n="hero_badge">Developer Apple verificato · App pubblicate sull'App Store</span>
+                </div>
+                <h1 class="serif reveal stagger-2" data-i18n-html="hero_h1"><i>App e sistemi</i> su misura per la tua attività.</h1>
+                <p class="hero-pain reveal stagger-3" data-i18n-html="hero_pain">Costruiamo la tua app su misura, o il sistema che automatizza e rende più comodo il lavoro della tua attività. <b>Più incassi, meno caos.</b></p>
 
                 <div class="hero-btns reveal stagger-3">
                     <a href="https://wa.me/393341989193?text=Ciao%2C%20ho%20un%27attivit%C3%A0%20e%20vorrei%20portarla%20online" target="_blank" rel="noopener" class="btn-pill" style="text-decoration: none;">
@@ -1633,7 +1677,7 @@
 
         <section class="clients">
             <div class="container">
-                <p class="clients-tagline" data-i18n="clients_tagline">Già scelti da attività locali, federazioni internazionali e realtà istituzionali. Da&nbsp;Civitavecchia e oltre.</p>
+                <p class="clients-tagline" data-i18n="clients_tagline">Già scelti da attività locali e realtà internazionali per app e sistemi su misura. Da&nbsp;Civitavecchia al mondo.</p>
             </div>
         </section>
 
@@ -1695,7 +1739,7 @@
                     <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="5" stroke="#F5A623" stroke-width="1.5"/><path d="M8 28C8 23.6 11.6 20 16 20C20.4 20 24 23.6 24 28" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/><path d="M22 6L26 4M10 6L6 4" stroke="#F5A623" stroke-width="1.5" stroke-linecap="round"/></svg>
                     <div class="settore-chip-text">
                         <h4 data-i18n="nicchie_6_h">Creator & Artisti</h4>
-                        <p data-i18n="nicchie_6_p">Sito + press kit digitale + link-in-bio per DJ, musicisti, fotografi</p>
+                        <p data-i18n="nicchie_6_p">App / link-in-bio + press kit digitale per DJ, musicisti, fotografi</p>
                     </div>
                 </div>
             </div>
@@ -1735,7 +1779,7 @@
                 <div class="process-step reveal stagger-4">
                     <span class="serif">04</span>
                     <h5 data-i18n="proc_4_h">Lancio</h5>
-                    <p data-i18n="proc_4_p">Ultimi test, poi lancio online del tuo sito. Dal primo giorno funziona.</p>
+                    <p data-i18n="proc_4_p">Ultimi test, poi lancio della tua app o sistema. Dal primo giorno funziona.</p>
                 </div>
             </div>
         </section>
@@ -1771,7 +1815,7 @@
                                 <span class="url-bar">lazzibarbershop.it</span>
                             </div>
                             <div class="laptop-screenshot">
-                                <img src="projects/lazzi/desktop.png" alt="Lazzi Barbershop Desktop" loading="lazy">
+                                <img src="projects/lazzi/desktop-scroll.jpg" alt="Lazzi Barbershop Desktop" loading="lazy">
                             </div>
                         </div>
                         <div class="laptop-base"></div>
@@ -1780,7 +1824,7 @@
                         <div class="phone-frame">
                             <div class="phone-notch"></div>
                             <div class="phone-screenshot">
-                                <img src="projects/lazzi/mobile.png" alt="Lazzi Barbershop Mobile" loading="lazy">
+                                <img src="projects/lazzi/mobile-scroll.jpg" alt="Lazzi Barbershop Mobile" loading="lazy">
                             </div>
                             <div class="phone-home-indicator"></div>
                         </div>
@@ -1814,7 +1858,7 @@
                                 <span class="url-bar">iktaworld.com</span>
                             </div>
                             <div class="laptop-screenshot">
-                                <img src="projects/ikta/desktop.png" alt="IKTA World Desktop" loading="lazy">
+                                <img src="projects/ikta/desktop-scroll.jpg" alt="IKTA World Desktop" loading="lazy">
                             </div>
                         </div>
                         <div class="laptop-base"></div>
@@ -1823,7 +1867,7 @@
                         <div class="phone-frame">
                             <div class="phone-notch"></div>
                             <div class="phone-screenshot">
-                                <img src="projects/ikta/mobile.png" alt="IKTA World Mobile" loading="lazy">
+                                <img src="projects/ikta/mobile-scroll.jpg" alt="IKTA World Mobile" loading="lazy">
                             </div>
                             <div class="phone-home-indicator"></div>
                         </div>
@@ -1857,7 +1901,7 @@
                                 <span class="url-bar">unicautocz.vercel.app</span>
                             </div>
                             <div class="laptop-screenshot">
-                                <img src="projects/unicauto/desktop.png" alt="UniCauto CZ Desktop" loading="lazy">
+                                <img src="projects/unicauto/desktop-scroll.jpg" alt="UniCauto CZ Desktop" loading="lazy">
                             </div>
                         </div>
                         <div class="laptop-base"></div>
@@ -1866,7 +1910,7 @@
                         <div class="phone-frame">
                             <div class="phone-notch"></div>
                             <div class="phone-screenshot">
-                                <img src="projects/unicauto/mobile.png" alt="UniCauto CZ Mobile" loading="lazy">
+                                <img src="projects/unicauto/mobile-scroll.jpg" alt="UniCauto CZ Mobile" loading="lazy">
                             </div>
                             <div class="phone-home-indicator"></div>
                         </div>
@@ -1900,7 +1944,7 @@
                                 <span class="url-bar">antitesi.link</span>
                             </div>
                             <div class="laptop-screenshot">
-                                <img src="projects/antitesi/desktop.jpg" alt="Antitesi Desktop" loading="lazy">
+                                <img src="projects/antitesi/desktop-scroll.jpg" alt="Antitesi Desktop" loading="lazy">
                             </div>
                         </div>
                         <div class="laptop-base"></div>
@@ -1909,7 +1953,7 @@
                         <div class="phone-frame">
                             <div class="phone-notch"></div>
                             <div class="phone-screenshot">
-                                <img src="projects/antitesi/mobile.jpg" alt="Antitesi Mobile" loading="lazy">
+                                <img src="projects/antitesi/mobile-scroll.jpg" alt="Antitesi Mobile" loading="lazy">
                             </div>
                             <div class="phone-home-indicator"></div>
                         </div>
@@ -1942,7 +1986,7 @@
                                 <span class="url-bar">paradise-iota-six.vercel.app</span>
                             </div>
                             <div class="laptop-screenshot">
-                                <img src="paradise/img/desktop.jpg" alt="Paradise Desktop" loading="lazy">
+                                <img src="paradise/img/desktop-scroll.jpg" alt="Paradise Desktop" loading="lazy">
                             </div>
                         </div>
                         <div class="laptop-base"></div>
@@ -1951,7 +1995,7 @@
                         <div class="phone-frame">
                             <div class="phone-notch"></div>
                             <div class="phone-screenshot">
-                                <img src="paradise/img/mobile.jpg" alt="Paradise Mobile" loading="lazy">
+                                <img src="paradise/img/mobile-scroll.jpg" alt="Paradise Mobile" loading="lazy">
                             </div>
                             <div class="phone-home-indicator"></div>
                         </div>
@@ -2066,7 +2110,7 @@
 
             <div class="section-header reveal">
                 <p class="mono" data-i18n="serv_mono">// Servizi</p>
-                <h2 class="serif" data-i18n="serv_h2">Cosa possiamo fare per il tuo business</h2>
+                <h2 class="serif" data-i18n="serv_h2">Cosa costruiamo per la tua attività</h2>
             </div>
             <div class="services-grid">
                 <!-- Sito Web -->
@@ -2082,8 +2126,8 @@
                         <circle cx="5" cy="26" r="2" fill="#F5A623"/>
                         <circle cx="20" cy="32" r="2" fill="#F5A623"/>
                     </svg>
-                    <h4 data-i18n="serv_web_h">Siti Web, Webapp & App</h4>
-                    <p data-i18n="serv_web_p">Landing page, siti completi, e-commerce e app&nbsp;iOS/Android. Veloci, SEO-ottimizzati, mobile-first.</p>
+                    <h4 data-i18n="serv_web_h">App su misura · iOS & Android</h4>
+                    <p data-i18n="serv_web_p">App native pubblicate sull'App Store e Google Play, costruite sulla tua attività: prenotazioni, ordini, fidelizzazione, gestione staff. Il sito, se ti serve, è&nbsp;incluso.</p>
                     <a href="https://wa.me/393341989193?text=Ciao%2C%20vorrei%20info%20su%20un%20sito%20web%20o%20app" target="_blank" rel="noopener" class="wa-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.528 5.855L0 24l6.34-1.501A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.032-1.386l-.361-.214-3.741.885.936-3.619-.236-.374A9.764 9.764 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
                         <span data-i18n="serv_wa">Scrivici su WhatsApp</span>
@@ -2103,8 +2147,8 @@
                                 <line x1="34" y1="15" x2="34" y2="22" stroke="#F5A623" stroke-width="1.5"/>
                                 <circle cx="34" cy="22" r="2" fill="#F5A623"/>
                             </svg>
-                            <h4 data-i18n="serv_ai_h">AI & Automazioni</h4>
-                            <p data-i18n="serv_ai_p">Non solo siti. Costruiamo tutto quello che semplifica il lavoro della tua attività. Chatbot, automazioni, tool su misura: se si può automatizzare, lo&nbsp;facciamo.</p>
+                            <h4 data-i18n="serv_ai_h">Sistemi & Automazioni</h4>
+                            <p data-i18n="serv_ai_p">Sistemi che automatizzano il lavoro della tua attività: prenotazioni, WhatsApp, pagamenti, tool su misura. Se si può automatizzare, lo&nbsp;facciamo.</p>
                             <a href="https://wa.me/393341989193?text=Ciao%2C%20vorrei%20info%20su%20AI%20e%20automazioni" target="_blank" rel="noopener" class="wa-link">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.528 5.855L0 24l6.34-1.501A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.032-1.386l-.361-.214-3.741.885.936-3.619-.236-.374A9.764 9.764 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
                                 <span data-i18n="serv_wa">Scrivici su WhatsApp</span>
@@ -2306,15 +2350,6 @@
             <div class="faq-list">
                 <div class="faq-item reveal">
                     <div class="faq-question">
-                        <h4 data-i18n="faq_1q">Quanto costa davvero?</h4>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p data-i18n="faq_1a">Dipende dal progetto: una landing semplice parte da 100–200€, un sito vetrina semplice da&nbsp;490€, mentre i siti su misura più complessi partono da 790€ con preventivo personalizzato. Il preventivo è concordato prima di iniziare: paghi metà alla firma, metà alla consegna.</p>
-                    </div>
-                </div>
-                <div class="faq-item reveal">
-                    <div class="faq-question">
                         <h4 data-i18n="faq_2q">Quanto tempo ci vuole?</h4>
                         <span class="faq-toggle">+</span>
                     </div>
@@ -2346,7 +2381,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq_5a">Certo. Analizziamo quello che hai e proponiamo un restyling completo, inclusa l'integrazione AI.</p>
+                        <p data-i18n="faq_5a">Certo. Ma spesso il vero salto è un'app o un sistema: il sito lo includiamo come add-on. Analizziamo quello che hai e proponiamo la soluzione giusta.</p>
                     </div>
                 </div>
                 <div class="faq-item reveal">
@@ -2714,10 +2749,10 @@
             it: {
                 nav_settori:'Settori', nav_progetti:'Progetti', nav_servizi:'Servizi', nav_cta:'Parliamone',
                 nav_mob_label:'// Menu', nav_mob_processo:'Come lavoriamo', nav_mob_faq:'FAQ', nav_mob_cta:'Parliamone →',
-                clients_tagline:'Già scelti da attività locali, federazioni internazionali e realtà istituzionali. Da Civitavecchia e oltre.',
-                hero_h1:'Smetti di essere <i>invisibile online.</i>',
-                hero_sub:'Non solo siti web. Costruiamo il sistema digitale della tua attività: automazioni, AI e strumenti su misura per fare di più, con meno sforzo.',
-                hero_pain:'Ogni giorno qualcuno cerca la tua attività su Google e trova quella del tuo concorrente. Senza un sito ben posizionato online <b>perdi clienti ogni giorno.</b>',
+                clients_tagline:'Già scelti da attività locali e realtà internazionali per app e sistemi su misura. Da Civitavecchia al mondo.',
+                hero_badge:'Developer Apple verificato · App pubblicate sull\'App Store',
+                hero_h1:'<i>App e sistemi</i> su misura per la tua attività.',
+                hero_pain:'Costruiamo la tua app su misura, o il sistema che automatizza e rende più comodo il lavoro della tua attività. <b>Più incassi, meno caos.</b>',
                 hero_cta_wa:'Scrivici su WhatsApp', hero_cta_call:'Chiamaci',
                 hero_cta:'Prenota una chiamata — 3 minuti →', hero_work:'Oppure dai un\'occhiata ai lavori →',
                 nicchie_mono:'// Settori', nicchie_h2:'Soluzioni diverse per ogni settore.',
@@ -2727,12 +2762,12 @@
                 nicchie_3_h:'Hotel & Hospitality', nicchie_3_p:'Prenotazioni dirette, meno commissioni Booking',
                 nicchie_4_h:'Salute & Benessere', nicchie_4_p:"Prima visita qualificata dall'AI, agenda sempre piena",
                 nicchie_5_h:'Locali & Eventi', nicchie_5_p:'Biglietteria, prenotazioni tavoli, gestione ingressi QR',
-                nicchie_6_h:'Creator & Artisti', nicchie_6_p:'Sito + press kit digitale + link-in-bio per DJ, musicisti, fotografi',
+                nicchie_6_h:'Creator & Artisti', nicchie_6_p:'App / link-in-bio + press kit digitale per DJ, musicisti, fotografi',
                 proc_mono:'// Come lavoriamo', proc_h2:'Come funziona, passo per passo',
                 proc_1_h:'Ascolto', proc_1_p:"Ci racconti cosa fai e qual è il tuo obiettivo. Capiamo insieme la soluzione giusta per te.",
                 proc_2_h:'Proposta', proc_2_p:'Preventivo dettagliato con costi e tempistiche. Niente sorprese.',
                 proc_3_h:'Sviluppo', proc_3_p:'Lavoriamo e ti teniamo aggiornato. Il risultato è qualcosa di tuo, costruito su misura.',
-                proc_4_h:'Lancio', proc_4_p:'Ultimi test, poi lancio online del tuo sito. Dal primo giorno funziona.',
+                proc_4_h:'Lancio', proc_4_p:'Ultimi test, poi lancio della tua app o sistema. Dal primo giorno funziona.',
                 proj_mono:'// Progetti', proj_h2:'Lavori recenti',
                 proj_sub:'Ogni progetto è un problema reale risolto. Guarda cosa abbiamo costruito.',
                 proj_visit:'Visita il sito', proj_scroll:'Scorri per vedere altri progetti',
@@ -2744,10 +2779,10 @@
                 proj_wine_mono:'INTELLIGENZA ARTIFICIALE + ENOTECA', proj_wine_h:'Riconoscimento Vini AI',
                 proj_wine_desc:"Tool di riconoscimento vini con AI integrata per un'enoteca locale. Il cliente fotografa la bottiglia, l'AI identifica il vino, fornisce scheda tecnica, storia e abbinamenti gastronomici in tempo reale.",
                 proj_wine_link:'Dettagli progetto',
-                serv_mono:'// Servizi', serv_h2:'Cosa possiamo fare per il tuo business',
-                serv_web_h:'Siti Web, Webapp & App', serv_web_p:'Landing page, siti completi, e-commerce e app iOS/Android. Veloci, SEO-ottimizzati, mobile-first.',
-                serv_wa:'Scrivici su WhatsApp', serv_ai_h:'AI & Automazioni',
-                serv_ai_p:'Non solo siti. Costruiamo tutto quello che semplifica il lavoro della tua attività. Chatbot, automazioni, tool su misura: se si può automatizzare, lo facciamo.',
+                serv_mono:'// Servizi', serv_h2:'Cosa costruiamo per la tua attività',
+                serv_web_h:'App su misura · iOS & Android', serv_web_p:'App native pubblicate sull\'App Store e Google Play, costruite sulla tua attività: prenotazioni, ordini, fidelizzazione, gestione staff. Il sito, se ti serve, è incluso.',
+                serv_wa:'Scrivici su WhatsApp', serv_ai_h:'Sistemi & Automazioni',
+                serv_ai_p:'Sistemi che automatizzano il lavoro della tua attività: prenotazioni, WhatsApp, pagamenti, tool su misura. Se si può automatizzare, lo facciamo.',
                 serv_ai_ex:'ESEMPI DI COSA POSSIAMO INTEGRARE',
                 chip_chatbot:'Chatbot H24', chip_bookings:'Prenotazioni automatiche', chip_whatsapp:'WhatsApp automatico',
                 chip_email:'Email post-acquisto', chip_leads:'Qualificazione lead', chip_quotes:'Preventivi istantanei',
@@ -2768,11 +2803,10 @@
                 mc_f2:'Dominio + hosting (1° anno)', mc_f3:'SEO locale', mc_f4:'Sistema prenotazioni',
                 mc_f5:'Pannello modifiche', mc_f6:'Assistente AI', mc_f6_proai:'Assistente AI (chat + WhatsApp)',
                 faq_mono:'// Domande frequenti', faq_h2:'Hai qualche dubbio?',
-                faq_1q:'Quanto costa davvero?', faq_1a:'Dipende dal progetto: una landing semplice parte da 100–200€, un sito vetrina semplice da 490€, mentre i siti su misura più complessi partono da 790€ con preventivo personalizzato. Il preventivo è concordato prima di iniziare: paghi metà alla firma, metà alla consegna.',
                 faq_2q:'Quanto tempo ci vuole?', faq_2a:'3-5 giorni per il pacchetto Base, 5-7 per il Pro. Ti teniamo aggiornato durante tutto il processo.',
                 faq_3q:'E se non mi piace il risultato?', faq_3a:'Garanzia 30 giorni soddisfatti o rimborsati, senza domande.',
                 faq_4q:'Posso fare modifiche dopo la consegna?', faq_4a:'Sì, le modifiche sono incluse nella manutenzione mensile.',
-                faq_5q:'Ho già un sito, potete rifarlo?', faq_5a:"Certo. Analizziamo quello che hai e proponiamo un restyling completo, inclusa l'integrazione AI.",
+                faq_5q:'Ho già un sito, potete rifarlo?', faq_5a:"Certo. Ma spesso il vero salto è un'app o un sistema: il sito lo includiamo come add-on. Analizziamo quello che hai e proponiamo la soluzione giusta.",
                 faq_6q:'Devo fornire i testi e le foto?', faq_6a:'Se li hai è perfetto. Altrimenti ci pensiamo noi: testi, copy e immagini inclusi nel preventivo.',
                 faq_7q:"Ho davvero bisogno dell'AI per la mia attività?", faq_7a:'Dipende. Se ricevi messaggi fuori orario, perdi clienti ogni giorno: il chatbot AI li recupera. Se i tuoi clienti fanno sempre le stesse domande, l\'AI risponde per te. Non la spingiamo a tutti: te la proponiamo solo se ha senso per la tua attività.',
                 faq_8q:'Come funziona il chatbot in pratica? Risponde bene?', faq_8a:'Il chatbot viene addestrato con le info reali della tua attività: orari, servizi, prezzi, domande frequenti. Non è un bot generico. Risponde come se fossi tu. Puoi vedere la demo live qui sopra.',
@@ -2785,8 +2819,8 @@
                 cont_oggi_ph:'Cosa hai oggi?', cont_oggi_1:'Niente online', cont_oggi_2:'Solo pagina Facebook',
                 cont_oggi_3:'Vecchio sito da aggiornare', cont_oggi_4:'Sito ok ma voglio aggiungere funzioni',
                 cont_quando_ph:'Quando vuoi partire?', cont_quando_1:'Subito', cont_quando_2:'1–3 mesi', cont_quando_3:'Più avanti, sto valutando',
-                cont_tipo_ph:'Tipo di progetto', cont_tipo_1:'Sito vetrina', cont_tipo_2:'Sito completo + prenotazioni',
-                cont_tipo_3:'Sito + AI integrata', cont_tipo_4:'Automazione / strumento su misura', cont_tipo_5:'Non so ancora',
+                cont_tipo_ph:'Tipo di progetto', cont_tipo_1:'App su misura', cont_tipo_2:'Sistema / gestionale',
+                cont_tipo_3:'Automazioni & AI', cont_tipo_4:'Sito web', cont_tipo_5:'Non so ancora',
                 cont_msg:'Raccontami brevemente la tua attività e cosa vorresti ottenere',
                 cont_btn:'Inviaci la richiesta →',
                 cont_feedback:'✓ Richiesta inviata correttamente! Ti rispondo entro poche ore.',
@@ -2795,10 +2829,10 @@
             en: {
                 nav_settori:'Industries', nav_progetti:'Projects', nav_servizi:'Services', nav_cta:"Let's Talk",
                 nav_mob_label:'// Menu', nav_mob_processo:'How we work', nav_mob_faq:'FAQ', nav_mob_cta:"Let's Talk →",
-                clients_tagline:'Already trusted by local businesses, international federations and institutions. From Civitavecchia and beyond.',
-                hero_h1:'Stop being <i>invisible online.</i>',
-                hero_sub:'Not just websites. We build the digital system of your business: automations, AI and custom tools to do more, with less effort.',
-                hero_pain:'Every day someone searches for your business on Google and finds your competitor instead. Without a well-ranked website, <b>you lose customers every day.</b>',
+                clients_tagline:'Already trusted by local businesses and international brands for custom apps and systems. From Civitavecchia to the world.',
+                hero_badge:'Verified Apple Developer · Apps published on the App Store',
+                hero_h1:'<i>Apps and systems</i> built for your business.',
+                hero_pain:'We build your custom app, or the system that automates and streamlines your business\'s daily work. <b>More revenue, less chaos.</b>',
                 hero_cta_wa:'Message us on WhatsApp', hero_cta_call:'Call us',
                 hero_cta:'Book a call — 3 minutes →', hero_work:'Or take a look at our work →',
                 nicchie_mono:'// Industries', nicchie_h2:'Different solutions for every industry.',
@@ -2808,12 +2842,12 @@
                 nicchie_3_h:'Hotel & Hospitality', nicchie_3_p:'Direct bookings, fewer Booking.com commissions',
                 nicchie_4_h:'Health & Wellness', nicchie_4_p:'AI-qualified first visits, always a full schedule',
                 nicchie_5_h:'Venues & Events', nicchie_5_p:'Ticketing, table reservations, QR entry management',
-                nicchie_6_h:'Creators & Artists', nicchie_6_p:'Website + digital press kit + link-in-bio for DJs, musicians, photographers',
+                nicchie_6_h:'Creators & Artists', nicchie_6_p:'App / link-in-bio + digital press kit for DJs, musicians, photographers',
                 proc_mono:'// How we work', proc_h2:'How it works, step by step',
                 proc_1_h:'Listening', proc_1_p:'You tell us what you do and what your goal is. We figure out the right solution together.',
                 proc_2_h:'Proposal', proc_2_p:'Detailed quote with costs and timelines. No surprises.',
                 proc_3_h:'Development', proc_3_p:'We build and keep you updated. The result is yours, built to measure.',
-                proc_4_h:'Launch', proc_4_p:'Final tests, then your site goes live. Works from day one.',
+                proc_4_h:'Launch', proc_4_p:'Final tests, then your app or system goes live. Works from day one.',
                 proj_mono:'// Projects', proj_h2:'Recent Work',
                 proj_sub:"Every project is a real problem solved. See what we've built.",
                 proj_visit:'Visit the site', proj_scroll:'Scroll to see more projects',
@@ -2825,10 +2859,10 @@
                 proj_wine_mono:'ARTIFICIAL INTELLIGENCE + WINE SHOP', proj_wine_h:'Wine Recognition AI',
                 proj_wine_desc:'AI-powered wine recognition tool for a local wine shop. The customer photographs the bottle, the AI identifies the wine and provides tasting notes, history and food pairings in real time.',
                 proj_wine_link:'Project details',
-                serv_mono:'// Services', serv_h2:'What we can do for your business',
-                serv_web_h:'Websites, Webapps & Apps', serv_web_p:'Landing pages, full websites, e-commerce and iOS/Android apps. Fast, SEO-optimized, mobile-first.',
-                serv_wa:'Message us on WhatsApp', serv_ai_h:'AI & Automation',
-                serv_ai_p:"Not just websites. We build everything that simplifies the work of your business. Chatbots, automations, custom tools: if it can be automated, we do it.",
+                serv_mono:'// Services', serv_h2:'What we build for your business',
+                serv_web_h:'Custom apps · iOS & Android', serv_web_p:'Native apps published on the App Store and Google Play, built around your business: bookings, orders, loyalty, staff management. The website, if you need it, is included.',
+                serv_wa:'Message us on WhatsApp', serv_ai_h:'Systems & Automation',
+                serv_ai_p:"Systems that automate your business's daily work: bookings, WhatsApp, payments, custom tools. If it can be automated, we do it.",
                 serv_ai_ex:'EXAMPLES OF WHAT WE CAN INTEGRATE',
                 chip_chatbot:'24/7 Chatbot', chip_bookings:'Automated bookings', chip_whatsapp:'Automated WhatsApp',
                 chip_email:'Post-purchase emails', chip_leads:'Lead qualification', chip_quotes:'Instant quotes',
@@ -2849,11 +2883,10 @@
                 mc_f2:'Domain + hosting (1st year)', mc_f3:'Local SEO', mc_f4:'Booking system',
                 mc_f5:'Self-edit panel', mc_f6:'AI Assistant', mc_f6_proai:'AI Assistant (chat + WhatsApp)',
                 faq_mono:'// FAQ', faq_h2:'Any questions?',
-                faq_1q:'How much does it really cost?', faq_1a:'It depends on the project: a simple landing page starts at €100–200, a simple showcase website at €490, while more complex custom sites start at €790 with a tailored quote. The quote is agreed before we start: you pay half on signing, half on delivery.',
                 faq_2q:'How long does it take?', faq_2a:'3-5 days for the Base package, 5-7 for Pro. We keep you updated throughout the process.',
                 faq_3q:"What if I don't like the result?", faq_3a:'30-day satisfaction guarantee or your money back, no questions asked.',
                 faq_4q:'Can I make changes after delivery?', faq_4a:'Yes, changes are included in the monthly maintenance.',
-                faq_5q:'I already have a site, can you redo it?', faq_5a:'Sure. We analyze what you have and propose a complete redesign, including AI integration.',
+                faq_5q:'I already have a site, can you redo it?', faq_5a:'Sure. But often the real leap is an app or a system — the website comes as an add-on. We analyze what you have and propose the right solution.',
                 faq_6q:'Do I need to provide texts and photos?', faq_6a:"If you have them, great. Otherwise we handle it: texts, copy and images included in the quote.",
                 faq_7q:'Do I really need AI for my business?', faq_7a:"It depends. If you receive messages outside business hours, you're losing customers every day: the AI chatbot recovers them. If your customers always ask the same questions, the AI answers for you. We don't push it on everyone: we only propose it if it makes sense for your business.",
                 faq_8q:'How does the chatbot work in practice? Does it answer well?', faq_8a:"The chatbot is trained on real information about your business: hours, services, prices, FAQs. It's not a generic bot. It responds as if it were you. You can see the live demo above.",
@@ -2866,8 +2899,8 @@
                 cont_oggi_ph:'What do you have today?', cont_oggi_1:'Nothing online', cont_oggi_2:'Just a Facebook page',
                 cont_oggi_3:'Old website to update', cont_oggi_4:'Working site but want to add features',
                 cont_quando_ph:'When do you want to start?', cont_quando_1:'Right away', cont_quando_2:'1–3 months', cont_quando_3:'Later, still evaluating',
-                cont_tipo_ph:'Type of project', cont_tipo_1:'Showcase website', cont_tipo_2:'Full website + bookings',
-                cont_tipo_3:'Website + AI integration', cont_tipo_4:'Automation / custom tool', cont_tipo_5:'Not sure yet',
+                cont_tipo_ph:'Type of project', cont_tipo_1:'Custom app', cont_tipo_2:'System / management tool',
+                cont_tipo_3:'Automations & AI', cont_tipo_4:'Website', cont_tipo_5:'Not sure yet',
                 cont_msg:'Briefly tell me about your business and what you want to achieve',
                 cont_btn:'Send your request →',
                 cont_feedback:'✓ Request sent! I\'ll reply within a few hours.',
