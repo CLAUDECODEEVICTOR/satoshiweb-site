@@ -39,7 +39,7 @@
         "@id": "https://satoshiweb.it/",
         "name": "Satoshi Web",
         "alternateName": ["satoshiweb", "satoshiweb.it", "Satoshi Dev"],
-        "description": "Satoshi Web realizza siti web professionali con intelligenza artificiale integrata per attività locali italiane. Chatbot H24, prenotazioni automatiche, tool AI su misura per il tuo settore.",
+        "description": "Satoshi Web realizza app iOS e Android e sistemi su misura per attività locali italiane. App pubblicate sull'App Store, automazioni e AI. Developer Apple verificato.",
         "url": "https://satoshiweb.it/",
         "logo": "https://satoshiweb.it/logo/og-image.png",
         "image": "https://satoshiweb.it/logo/og-image.png",
@@ -65,7 +65,7 @@
             "@type": "OfferCatalog",
             "name": "Servizi Web con AI",
             "itemListElement": [
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Siti Web Professionali", "description": "Siti web su misura per attività locali"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "App iOS & Android", "description": "App native su misura pubblicate sull'App Store e Google Play"}},
                 {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "AI e Chatbot Integrati", "description": "Chatbot H24 per prenotazioni e assistenza clienti"}},
                 {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "E-Commerce", "description": "Negozi online con pagamenti integrati"}},
                 {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Landing Page", "description": "Pagine di conversione per campagne marketing"}},
@@ -85,12 +85,14 @@
     <style>
         /* --- RESET & VARIABLES --- */
         :root {
-            --bg: #0a0a0a;
-            --card: #111111;
+            --bg: #0b0906;
+            --card: #16130d;
             --text: #f0ede6;
-            --text-muted: #7a7770;
+            --text-muted: #a8a094;
             --accent: #F5A623;
-            --border: rgba(240, 237, 230, 0.1);
+            --border: rgba(245, 205, 150, 0.12);
+            --card-grad: linear-gradient(155deg, #1b1710, #100d09);
+            --elev: 0 22px 46px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.045);
             --font-serif: 'Clash Display', sans-serif;
             --font-sans: 'Satoshi', sans-serif;
             --font-mono: ui-monospace, 'SF Mono', 'Fira Code', monospace;
@@ -488,14 +490,15 @@
             flex-wrap: wrap;
         }
         .client-logo {
-            max-height: 48px;
+            max-height: 44px;
             max-width: 100%;
             width: auto;
             object-fit: contain;
-            opacity: 0.6;
-            transition: opacity 0.2s;
+            filter: grayscale(1) brightness(0) invert(1);
+            opacity: 0.5;
+            transition: opacity 0.25s;
         }
-        .client-logo:hover { opacity: 1; }
+        .client-logo:hover { opacity: 0.9; }
         .client-logo-invert { filter: brightness(0) invert(1); }
         .client-logo-text { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; opacity: 0.45; color: var(--text); letter-spacing: 0.05em; transition: opacity 0.2s; line-height: 44px; }
         .client-logo-text:hover { opacity: 1; }
@@ -1178,7 +1181,7 @@
         /* --- WHATSAPP LINK --- */
         .wa-link {
             display: inline-flex; align-items: center; gap: 0.45rem;
-            color: #25D366; font-size: 0.85rem; text-decoration: none;
+            color: var(--accent); font-size: 0.85rem; text-decoration: none;
             margin-top: 1.25rem; opacity: 0.85; transition: opacity 0.2s;
             font-weight: 500;
         }
@@ -1529,6 +1532,60 @@
             .settori-grid { grid-template-columns: 1fr; }
             .process-grid { grid-template-columns: 1fr; }
         }
+
+        /* --- Depth pass: card elevation + warm top-lit surface --- */
+        .service-card, .settore-chip, .pc-card, .pe-item {
+            background: var(--card-grad);
+            box-shadow: var(--elev);
+        }
+        .service-card:hover, .settore-chip:hover {
+            box-shadow: var(--elev), 0 0 40px rgba(245, 166, 35, 0.10);
+        }
+        /* Soft accent glow behind each section header — light source, not a void */
+        .section-header { position: relative; }
+        .section-header::before {
+            content: ""; position: absolute; left: 50%; top: -30%;
+            width: 460px; height: 320px; transform: translateX(-50%);
+            background: radial-gradient(ellipse at center, rgba(245,166,35,0.07), transparent 70%);
+            pointer-events: none; z-index: -1;
+        }
+
+        /* --- App showcase (Ordofy + Axis) --- */
+        .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .app-card {
+            display: flex; gap: 26px; align-items: center;
+            background: var(--card-grad); border: 1px solid var(--border);
+            border-radius: 22px; padding: 30px; box-shadow: var(--elev);
+        }
+        .app-phone, .app-coming {
+            flex-shrink: 0; width: 148px; aspect-ratio: 9 / 19.5;
+            border-radius: 26px; overflow: hidden; position: relative;
+        }
+        .app-phone { background: #000; border: 5px solid #16130d; box-shadow: 0 22px 50px rgba(0,0,0,0.5); }
+        .app-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+        .app-phone-notch {
+            position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+            width: 44px; height: 13px; background: #16130d; border-radius: 8px; z-index: 2;
+        }
+        .app-coming {
+            border: 1px solid var(--border);
+            background: radial-gradient(circle at 50% 42%, rgba(245,166,35,0.10), transparent 60%), #100d09;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+        }
+        .app-icon { width: 66px; height: 66px; border-radius: 16px; filter: drop-shadow(0 0 26px rgba(245,166,35,0.4)); }
+        .app-soon-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+        .app-info { flex: 1; min-width: 0; }
+        .app-info h3 { font-size: 1.9rem; margin: 0.5rem 0 0.6rem; }
+        .app-info p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; }
+        .app-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 11px; border-radius: 50px; }
+        .app-badge.live { background: rgba(245,166,35,0.14); color: var(--accent); border: 1px solid rgba(245,166,35,0.35); }
+        .app-badge.soon { color: var(--text-muted); border: 1px solid var(--border); }
+        .app-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-block; margin-top: 0.9rem; }
+        .app-link:hover { text-decoration: underline; }
+        @media (max-width: 820px) {
+            .app-grid { grid-template-columns: 1fr; }
+            .app-card { flex-direction: column; text-align: center; align-items: center; }
+        }
     </style>
 
     <!-- Google Analytics 4 — satoshiweb.it (G-1DDL4FX44N) -->
@@ -1792,6 +1849,48 @@
             <circle cx="120" cy="6" r="2" fill="#F5A623" opacity="0.25"/>
             <circle cx="350" cy="20" r="4" fill="#F5A623" opacity="0.25"/>
             <circle cx="550" cy="20" r="3" fill="#F5A623" opacity="0.25"/>
+        </svg>
+
+        <!-- APP SHOWCASE: Ordofy + Axis -->
+        <section id="app" class="section-padding container section-relative">
+            <div class="section-header reveal">
+                <p class="mono" data-i18n="app_mono">// Le nostre app</p>
+                <h2 class="serif" data-i18n="app_h2">App vere. Non solo per i clienti.</h2>
+                <p class="section-sub" data-i18n="app_sub">Sviluppiamo i nostri prodotti — la prova che le app le costruiamo davvero.</p>
+            </div>
+            <div class="app-grid">
+                <div class="app-card reveal">
+                    <div class="app-phone">
+                        <div class="app-phone-notch"></div>
+                        <img src="projects/ordofy/app-tavoli.png" alt="Ordofy — gestione tavoli e ordini" loading="lazy">
+                    </div>
+                    <div class="app-info">
+                        <span class="app-badge live" data-i18n="app_ordofy_tag">In uso nei club</span>
+                        <h3 class="serif">Ordofy</h3>
+                        <p data-i18n="app_ordofy_p">Il sistema operativo per discoteche e beach club: ordini bottiglie e tavoli via QR, app per lo staff, incassi in tempo reale.</p>
+                        <a href="https://wa.me/393341989193?text=Ciao%2C%20vorrei%20info%20su%20Ordofy" target="_blank" rel="noopener" class="app-link" data-i18n="app_ordofy_cta">Scopri Ordofy →</a>
+                    </div>
+                </div>
+                <div class="app-card reveal">
+                    <div class="app-coming">
+                        <img src="projects/axis/icon.png" alt="Axis" class="app-icon">
+                        <span class="app-soon-label" data-i18n="app_axis_soon">In arrivo</span>
+                    </div>
+                    <div class="app-info">
+                        <span class="app-badge soon" data-i18n="app_axis_tag">In arrivo</span>
+                        <h3 class="serif">Axis</h3>
+                        <p data-i18n="app_axis_p">Il sistema operativo personale: allenamento, finanze, routine e AI, tutto in un'unica app.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SECTION DIVIDER (app → progetti) -->
+        <svg class="circuit-divider" viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="20" x2="600" y2="20" stroke="#F5A623" stroke-width="1" opacity="0.15"/>
+            <circle cx="150" cy="20" r="4" fill="#F5A623" opacity="0.25"/>
+            <circle cx="350" cy="20" r="3" fill="#F5A623" opacity="0.25"/>
+            <circle cx="470" cy="20" r="4" fill="#F5A623" opacity="0.25"/>
         </svg>
 
         <section id="progetti" class="section-padding container">
@@ -2115,21 +2214,14 @@
             <div class="services-grid">
                 <!-- Sito Web -->
                 <div class="service-card reveal">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5" y="6" width="30" height="20" rx="2" stroke="#F5A623" stroke-width="1.5"/>
-                        <line x1="20" y1="26" x2="20" y2="32" stroke="#F5A623" stroke-width="1.5"/>
-                        <line x1="13" y1="32" x2="27" y2="32" stroke="#F5A623" stroke-width="1.5"/>
-                        <line x1="10" y1="16" x2="30" y2="16" stroke="#F5A623" stroke-width="1" opacity="0.4"/>
-                        <circle cx="5" cy="6" r="2" fill="#F5A623"/>
-                        <circle cx="35" cy="6" r="2" fill="#F5A623"/>
-                        <circle cx="35" cy="26" r="2" fill="#F5A623"/>
-                        <circle cx="5" cy="26" r="2" fill="#F5A623"/>
-                        <circle cx="20" cy="32" r="2" fill="#F5A623"/>
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect width="14" height="20" x="5" y="2" rx="2.5"/>
+                        <path d="M12 18h.01"/>
                     </svg>
                     <h4 data-i18n="serv_web_h">App su misura · iOS & Android</h4>
                     <p data-i18n="serv_web_p">App native pubblicate sull'App Store e Google Play, costruite sulla tua attività: prenotazioni, ordini, fidelizzazione, gestione staff. Il sito, se ti serve, è&nbsp;incluso.</p>
                     <a href="https://wa.me/393341989193?text=Ciao%2C%20vorrei%20info%20su%20un%20sito%20web%20o%20app" target="_blank" rel="noopener" class="wa-link">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.528 5.855L0 24l6.34-1.501A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.032-1.386l-.361-.214-3.741.885.936-3.619-.236-.374A9.764 9.764 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.528 5.855L0 24l6.34-1.501A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.032-1.386l-.361-.214-3.741.885.936-3.619-.236-.374A9.764 9.764 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
                         <span data-i18n="serv_wa">Scrivici su WhatsApp</span>
                     </a>
                 </div>
@@ -2137,20 +2229,15 @@
                 <div class="service-card reveal">
                     <div class="service-card-ai">
                         <div>
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="4" y="6" width="26" height="20" rx="3" stroke="#F5A623" stroke-width="1.5"/>
-                                <path d="M8 32L4 26H30L26 32H8Z" stroke="#F5A623" stroke-width="1.5" stroke-linejoin="round"/>
-                                <circle cx="12" cy="16" r="2" fill="#F5A623"/>
-                                <circle cx="17" cy="16" r="2" fill="#F5A623"/>
-                                <circle cx="22" cy="16" r="2" fill="#F5A623"/>
-                                <circle cx="34" cy="10" r="4" fill="none" stroke="#F5A623" stroke-width="1.5"/>
-                                <line x1="34" y1="15" x2="34" y2="22" stroke="#F5A623" stroke-width="1.5"/>
-                                <circle cx="34" cy="22" r="2" fill="#F5A623"/>
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect width="16" height="16" x="4" y="4" rx="2"/>
+                                <rect width="6" height="6" x="9" y="9" rx="1"/>
+                                <path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/>
                             </svg>
                             <h4 data-i18n="serv_ai_h">Sistemi & Automazioni</h4>
                             <p data-i18n="serv_ai_p">Sistemi che automatizzano il lavoro della tua attività: prenotazioni, WhatsApp, pagamenti, tool su misura. Se si può automatizzare, lo&nbsp;facciamo.</p>
                             <a href="https://wa.me/393341989193?text=Ciao%2C%20vorrei%20info%20su%20AI%20e%20automazioni" target="_blank" rel="noopener" class="wa-link">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.528 5.855L0 24l6.34-1.501A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.032-1.386l-.361-.214-3.741.885.936-3.619-.236-.374A9.764 9.764 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.528 5.855L0 24l6.34-1.501A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.792 9.792 0 01-5.032-1.386l-.361-.214-3.741.885.936-3.619-.236-.374A9.764 9.764 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
                                 <span data-i18n="serv_wa">Scrivici su WhatsApp</span>
                             </a>
                         </div>
@@ -2354,7 +2441,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq_2a">3-5 giorni per il pacchetto Base, 5-7 per il Pro. Ti teniamo aggiornato durante tutto il processo.</p>
+                        <p data-i18n="faq_2a">Dipende dal progetto: pochi giorni per un sito, di più per app e sistemi complessi. Ti teniamo aggiornato durante tutto il processo.</p>
                     </div>
                 </div>
                 <div class="faq-item reveal">
@@ -2408,7 +2495,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq_8a">Il chatbot viene addestrato con le info reali della tua attività: orari, servizi, prezzi, domande frequenti. Non è un bot generico. Risponde come se fossi tu. Puoi vedere la demo live qui sopra.</p>
+                        <p data-i18n="faq_8a">Il chatbot viene addestrato con le info reali della tua attività: orari, servizi, prezzi, domande frequenti. Non è un bot generico. Risponde come se fossi tu.</p>
                     </div>
                 </div>
             </div>
@@ -2768,6 +2855,9 @@
                 proc_2_h:'Proposta', proc_2_p:'Preventivo dettagliato con costi e tempistiche. Niente sorprese.',
                 proc_3_h:'Sviluppo', proc_3_p:'Lavoriamo e ti teniamo aggiornato. Il risultato è qualcosa di tuo, costruito su misura.',
                 proc_4_h:'Lancio', proc_4_p:'Ultimi test, poi lancio della tua app o sistema. Dal primo giorno funziona.',
+                app_mono:'// Le nostre app', app_h2:'App vere. Non solo per i clienti.', app_sub:'Sviluppiamo i nostri prodotti — la prova che le app le costruiamo davvero.',
+                app_ordofy_tag:'In uso nei club', app_ordofy_p:'Il sistema operativo per discoteche e beach club: ordini bottiglie e tavoli via QR, app per lo staff, incassi in tempo reale.', app_ordofy_cta:'Scopri Ordofy →',
+                app_axis_soon:'In arrivo', app_axis_tag:'In arrivo', app_axis_p:'Il sistema operativo personale: allenamento, finanze, routine e AI, tutto in un\'unica app.',
                 proj_mono:'// Progetti', proj_h2:'Lavori recenti',
                 proj_sub:'Ogni progetto è un problema reale risolto. Guarda cosa abbiamo costruito.',
                 proj_visit:'Visita il sito', proj_scroll:'Scorri per vedere altri progetti',
@@ -2803,13 +2893,13 @@
                 mc_f2:'Dominio + hosting (1° anno)', mc_f3:'SEO locale', mc_f4:'Sistema prenotazioni',
                 mc_f5:'Pannello modifiche', mc_f6:'Assistente AI', mc_f6_proai:'Assistente AI (chat + WhatsApp)',
                 faq_mono:'// Domande frequenti', faq_h2:'Hai qualche dubbio?',
-                faq_2q:'Quanto tempo ci vuole?', faq_2a:'3-5 giorni per il pacchetto Base, 5-7 per il Pro. Ti teniamo aggiornato durante tutto il processo.',
+                faq_2q:'Quanto tempo ci vuole?', faq_2a:'Dipende dal progetto: pochi giorni per un sito, di più per app e sistemi complessi. Ti teniamo aggiornato durante tutto il processo.',
                 faq_3q:'E se non mi piace il risultato?', faq_3a:'Garanzia 30 giorni soddisfatti o rimborsati, senza domande.',
                 faq_4q:'Posso fare modifiche dopo la consegna?', faq_4a:'Sì, le modifiche sono incluse nella manutenzione mensile.',
                 faq_5q:'Ho già un sito, potete rifarlo?', faq_5a:"Certo. Ma spesso il vero salto è un'app o un sistema: il sito lo includiamo come add-on. Analizziamo quello che hai e proponiamo la soluzione giusta.",
                 faq_6q:'Devo fornire i testi e le foto?', faq_6a:'Se li hai è perfetto. Altrimenti ci pensiamo noi: testi, copy e immagini inclusi nel preventivo.',
                 faq_7q:"Ho davvero bisogno dell'AI per la mia attività?", faq_7a:'Dipende. Se ricevi messaggi fuori orario, perdi clienti ogni giorno: il chatbot AI li recupera. Se i tuoi clienti fanno sempre le stesse domande, l\'AI risponde per te. Non la spingiamo a tutti: te la proponiamo solo se ha senso per la tua attività.',
-                faq_8q:'Come funziona il chatbot in pratica? Risponde bene?', faq_8a:'Il chatbot viene addestrato con le info reali della tua attività: orari, servizi, prezzi, domande frequenti. Non è un bot generico. Risponde come se fossi tu. Puoi vedere la demo live qui sopra.',
+                faq_8q:'Come funziona il chatbot in pratica? Risponde bene?', faq_8a:'Il chatbot viene addestrato con le info reali della tua attività: orari, servizi, prezzi, domande frequenti. Non è un bot generico. Risponde come se fossi tu.',
                 cont_mono:'// Parliamoci', cont_h2:'Hai un\'attività.<br>Vuoi crescere online.',
                 cont_sub:'Parti da zero o vuoi aggiornare quello che hai? Compila il form. Ti rispondiamo entro 24 ore con una proposta concreta.',
                 cont_nome:'Nome', cont_tel:'Telefono', cont_email:'Email',
@@ -2848,6 +2938,9 @@
                 proc_2_h:'Proposal', proc_2_p:'Detailed quote with costs and timelines. No surprises.',
                 proc_3_h:'Development', proc_3_p:'We build and keep you updated. The result is yours, built to measure.',
                 proc_4_h:'Launch', proc_4_p:'Final tests, then your app or system goes live. Works from day one.',
+                app_mono:'// Our apps', app_h2:'Real apps. Not just for clients.', app_sub:'We build our own products — proof that we actually ship apps.',
+                app_ordofy_tag:'Live in clubs', app_ordofy_p:'The operating system for clubs and beach clubs: QR bottle & table ordering, a staff app, and revenue in real time.', app_ordofy_cta:'Discover Ordofy →',
+                app_axis_soon:'Coming soon', app_axis_tag:'Coming soon', app_axis_p:'The personal operating system: training, finances, routine and AI — all in one app.',
                 proj_mono:'// Projects', proj_h2:'Recent Work',
                 proj_sub:"Every project is a real problem solved. See what we've built.",
                 proj_visit:'Visit the site', proj_scroll:'Scroll to see more projects',
@@ -2883,13 +2976,13 @@
                 mc_f2:'Domain + hosting (1st year)', mc_f3:'Local SEO', mc_f4:'Booking system',
                 mc_f5:'Self-edit panel', mc_f6:'AI Assistant', mc_f6_proai:'AI Assistant (chat + WhatsApp)',
                 faq_mono:'// FAQ', faq_h2:'Any questions?',
-                faq_2q:'How long does it take?', faq_2a:'3-5 days for the Base package, 5-7 for Pro. We keep you updated throughout the process.',
+                faq_2q:'How long does it take?', faq_2a:'It depends on the project: a few days for a website, longer for complex apps and systems. We keep you updated throughout.',
                 faq_3q:"What if I don't like the result?", faq_3a:'30-day satisfaction guarantee or your money back, no questions asked.',
                 faq_4q:'Can I make changes after delivery?', faq_4a:'Yes, changes are included in the monthly maintenance.',
                 faq_5q:'I already have a site, can you redo it?', faq_5a:'Sure. But often the real leap is an app or a system — the website comes as an add-on. We analyze what you have and propose the right solution.',
                 faq_6q:'Do I need to provide texts and photos?', faq_6a:"If you have them, great. Otherwise we handle it: texts, copy and images included in the quote.",
                 faq_7q:'Do I really need AI for my business?', faq_7a:"It depends. If you receive messages outside business hours, you're losing customers every day: the AI chatbot recovers them. If your customers always ask the same questions, the AI answers for you. We don't push it on everyone: we only propose it if it makes sense for your business.",
-                faq_8q:'How does the chatbot work in practice? Does it answer well?', faq_8a:"The chatbot is trained on real information about your business: hours, services, prices, FAQs. It's not a generic bot. It responds as if it were you. You can see the live demo above.",
+                faq_8q:'How does the chatbot work in practice? Does it answer well?', faq_8a:"The chatbot is trained on real information about your business: hours, services, prices, FAQs. It's not a generic bot. It responds as if it were you.",
                 cont_mono:"// Let's Talk", cont_h2:'You have a business.<br>You want to grow online.',
                 cont_sub:"Starting from scratch or want to update what you have? Fill in the form. We'll reply within 24 hours with a concrete proposal.",
                 cont_nome:'Name', cont_tel:'Phone', cont_email:'Email',
