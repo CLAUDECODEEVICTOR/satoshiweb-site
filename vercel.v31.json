@@ -2,13 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "node build.mjs",
   "outputDirectory": "public",
-  "trailingSlash": true,
   "rewrites": [
     { "source": "/pannello", "destination": "/pannello.html" }
   ],
   "headers": [
     {
-      "source": "/(css|js|img|font)/(.*)",
+      "source": "/(css|js|img|font|og)/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     },
     {

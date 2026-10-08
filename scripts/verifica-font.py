@@ -3,7 +3,8 @@
 Uso: python3 scripts/verifica-font.py http://localhost:4522/         (locale)
      python3 scripts/verifica-font.py https://<anteprima>.vercel.app/ (dopo un deploy di anteprima: da fare PRIMA del lancio)
 Esce con 0 se tutto va, 1 se qualcosa manca. Non invia nulla: legge soltanto la pagina."""
-import asyncio, sys
+import asyncio, os, sys
+from urllib.parse import urlparse
 from playwright.async_api import async_playwright
 URL=(sys.argv[1] if len(sys.argv)>1 else 'http://localhost:4522/')
 ATTESI={'Bricolage Grotesque','Geist','Satoshi'}
@@ -14,6 +15,12 @@ async def main():
         font=[]
         pg.on('response',lambda r: font.append((r.status,r.headers.get('content-type',''),r.url,len(r.url))) if '/font/' in r.url else None)
         await ctx.route('**/victoranalytics-live.vercel.app/**',lambda r:r.fulfill(status=204,body=''))
+        # Anteprima protetta: SW_BYPASS_FILE = file con il token di bypass. Il token va SOLO all'host dell'anteprima, mai a terzi.
+        if os.environ.get('SW_BYPASS_FILE'):
+            token=open(os.environ['SW_BYPASS_FILE']).read().strip(); host=urlparse(URL).netloc
+            async def con_token(route):
+                await route.continue_(headers={**route.request.headers,'x-vercel-protection-bypass':token,'x-vercel-set-bypass-cookie':'true'})
+            await ctx.route(f'https://{host}/**',con_token)
         await pg.add_init_script("try{localStorage.setItem('sw_consent','denied')}catch(e){}")
         await pg.goto(URL,wait_until='networkidle'); await pg.evaluate('document.fonts.ready')
         for st,ct,u,_ in font:
