@@ -37,12 +37,12 @@ ${p.jsonld ? `<script type="application/ld+json">${JSON.stringify(p.jsonld)}</sc
 </head>`;
 }
 
-function testataCaso(ctx) {
+function testataCaso(ctx, indietro = true) {
   const { sito } = ctx;
   return `<header class="testata testata--caso">
 <div class="contenitore testata__riga">
 <a class="marchio" href="/" aria-label="${esc(sito.nome)}, home"><img src="/img/satoshi-mark.svg" alt="" width="26" height="28"><span class="marchio__nome">${esc(sito.nome)}</span></a>
-<a class="testata__indietro" href="/lavori/">← Tutti i lavori</a>
+${indietro ? '<a class="testata__indietro" href="/lavori/">← Tutti i lavori</a>' : ''}
 </div>
 </header>`;
 }
@@ -100,7 +100,7 @@ export function pagina(ctx, p) {
 ${head(ctx, p)}
 <body${p.conBarra ? ' class="con-barra"' : ''}>
 <a class="salta" href="#principale">Vai al contenuto</a>
-${p.testataCaso ? testataCaso(ctx) : testata(ctx)}
+${p.testataCaso ? testataCaso(ctx) : p.testataSemplice ? testataCaso(ctx, false) : testata(ctx)}
 <main id="principale">
 ${p.corpo}
 </main>

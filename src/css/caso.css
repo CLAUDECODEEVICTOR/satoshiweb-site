@@ -15,7 +15,7 @@
 
 /* Fascia ambra con il lavoro (ambra solo come fondo) */
 .caso-fascia { margin-top: 12px; padding-top: 20px; background: var(--ambra); }
-.caso-telefono { height: 340px; overflow: hidden; border: 2px solid var(--inchiostro); border-bottom: 0; border-radius: 20px 20px 0 0; background: var(--inchiostro); }
+.caso-telefono { height: 262px; overflow: hidden; border: 2px solid var(--inchiostro); border-bottom: 0; border-radius: 20px 20px 0 0; background: var(--inchiostro); }
 .caso-telefono img { width: 100%; height: 100%; object-fit: cover; }
 .caso-schermo { border: 2px solid var(--inchiostro); border-bottom: 0; background: var(--inchiostro); }
 .caso-schermo img { width: 100%; height: auto; }
@@ -35,10 +35,10 @@
 .caso-blocco figcaption { margin-top: 6px; font-size: 12px; color: var(--testo-3); }
 
 /* Visual */
-.caso-tile__cornice { aspect-ratio: 350 / 300; overflow: hidden; border: 1px solid var(--inchiostro); background: #000; }
+.caso-tile__cornice { aspect-ratio: 350 / 262; overflow: hidden; border: 1px solid var(--inchiostro); background: #000; }
 .caso-tile__cornice img { width: 100%; height: 100%; object-fit: cover; }
 .caso-coppia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.caso-coppia .caso-tile__cornice { aspect-ratio: var(--aspect, 170 / 300); }
+.caso-coppia .caso-tile__cornice { aspect-ratio: var(--aspect, 170 / 262); }
 .caso-coppia figcaption { grid-column: 1 / -1; margin-top: 0; }
 .caso-schermi { display: grid; gap: 10px; }
 .caso-schermi__img { overflow: hidden; border: 1px solid var(--inchiostro); background: var(--inchiostro); }
@@ -72,7 +72,7 @@
   .caso-blocco__visual { margin-top: 14px; }
   .caso-coppia { max-width: 440px; }
   .caso-tile { max-width: 280px; }
-  .caso-tile .caso-tile__cornice { aspect-ratio: 240 / 300; }
+  .caso-tile .caso-tile__cornice { aspect-ratio: 240 / 262; }
   .caso-barra { max-width: 440px; }
   .caso-foto { max-width: 460px; }
   .caso-n { font-size: 13px; }

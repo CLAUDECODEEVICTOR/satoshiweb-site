@@ -38,7 +38,7 @@ function visual(ctx, v) {
     case 'tile':
       return `<figure class="caso-tile"><div class="caso-tile__cornice">${conPos(img(ctx, v.img, { alt: v.alt, sizes: '(min-width: 834px) 280px, 350px' }), v.pos)}</div>${cap}</figure>`;
     case 'coppia':
-      return `<figure class="caso-coppia" style="--aspect: ${v.aspect || '170 / 300'}">
+      return `<figure class="caso-coppia" style="--aspect: ${v.aspect || '170 / 262'}">
 ${v.items.map((i) => `<div class="caso-tile__cornice">${conPos(img(ctx, i.img, { alt: i.alt, sizes: '(min-width: 834px) 240px, 170px' }), i.pos)}</div>`).join('\n')}
 ${cap}</figure>`;
     case 'schermo':

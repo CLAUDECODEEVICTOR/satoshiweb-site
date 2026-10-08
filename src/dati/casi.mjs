@@ -203,7 +203,7 @@ export const casi = {
         testo: ['La vista Stasera mostra quante persone sono entrate, quanti tavoli e quante persone in lista, e quante sono ancora da spuntare.'],
         visual: {
           tipo: 'coppia',
-          aspect: '170 / 300',
+          aspect: '170 / 262',
           items: [
             { img: 'milano/pannello-richieste-mobile', alt: 'Le richieste nel pannello, dal telefono', pos: 0 },
             { img: 'milano/stasera-mobile', alt: 'La vista Stasera: persone entrate, tavoli, lista e nomi da spuntare', pos: 0 },

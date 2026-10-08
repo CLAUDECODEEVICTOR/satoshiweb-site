@@ -103,6 +103,7 @@ export const contatti = {
   sotto: 'Che tu parta da zero o da un sito che hai già. Senza impegno.',
   whatsapp: 'Scrivimi su WhatsApp',
   oppure: 'oppure lascia i tuoi dati',
+  promessa: 'Ti rispondo personalmente entro 1 giorno lavorativo.',
   dopoTitolo: 'Cosa succede dopo',
   dopo: [
     "Leggo cosa mi hai scritto e guardo quello che hai già online, se c'è.",
@@ -110,6 +111,7 @@ export const contatti = {
     'Decidi tu se andare avanti.',
   ],
   form: {
+    intro: "Non serve avere già un'idea chiara. Raccontami semplicemente cosa fai e cosa vorresti ottenere.",
     nome: 'Nome',
     attivita: 'Attività',
     attivitaEsempio: 'es. Bar Roma, Civitavecchia',

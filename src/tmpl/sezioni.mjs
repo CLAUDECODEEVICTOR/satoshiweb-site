@@ -241,11 +241,16 @@ ${faq.voci
 </section>`;
 }
 
-// 8. CTA + FORM (la logica di invio è Fase 4; qui struttura, etichette, stati base)
+// 8. CTA + FORM. Invio con fetch a Formspree (sito.js), pagina /grazie/ dopo il successo, WhatsApp come alternativa.
 export function sezioneContatti(ctx) {
   const f = contatti.form;
   const obbligatorio = '<span aria-hidden="true"> *</span><span class="solo-sr"> (obbligatorio)</span>';
   const testoCampo = (nome, extra = '') => `<span class="campo__testo">${esc(nome)}${extra}</span>`;
+  const gruppo = (id, etichetta, controllo, opzioni = {}) => `<div class="campo-gruppo">
+<label class="campo${opzioni.facoltativo ? ' campo--facoltativo' : ''}">${etichetta}${controllo}</label>
+${opzioni.errore ? `<p class="campo__errore" id="err-${id}" hidden></p>` : ''}
+</div>`;
+  const dir = (id) => `id="f-${id}" aria-describedby="err-${id}"`;
   return `<section class="contatti" id="contatti">
 <div class="contenitore contatti__griglia">
 <h2 class="contatti__titolo">${t(contatti.titolo)}</h2>
@@ -261,16 +266,20 @@ ${contatti.dopo.map((x) => `<li>${t(x)}</li>`).join('\n')}
 </div>
 </div>
 <form class="form" id="form-contatto" action="${ctx.sito.formAction}" method="POST" aria-label="Scrivimi">
-<label class="campo">${testoCampo(f.nome, obbligatorio)}<input type="text" name="nome" autocomplete="name" required></label>
-<label class="campo">${testoCampo(f.attivita, obbligatorio)}<input type="text" name="attivita" placeholder="${esc(f.attivitaEsempio)}" autocomplete="organization" required></label>
-<label class="campo">${testoCampo(f.telefono, obbligatorio)}<input type="tel" name="telefono" inputmode="tel" autocomplete="tel" required></label>
+<p class="form__intro">${t(f.intro)}</p>
+${gruppo('nome', testoCampo(f.nome, obbligatorio), `<input ${dir('nome')} type="text" name="nome" autocomplete="name" maxlength="80" required>`, { errore: true })}
+${gruppo('attivita', testoCampo(f.attivita, obbligatorio), `<input ${dir('attivita')} type="text" name="attivita" placeholder="${esc(f.attivitaEsempio)}" autocomplete="organization" maxlength="120" required>`, { errore: true })}
+${gruppo('telefono', testoCampo(f.telefono, obbligatorio), `<input ${dir('telefono')} type="tel" name="telefono" inputmode="tel" autocomplete="tel" maxlength="30" required>`, { errore: true })}
 <button class="dettagli__toggle" id="dettagli-toggle" type="button" aria-expanded="false" aria-controls="dettagli" hidden>${esc(f.dettagli)}</button>
 <div class="dettagli" id="dettagli">
-<label class="campo campo--facoltativo">${testoCampo(f.sito, '<span class="v-d"> (facoltativo)</span>')}<input type="text" name="sito"></label>
+<label class="campo campo--facoltativo">${testoCampo(f.sito, '<span class="v-d"> (facoltativo)</span>')}<input type="text" name="sito" autocomplete="url" maxlength="200"></label>
 <label class="campo campo--facoltativo">${testoCampo(f.nota, '<span class="v-d"> (facoltativo)</span>')}<textarea name="nota" rows="2" maxlength="1000"></textarea></label>
 </div>
 <input class="solo-sr" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Lascia vuoto">
-<button class="btn" type="submit">${t(f.invia)}</button>
+<input type="hidden" name="_subject" value="Nuova richiesta da satoshiweb.it">
+<button class="btn" type="submit" id="form-invia" data-etichetta="${esc(f.invia)}">${t(f.invia)}</button>
+<div class="form__stato" id="form-stato" role="status" aria-live="polite"></div>
+<p class="form__promessa">${t(contatti.promessa)}</p>
 <p class="form__privacy">${esc(f.privacyPre)}<a href="/privacy/">${esc(f.privacyLink)}</a>.</p>
 </form>
 </div>

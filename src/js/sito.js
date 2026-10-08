@@ -80,6 +80,145 @@
     aggiorna();
   }
 
-  /* Pagina grazie: nome e attività arrivano da sessionStorage, mai dall'URL (Fase 4). */
+  /* FORM DI CONTATTO (Fase 4). Invio con fetch a Formspree. Nessun dato personale nell'URL: nome e attività
+     per la pagina /grazie/ passano da sessionStorage. Senza JavaScript resta il POST nativo con la validazione del browser. */
+  var form = document.getElementById('form-contatto');
+  if (form) {
+    var avvio = Date.now();
+    var invia = document.getElementById('form-invia');
+    var stato = document.getElementById('form-stato');
+    var inviando = false;
+    var iniziato = false;
+    var WA = (document.querySelector('.contatti__testo a[href^="https://wa.me"]') || {}).href || 'https://wa.me/393341989193';
+    form.noValidate = true;
+
+    var messaggi = {
+      nome: 'Scrivi il tuo nome.',
+      attivita: 'Scrivi il nome della tua attività.',
+      telefono: 'Scrivi un numero di telefono, con o senza prefisso.',
+      telefonoFormato: 'Controlla il numero: servono da 8 a 15 cifre.'
+    };
+    function controlla(campo) {
+      var v = campo.value.replace(/^\s+|\s+$/g, '');
+      var n = campo.name;
+      if (n === 'nome' || n === 'attivita') return v.length < 2 ? messaggi[n] : '';
+      if (n === 'telefono') {
+        if (!v) return messaggi.telefono;
+        var cifre = v.replace(/[^0-9]/g, '').length;
+        if (!/^[0-9+()\s.\-]+$/.test(v) || cifre < 8 || cifre > 15) return messaggi.telefonoFormato;
+      }
+      return '';
+    }
+    function mostra(campo, testo) {
+      var err = document.getElementById('err-' + campo.name);
+      if (!err) return;
+      if (testo) {
+        err.textContent = testo;
+        err.setAttribute('role', 'alert');
+        err.hidden = false;
+        campo.setAttribute('aria-invalid', 'true');
+      } else {
+        err.hidden = true;
+        err.textContent = '';
+        campo.removeAttribute('aria-invalid');
+      }
+    }
+    function obbligatori() { return [form.elements.nome, form.elements.attivita, form.elements.telefono]; }
+    obbligatori().forEach(function (c) {
+      c.addEventListener('blur', function () { if (c.value || c.getAttribute('aria-invalid')) mostra(c, controlla(c)); });
+      c.addEventListener('input', function () { if (c.getAttribute('aria-invalid')) mostra(c, controlla(c)); });
+    });
+    form.addEventListener('focusin', function () {
+      if (!iniziato) { iniziato = true; track('form_start'); }
+    });
+
+    function messaggio(html, conWhatsapp) {
+      stato.textContent = '';
+      var p = document.createElement('p');
+      p.className = 'form__errore';
+      p.textContent = html;
+      stato.appendChild(p);
+      if (conWhatsapp) {
+        var a = document.createElement('a');
+        a.href = WA;
+        a.className = 'form__wa';
+        a.textContent = 'Scrivimi su WhatsApp';
+        a.setAttribute('data-track', 'whatsapp_click');
+        a.setAttribute('data-pos', 'form_errore');
+        stato.appendChild(a);
+      }
+    }
+    function riabilita() {
+      inviando = false;
+      invia.disabled = false;
+      invia.removeAttribute('aria-busy');
+      invia.textContent = invia.getAttribute('data-etichetta');
+    }
+    function finito(dati) {
+      try { sessionStorage.setItem('sw_richiesta', JSON.stringify({ nome: dati.nome, attivita: dati.attivita })); } catch (e) {}
+      location.assign('/grazie/');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (inviando) return;
+      stato.textContent = '';
+      var primo = null;
+      obbligatori().forEach(function (c) {
+        var m = controlla(c);
+        mostra(c, m);
+        if (m && !primo) primo = c;
+      });
+      if (primo) { track('form_error', { motivo: 'validazione' }); primo.focus(); return; }
+      var dati = {
+        nome: form.elements.nome.value.replace(/^\s+|\s+$/g, ''),
+        attivita: form.elements.attivita.value.replace(/^\s+|\s+$/g, '')
+      };
+      track('form_submit');
+      /* Anti-spam: casella trappola compilata o invio sotto 3 secondi dal caricamento = scartato in silenzio. */
+      if (form.elements._gotcha.value || Date.now() - avvio < 3000) { finito(dati); return; }
+      if (navigator.onLine === false) {
+        track('form_error', { motivo: 'rete' });
+        messaggio('Sembra che non ci sia connessione. Riprova tra poco, oppure scrivimi su WhatsApp.', true);
+        return;
+      }
+      inviando = true;
+      invia.disabled = true;
+      invia.setAttribute('aria-busy', 'true');
+      invia.textContent = 'Invio...';
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var tempo = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) {
+        clearTimeout(tempo);
+        if (r.ok) { track('form_success'); track('conversion'); finito(dati); return; }
+        throw new Error('stato ' + r.status);
+      }).catch(function () {
+        clearTimeout(tempo);
+        track('form_error', { motivo: 'rete' });
+        riabilita();
+        messaggio('Non è partita. Riprova, oppure scrivimi su WhatsApp.', true);
+      });
+    });
+  }
+
+  /* Pagina /grazie/: nome e attività da sessionStorage (mai dall'URL), inseriti come testo. */
+  var grazieNome = document.getElementById('grazie-titolo');
+  if (grazieNome) {
+    try {
+      var r = JSON.parse(sessionStorage.getItem('sw_richiesta') || 'null');
+      if (r && r.nome) {
+        grazieNome.textContent = 'Fatto, ' + r.nome + '. Ora tocca a\u00A0me.';
+        var att = document.getElementById('grazie-attivita');
+        if (att && r.attivita) att.textContent = 'Ho i dati di\u00A0' + r.attivita + '. Ti scrivo io al\u00A0numero che mi hai lasciato.';
+      }
+      sessionStorage.removeItem('sw_richiesta');
+    } catch (e) {}
+  }
+
   void ridotto;
 })();
