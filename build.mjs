@@ -14,7 +14,8 @@ import { fileURLToPath } from 'node:url';
 import { sito, footer, barraFissa } from './src/dati/sito.mjs';
 import { navLinea, navMenu } from './src/dati/home.mjs';
 import { lavori } from './src/dati/lavori.mjs';
-import { home, indiceLavori, caso, grazie, non_trovata } from './src/tmpl/pagine.mjs';
+import { home, indiceLavori, grazie, non_trovata } from './src/tmpl/pagine.mjs';
+import { caso } from './src/tmpl/caso.mjs';
 
 const RADICE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(RADICE, 'src');
@@ -72,7 +73,7 @@ for (const f of Object.values(FAMIGLIE)) if (!famigliePresenti.has(f)) console.w
 
 // 3. CSS e JS con hash nel nome (cache lunga e sicura).
 const minCss = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}').trim();
-const css = minCss(cssFont + ['base.css', 'componenti.css', 'home.css'].map((f) => fs.readFileSync(path.join(SRC, 'css', f), 'utf8')).join('\n'));
+const css = minCss(cssFont + ['base.css', 'componenti.css', 'home.css', 'caso.css'].map((f) => fs.readFileSync(path.join(SRC, 'css', f), 'utf8')).join('\n'));
 const cssNome = `/css/sito.${hash(css)}.css`;
 scrivi(cssNome.slice(1), css);
 const js = fs.readFileSync(path.join(SRC, 'js/sito.js'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s+/gm, '').replace(/\n+/g, '\n');

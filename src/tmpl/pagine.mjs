@@ -3,7 +3,7 @@
 import { esc, t } from './util.mjs';
 import { sezioneHero, sezioneDaDoveParti, sezioneLavori, sezioneCapacita, sezioneProcesso, sezioneFondatore, sezioneFaq, sezioneContatti } from './sezioni.mjs';
 import { pagina } from './layout.mjs';
-import { lavoriIndice, lavoroPerSlug } from '../dati/lavori.mjs';
+import { lavoriIndice } from '../dati/lavori.mjs';
 
 export function home(ctx) {
   const corpo = [
@@ -56,30 +56,6 @@ ${voci}
     percorso: '/lavori/',
     titolo: 'Lavori: siti e sistemi per attività | Satoshi Web',
     descrizione: 'Sei progetti reali: un caffè, un PR, un club, un barbiere, una federazione. Cosa serviva e cosa ho costruito.',
-    corpo,
-  });
-}
-
-export function caso(ctx, slug) {
-  const l = lavoroPerSlug(slug);
-  const corpo = `<section class="testata-pagina contenitore">
-<div class="etichetta">${esc(l.categoria)}${l.luogo ? ' · ' + esc(l.luogo) : ''}</div>
-<h1>${t(l.nome)}</h1>
-<p class="lead">${t(l.frase)}</p>
-${l.stato === 'anteprima' ? '<span class="stato">In anteprima</span>' : ''}
-${l.link ? `<a class="link-forte" href="${l.link.href}" rel="noopener">${esc(l.link.testo)} →</a>` : ''}
-</section>
-<section class="chiusura su-scuro">
-<div class="contenitore">
-<h2>${t('Vuoi qualcosa di simile per la tua attività?')}</h2>
-<a class="btn" href="/#contatti" data-track="cta_click" data-pos="caso">${t('Parliamo del tuo progetto →')}</a>
-<a class="link-forte" href="/lavori/">Tutti i lavori</a>
-</div>
-</section>`;
-  return pagina(ctx, {
-    percorso: `/lavori/${slug}/`,
-    titolo: `${l.nome}: ${l.categoria.toLowerCase()} | Satoshi Web`,
-    descrizione: l.frase.length > 155 ? l.frase.slice(0, 152).trimEnd() + '...' : l.frase,
     corpo,
   });
 }

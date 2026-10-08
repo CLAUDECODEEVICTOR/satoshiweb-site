@@ -267,12 +267,14 @@
 .processo__passi li:last-child { border-bottom: 1px solid var(--inchiostro); }
 .processo__passi strong { font-family: var(--f-titoli); font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
 .processo__passi span { color: var(--testo-2); }
+.processo__passi .processo__n { margin-right: 6px; font-family: var(--f-testo); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--testo-3); }
 @media (min-width: 834px) {
   .processo h2 { font-size: 46px; }
   .processo__passi { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; margin-top: 24px; }
   .processo__passi li { padding-block: 14px 20px; }
   .processo__passi li:nth-child(n + 3) { border-bottom: 1px solid var(--inchiostro); }
   .processo__passi strong { display: block; font-size: 24px; }
+  .processo__passi .processo__n { display: block; margin: 0 0 4px; }
 }
 @media (min-width: 1200px) {
   .processo h2 { font-size: clamp(34px, 4.6vw, 64px); }

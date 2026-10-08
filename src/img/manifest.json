@@ -1,4 +1,22 @@
 {
+  "acasamia/acm-d-giornata": {
+    "w": 1440,
+    "h": 900,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-d-giornata-390.515a44.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-d-giornata-780.515a44.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/acasamia-acm-d-giornata-1440.515a44.webp"
+      }
+    ]
+  },
   "acasamia/acm-d-orari": {
     "w": 1440,
     "h": 900,
@@ -49,6 +67,20 @@
       }
     ]
   },
+  "acasamia/acm-m-giornata": {
+    "w": 780,
+    "h": 1688,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-m-giornata-390.a85ea2.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-m-giornata-780.a85ea2.webp"
+      }
+    ]
+  },
   "acasamia/acm-m-orari-crop": {
     "w": 780,
     "h": 730,
@@ -74,6 +106,24 @@
       {
         "w": 780,
         "url": "/img/acasamia-acm-mobile-780.bd9a33.webp"
+      }
+    ]
+  },
+  "acasamia/foto-reale": {
+    "w": 1280,
+    "h": 1600,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-foto-reale-390.4fcdf7.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-foto-reale-780.4fcdf7.webp"
+      },
+      {
+        "w": 1280,
+        "url": "/img/acasamia-foto-reale-1280.4fcdf7.webp"
       }
     ]
   },
@@ -105,6 +155,94 @@
       }
     ]
   },
+  "ikta/discipline": {
+    "w": 2048,
+    "h": 1280,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/ikta-discipline-390.6fe028.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/ikta-discipline-780.6fe028.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/ikta-discipline-1440.6fe028.webp"
+      },
+      {
+        "w": 2048,
+        "url": "/img/ikta-discipline-2048.6fe028.webp"
+      }
+    ]
+  },
+  "ikta/gare": {
+    "w": 2048,
+    "h": 1280,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/ikta-gare-390.23c39f.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/ikta-gare-780.23c39f.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/ikta-gare-1440.23c39f.webp"
+      },
+      {
+        "w": 2048,
+        "url": "/img/ikta-gare-2048.23c39f.webp"
+      }
+    ]
+  },
+  "ikta/home-navigazione": {
+    "w": 2048,
+    "h": 122,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/ikta-home-navigazione-390.a17499.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/ikta-home-navigazione-780.a17499.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/ikta-home-navigazione-1440.a17499.webp"
+      },
+      {
+        "w": 2048,
+        "url": "/img/ikta-home-navigazione-2048.a17499.webp"
+      }
+    ]
+  },
+  "lazzi/catalogo": {
+    "w": 2880,
+    "h": 1800,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/lazzi-catalogo-390.6523e7.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/lazzi-catalogo-780.6523e7.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/lazzi-catalogo-1440.6523e7.webp"
+      },
+      {
+        "w": 2880,
+        "url": "/img/lazzi-catalogo-2880.6523e7.webp"
+      }
+    ]
+  },
   "lazzi/pannello-ordini": {
     "w": 1339,
     "h": 400,
@@ -120,6 +258,38 @@
       {
         "w": 1339,
         "url": "/img/lazzi-pannello-ordini-1339.d0ca95.webp"
+      }
+    ]
+  },
+  "lazzi/pannello-prodotti": {
+    "w": 1339,
+    "h": 741,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/lazzi-pannello-prodotti-390.928095.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/lazzi-pannello-prodotti-780.928095.webp"
+      },
+      {
+        "w": 1339,
+        "url": "/img/lazzi-pannello-prodotti-1339.928095.webp"
+      }
+    ]
+  },
+  "lazzi/scheda-mobile": {
+    "w": 780,
+    "h": 1688,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/lazzi-scheda-mobile-390.ceae7f.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/lazzi-scheda-mobile-780.ceae7f.webp"
       }
     ]
   },
@@ -142,6 +312,20 @@
       {
         "w": 2880,
         "url": "/img/lazzi-vetrina-2880.81b9da.webp"
+      }
+    ]
+  },
+  "luca/lettore-ingresso": {
+    "w": 780,
+    "h": 1688,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-lettore-ingresso-390.88142d.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-lettore-ingresso-780.88142d.webp"
       }
     ]
   },
@@ -191,6 +375,34 @@
       }
     ]
   },
+  "luca/pannello-conferma": {
+    "w": 780,
+    "h": 1500,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-pannello-conferma-390.4e0225.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-pannello-conferma-780.4e0225.webp"
+      }
+    ]
+  },
+  "luca/pannello-dettaglio": {
+    "w": 780,
+    "h": 1548,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-pannello-dettaglio-390.42655c.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-pannello-dettaglio-780.42655c.webp"
+      }
+    ]
+  },
   "luca/pannello-richieste": {
     "w": 780,
     "h": 1688,
@@ -202,6 +414,172 @@
       {
         "w": 780,
         "url": "/img/luca-pannello-richieste-780.445c0a.webp"
+      }
+    ]
+  },
+  "milano/mcr-d-calendario": {
+    "w": 1440,
+    "h": 900,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/milano-mcr-d-calendario-390.92dc67.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/milano-mcr-d-calendario-780.92dc67.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/milano-mcr-d-calendario-1440.92dc67.webp"
+      }
+    ]
+  },
+  "milano/mcr-m-form": {
+    "w": 780,
+    "h": 1020,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/milano-mcr-m-form-390.6cb75a.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/milano-mcr-m-form-780.6cb75a.webp"
+      }
+    ]
+  },
+  "milano/pannello-richieste-mobile": {
+    "w": 658,
+    "h": 1424,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/milano-pannello-richieste-mobile-390.fec906.webp"
+      },
+      {
+        "w": 658,
+        "url": "/img/milano-pannello-richieste-mobile-658.fec906.webp"
+      }
+    ]
+  },
+  "milano/pannello-richieste-web": {
+    "w": 1400,
+    "h": 886,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/milano-pannello-richieste-web-390.8d8512.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/milano-pannello-richieste-web-780.8d8512.webp"
+      },
+      {
+        "w": 1400,
+        "url": "/img/milano-pannello-richieste-web-1400.8d8512.webp"
+      }
+    ]
+  },
+  "milano/stasera-mobile": {
+    "w": 658,
+    "h": 1424,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/milano-stasera-mobile-390.376c32.webp"
+      },
+      {
+        "w": 658,
+        "url": "/img/milano-stasera-mobile-658.376c32.webp"
+      }
+    ]
+  },
+  "taiko/pannello-events": {
+    "w": 2880,
+    "h": 1800,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/taiko-pannello-events-390.0a9999.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/taiko-pannello-events-780.0a9999.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/taiko-pannello-events-1440.0a9999.webp"
+      },
+      {
+        "w": 2880,
+        "url": "/img/taiko-pannello-events-2880.0a9999.webp"
+      }
+    ]
+  },
+  "taiko/pannello-requests": {
+    "w": 2880,
+    "h": 1800,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/taiko-pannello-requests-390.23899e.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/taiko-pannello-requests-780.23899e.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/taiko-pannello-requests-1440.23899e.webp"
+      },
+      {
+        "w": 2880,
+        "url": "/img/taiko-pannello-requests-2880.23899e.webp"
+      }
+    ]
+  },
+  "taiko/richiesta-evento": {
+    "w": 2880,
+    "h": 1800,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/taiko-richiesta-evento-390.d58336.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/taiko-richiesta-evento-780.d58336.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/taiko-richiesta-evento-1440.d58336.webp"
+      },
+      {
+        "w": 2880,
+        "url": "/img/taiko-richiesta-evento-2880.d58336.webp"
+      }
+    ]
+  },
+  "taiko/sito-hero": {
+    "w": 2880,
+    "h": 1800,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/taiko-sito-hero-390.ecf694.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/taiko-sito-hero-780.ecf694.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/taiko-sito-hero-1440.ecf694.webp"
+      },
+      {
+        "w": 2880,
+        "url": "/img/taiko-sito-hero-2880.ecf694.webp"
       }
     ]
   },

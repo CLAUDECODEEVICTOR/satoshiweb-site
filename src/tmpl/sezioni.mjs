@@ -142,7 +142,7 @@ function schedaLazzi(ctx, l) {
   const s = l.scheda;
   return `<article class="lavoro lavoro--shop" id="lavoro-${l.slug}">
 <div class="shop__corpo">
-${testaScheda(l, '')}
+${testaScheda(l, s.destra)}
 ${nomeScheda(l)}
 <p class="lavoro__testo v-mt">${t(s.testo)}</p>
 </div>
@@ -205,7 +205,7 @@ export function sezioneProcesso() {
 <div class="contenitore">
 <h2>${t(processo.titolo)}</h2>
 <ol class="processo__passi">
-${processo.passi.map((p) => `<li><strong>${t(p.titolo)}</strong> <span>${t(p.testo)}</span></li>`).join('\n')}
+${processo.passi.map((p) => `<li><span class="processo__n">${p.n}</span> <strong>${t(p.titolo)}</strong> <span>${t(p.testo)}</span></li>`).join('\n')}
 </ol>
 </div>
 </section>`;

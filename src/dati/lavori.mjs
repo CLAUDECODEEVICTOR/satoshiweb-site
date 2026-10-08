@@ -97,6 +97,7 @@ export const lavori = [
     // Il luogo non è nei materiali: la parte destra dell'etichetta resta vuota, non si inventa.
     scheda: {
       etichetta: '04 · E-commerce',
+      destra: 'Shop online',
       testo: 'Ho progettato e sviluppato il sito e lo shop online di Lazzi Barbershop, con gestione dal pannello.',
       testoLato: 'Il sito e lo shop possono essere gestiti direttamente dal browser attraverso il pannello.',
     },

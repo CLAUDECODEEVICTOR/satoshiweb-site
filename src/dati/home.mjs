@@ -69,10 +69,10 @@ export const capacita = {
 export const processo = {
   titolo: 'Come lavoro.',
   passi: [
-    { titolo: 'Guardo.', testo: "La tua attività e quello che hai già online, se c'è." },
-    { titolo: 'Ti dico cosa serve.', testo: 'Se hai già qualcosa, partiamo da lì. Se non hai niente, partiamo da zero.' },
-    { titolo: 'Lo costruiamo.', testo: 'Sito, prenotazioni, shop o gli strumenti che servono davvero.' },
-    { titolo: 'Lo mettiamo online.', testo: 'E da lì possiamo continuare a migliorarlo.' },
+    { n: '01', titolo: 'Guardo.', testo: "La tua attività e quello che hai già online, se c'è." },
+    { n: '02', titolo: 'Ti dico cosa serve.', testo: 'Se hai già qualcosa, partiamo da lì. Se non hai niente, partiamo da zero.' },
+    { n: '03', titolo: 'Lo costruiamo.', testo: 'Sito, prenotazioni, shop o gli strumenti che servono davvero.' },
+    { n: '04', titolo: 'Lo mettiamo online.', testo: 'E da lì possiamo continuare a migliorarlo.' },
   ],
 };
 

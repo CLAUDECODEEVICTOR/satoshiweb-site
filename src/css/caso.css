@@ -1,0 +1,95 @@
+/* Case study. Mobile dalla tavola V3.1 n.10 (390); tablet e desktop non sono disegnati nella V3.1:
+   si scala lo stesso schema (testo a sinistra, visual a destra) con i token già approvati, senza elementi nuovi. */
+
+/* Header del case study: marchio e "← Tutti i lavori" (V3.1) */
+.testata__indietro { display: inline-flex; align-items: center; min-height: var(--tocco); font-size: 15px; text-decoration: none; }
+.testata--caso .testata__riga { padding-block: 6px; }
+
+/* Testata */
+.caso-testa { padding-top: 28px; }
+.caso-testa .etichetta { letter-spacing: 0.14em; }
+.caso-testa h1 { margin-top: 10px; font-size: clamp(38px, 12vw, 52px); line-height: 0.95; letter-spacing: -0.04em; }
+.caso-testa .lead { margin-top: 12px; font-size: 18px; line-height: 1.35; max-width: 56ch; }
+.caso-testa .stato { margin-top: 12px; }
+.caso-testa .link-forte { display: inline-flex; align-items: center; min-height: var(--tocco); padding-block: 0; margin-top: var(--s1); }
+
+/* Fascia ambra con il lavoro (ambra solo come fondo) */
+.caso-fascia { margin-top: 12px; padding-top: 20px; background: var(--ambra); }
+.caso-telefono { height: 340px; overflow: hidden; border: 2px solid var(--inchiostro); border-bottom: 0; border-radius: 20px 20px 0 0; background: var(--inchiostro); }
+.caso-telefono img { width: 100%; height: 100%; object-fit: cover; }
+.caso-schermo { border: 2px solid var(--inchiostro); border-bottom: 0; background: var(--inchiostro); }
+.caso-schermo img { width: 100%; height: auto; }
+.caso-fascia__visual--doppio .caso-schermo { display: none; }
+
+/* Blocchi numerati */
+.caso-blocco { padding-top: 36px; }
+.caso-blocco + .caso-blocco { padding-top: 32px; }
+.caso-blocco__riga { border-top: 1px solid var(--inchiostro); padding-top: 14px; }
+.caso-blocco__testo { min-width: 0; }
+.caso-n { font-family: var(--f-testo); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; line-height: 1.5; text-transform: uppercase; }
+.caso-blocco__testo p { margin-top: 10px; }
+.caso-blocco__testo p + p { color: var(--testo-2); }
+.caso-elenco { margin-top: 8px; }
+.caso-elenco li { padding-block: 10px; border-bottom: 1px solid var(--filetto); }
+.caso-blocco__visual { margin-top: 14px; min-width: 0; }
+.caso-blocco figcaption { margin-top: 6px; font-size: 12px; color: var(--testo-3); }
+
+/* Visual */
+.caso-tile__cornice { aspect-ratio: 350 / 300; overflow: hidden; border: 1px solid var(--inchiostro); background: #000; }
+.caso-tile__cornice img { width: 100%; height: 100%; object-fit: cover; }
+.caso-coppia { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.caso-coppia .caso-tile__cornice { aspect-ratio: var(--aspect, 170 / 300); }
+.caso-coppia figcaption { grid-column: 1 / -1; margin-top: 0; }
+.caso-schermi { display: grid; gap: 10px; }
+.caso-schermi__img { overflow: hidden; border: 1px solid var(--inchiostro); background: var(--inchiostro); }
+.caso-schermi__img img { width: 100%; height: auto; }
+.caso-barra { padding: 20px; background: var(--carta-2); }
+.caso-barra img { width: 100%; height: auto; }
+.caso-foto > div { aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--inchiostro); }
+.caso-foto img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Chiusura scura */
+.chiusura { margin-top: 40px; padding-block: var(--s8); }
+.chiusura .btn + .btn { margin-top: 10px; }
+.chiusura .btn--chiaro { background: transparent; color: var(--carta); border-color: var(--carta); }
+.chiusura .btn--chiaro:hover { color: var(--carta); }
+.chiusura__prossimo { display: flex; align-items: center; min-height: var(--tocco); margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--testo-3); color: var(--carta); }
+.chiusura__prossimo:hover { color: var(--su-scuro-2); }
+
+@media (min-width: 834px) {
+  .caso-testa { padding-top: 44px; }
+  .caso-testa h1 { margin-top: 14px; font-size: clamp(60px, 8vw, 92px); }
+  .caso-testa .lead { font-size: 22px; max-width: 60ch; }
+  .caso-fascia { margin-top: 20px; padding-top: 24px; }
+  .caso-fascia__visual--doppio .caso-schermo { display: block; }
+  .caso-fascia__visual--doppio .caso-telefono { display: none; }
+  .caso-schermo { aspect-ratio: 770 / 300; overflow: hidden; }
+  .caso-blocco { padding-top: 56px; }
+  .caso-blocco + .caso-blocco { padding-top: 48px; }
+  .caso-blocco__riga { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px; align-items: start; }
+  .caso-blocco__riga--solo { grid-template-columns: minmax(0, 1fr); }
+  .caso-blocco__riga--solo .caso-blocco__testo { max-width: 720px; }
+  .caso-blocco__visual { margin-top: 14px; }
+  .caso-coppia { max-width: 440px; }
+  .caso-tile { max-width: 280px; }
+  .caso-tile .caso-tile__cornice { aspect-ratio: 240 / 300; }
+  .caso-barra { max-width: 440px; }
+  .caso-foto { max-width: 460px; }
+  .caso-n { font-size: 13px; }
+  .chiusura { margin-top: 64px; padding-block: 64px; }
+  .chiusura .btn { display: inline-flex; width: auto; padding-inline: 28px; }
+  .chiusura .btn + .btn { margin-top: 0; margin-left: 12px; }
+}
+@media (min-width: 1200px) {
+  .caso-testa { padding-top: 56px; }
+  .caso-testa h1 { font-size: clamp(72px, 7vw, 108px); }
+  .caso-fascia { margin-top: 28px; }
+  .caso-fascia__visual--doppio { display: flex; gap: 28px; align-items: flex-start; height: 380px; overflow: hidden; }
+  .caso-fascia__visual--doppio .caso-schermo { flex: 1 1 0; min-width: 0; aspect-ratio: auto; }
+  .caso-fascia__visual--doppio .caso-telefono { display: block; flex: 0 0 230px; height: auto; margin-top: 28px; border-radius: 22px 22px 0 0; }
+  .caso-fascia__visual--doppio .caso-telefono img { height: auto; }
+  .caso-fascia__visual--schermo { max-height: 420px; overflow: hidden; }
+  .caso-blocco { padding-top: 72px; }
+  .caso-blocco + .caso-blocco { padding-top: 56px; }
+  .caso-blocco__riga { gap: 56px; }
+}
