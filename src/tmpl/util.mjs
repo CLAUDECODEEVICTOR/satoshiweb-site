@@ -30,3 +30,6 @@ export function img(ctx, chiave, opz) {
 }
 
 export const assoluto = (ctx, percorso) => ctx.sito.url + percorso;
+
+// Titolo a gruppi (skill tipografia-web): ogni gruppo non si spezza, il browser va a capo solo tra un gruppo e l'altro.
+export const gruppi = (lista) => lista.map((g) => `<span class="ph">${t(g, { vedova: false })}</span>`).join(' ');

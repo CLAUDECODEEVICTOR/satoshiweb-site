@@ -1,33 +1,21 @@
 // Pagine della foundation. La home ha per ora solo l'hero (Fase 2 aggiunge le altre sezioni nell'ordine del Brief §4).
 // Le pagine /lavori/ e dei casi mostrano solo i dati verificati: nessun blocco senza contenuto reale.
-import { esc, t, img } from './util.mjs';
+import { esc, t } from './util.mjs';
+import { sezioneHero, sezioneDaDoveParti, sezioneLavori, sezioneCapacita, sezioneProcesso, sezioneFondatore, sezioneFaq, sezioneContatti } from './sezioni.mjs';
 import { pagina } from './layout.mjs';
 import { lavoriIndice, lavoroPerSlug } from '../dati/lavori.mjs';
 
-function titoloHero(hero) {
-  return hero.titolo
-    .map((g) => {
-      const parole = t(g.testo);
-      return g.evidenzia ? `<span class="hl">${parole}</span>` : parole;
-    })
-    .join(' ');
-}
-
 export function home(ctx) {
-  const { hero } = ctx;
-  const corpo = `<section class="hero contenitore" id="top">
-<div class="etichetta">${esc(hero.etichetta)}</div>
-<h1 class="hero__titolo">${titoloHero(hero)}</h1>
-<p class="hero__sotto">${t(hero.sottotitolo)}</p>
-<a class="btn" id="hero-cta" href="#contatti" data-track="cta_hero">${t(hero.cta)}</a>
-<a class="hero__secondaria" href="#parti" data-track="cta_secondaria">${t(hero.secondaria)}</a>
-</section>
-<div class="fascia-lavoro">
-<div class="contenitore">
-<div class="fascia-lavoro__testa"><span>${esc(hero.fascia.etichetta)}</span><span>${esc(hero.fascia.riferimento)}</span></div>
-<div class="telefono">${img(ctx, 'acasamia/acm-mobile', { alt: 'Il sito di A casa mia visto dal telefono', sizes: '(min-width: 834px) 380px, 100vw', priorita: true })}</div>
-</div>
-</div>`;
+  const corpo = [
+    sezioneHero(ctx),
+    sezioneDaDoveParti(),
+    sezioneLavori(ctx),
+    sezioneCapacita(ctx),
+    sezioneProcesso(),
+    sezioneFondatore(ctx),
+    sezioneFaq(),
+    sezioneContatti(ctx),
+  ].join('\n');
   return pagina(ctx, {
     percorso: '/',
     titolo: 'Satoshi Web: siti web per attività e professionisti, Civitavecchia',

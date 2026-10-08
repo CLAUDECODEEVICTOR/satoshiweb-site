@@ -1,4 +1,68 @@
 {
+  "acasamia/acm-d-orari": {
+    "w": 1440,
+    "h": 900,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-d-orari-390.662b64.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-d-orari-780.662b64.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/acasamia-acm-d-orari-1440.662b64.webp"
+      }
+    ]
+  },
+  "acasamia/acm-desktop": {
+    "w": 1440,
+    "h": 900,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-desktop-390.3c4156.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-desktop-780.3c4156.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/acasamia-acm-desktop-1440.3c4156.webp"
+      }
+    ]
+  },
+  "acasamia/acm-m-bar": {
+    "w": 780,
+    "h": 148,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-m-bar-390.f97ac6.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-m-bar-780.f97ac6.webp"
+      }
+    ]
+  },
+  "acasamia/acm-m-orari-crop": {
+    "w": 780,
+    "h": 730,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-m-orari-crop-390.e442f8.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-m-orari-crop-780.e442f8.webp"
+      }
+    ]
+  },
   "acasamia/acm-mobile": {
     "w": 780,
     "h": 1688,
@@ -10,6 +74,166 @@
       {
         "w": 780,
         "url": "/img/acasamia-acm-mobile-780.bd9a33.webp"
+      }
+    ]
+  },
+  "ai/ai-dopo-zoom": {
+    "w": 640,
+    "h": 345,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/ai-ai-dopo-zoom-390.e8549b.webp"
+      },
+      {
+        "w": 640,
+        "url": "/img/ai-ai-dopo-zoom-640.e8549b.webp"
+      }
+    ]
+  },
+  "fondatore/edoardo-crop": {
+    "w": 540,
+    "h": 680,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/fondatore-edoardo-crop-390.b1da19.webp"
+      },
+      {
+        "w": 540,
+        "url": "/img/fondatore-edoardo-crop-540.b1da19.webp"
+      }
+    ]
+  },
+  "lazzi/pannello-ordini": {
+    "w": 1339,
+    "h": 400,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/lazzi-pannello-ordini-390.d0ca95.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/lazzi-pannello-ordini-780.d0ca95.webp"
+      },
+      {
+        "w": 1339,
+        "url": "/img/lazzi-pannello-ordini-1339.d0ca95.webp"
+      }
+    ]
+  },
+  "lazzi/vetrina": {
+    "w": 2880,
+    "h": 1800,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/lazzi-vetrina-390.81b9da.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/lazzi-vetrina-780.81b9da.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/lazzi-vetrina-1440.81b9da.webp"
+      },
+      {
+        "w": 2880,
+        "url": "/img/lazzi-vetrina-2880.81b9da.webp"
+      }
+    ]
+  },
+  "luca/luca-d-serate": {
+    "w": 1440,
+    "h": 900,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-luca-d-serate-390.3ca56e.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-luca-d-serate-780.3ca56e.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/luca-luca-d-serate-1440.3ca56e.webp"
+      }
+    ]
+  },
+  "luca/luca-m-hero": {
+    "w": 780,
+    "h": 1560,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-luca-m-hero-390.a4dc98.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-luca-m-hero-780.a4dc98.webp"
+      }
+    ]
+  },
+  "luca/luca-m-serate": {
+    "w": 780,
+    "h": 910,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-luca-m-serate-390.99eada.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-luca-m-serate-780.99eada.webp"
+      }
+    ]
+  },
+  "luca/pannello-richieste": {
+    "w": 780,
+    "h": 1688,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/luca-pannello-richieste-390.445c0a.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/luca-pannello-richieste-780.445c0a.webp"
+      }
+    ]
+  },
+  "taiko/taiko-d-hero": {
+    "w": 1440,
+    "h": 900,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/taiko-taiko-d-hero-390.25cf2c.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/taiko-taiko-d-hero-780.25cf2c.webp"
+      },
+      {
+        "w": 1440,
+        "url": "/img/taiko-taiko-d-hero-1440.25cf2c.webp"
+      }
+    ]
+  },
+  "taiko/taiko-m-001": {
+    "w": 780,
+    "h": 850,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/taiko-taiko-m-001-390.dc6c5d.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/taiko-taiko-m-001-780.dc6c5d.webp"
       }
     ]
   }

@@ -52,3 +52,7 @@ Key design tokens (`:root` variables):
 ## SEO
 
 The page includes Open Graph tags, Twitter Card meta, and Schema.org JSON-LD (`ProfessionalService` type, with `Service` / `OfferCatalog` / `Offer` and `PostalAddress` blocks). The canonical URL is `https://satoshiweb.it/`.
+
+## Design
+
+@.claude/design.md

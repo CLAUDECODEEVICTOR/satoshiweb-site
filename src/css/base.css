@@ -39,6 +39,9 @@
 @media (min-width: 834px) {
   :root { --gutter: 32px; }
 }
+@media (min-width: 1200px) {
+  :root { --gutter: 40px; }
+}
 
 *, *::before, *::after { box-sizing: border-box; }
 

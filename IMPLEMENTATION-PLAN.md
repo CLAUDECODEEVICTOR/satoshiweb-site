@@ -589,3 +589,49 @@ Non sono bloccanti per **iniziare** (lo sono per il **lancio**): Q4 (Samuele), t
 - **Barra fissa:** solo sulla home (dopo la CTA hero). Sulle pagine interne non c'è, perché la V3.1 non la prevede lì. Se la vuoi anche nei case study è una decisione di design.
 - **Dati di Lazzi e Milano:** `link: null` finché non verifico indirizzo e dominio (M3).
 - **`llms.txt` legacy** dice "A partire da 200 euro" per i siti. Il Brief vieta prezzi non approvati. Il file resta com'è finché non decidi; lo segnalo.
+
+---
+
+## REVISIONE 2 (8 ottobre 2026): Fase 2, homepage V3.1 costruita
+
+**Stato:** le 8 sezioni della homepage (hero, da dove parti, lavori, cosa può fare un sito, processo, fondatore, FAQ, CTA e form) più header, footer e barra fissa sono costruite sul branch `v3.1-foundation`, a partire dalle tre tavole V3.1 (mobile 390, tablet 834, desktop 1440). Font self-hosted integrati. Tutto `noindex`, `SW_INDICIZZA` spento.
+
+**Font.** Bricolage Grotesque (variabile `wght 200-800` con asse `opsz`, come nella V3.1) e Geist 400/500/600, subset latino, dal pacchetto Fontsource (OFL). Satoshi 700 dal pacchetto ufficiale Fontshare, **non modificato**: la licenza ITF FFL 2.0 permette il self-hosting con `@font-face` e l'uso commerciale, ma vieta subsetting, conversione e ridistribuzione. Poiché il repo GitHub è **pubblico**, il file Satoshi **non è committato** (escluso in `.git/info/exclude`): esiste solo in locale e arriva a Vercel con il deploy da cartella (`vercel --prod`). Se manca, il nome ricade su Bricolage e il build lo segnala. La freccia "→" non è in nessun subset di Google e Fontsource: come già nella V3.1 viene dal font di sistema.
+
+**Misure contro la V3.1** (stesso browser, stesse larghezze, font veri):
+
+| Larghezza | Altezza pagina V3.1 | Nostra | Note |
+|---|---|---|---|
+| 360 | 7.120 | 7.446 | CTA hero a 396 (V3.1: 394) |
+| 390 | 7.136 | 7.515 (7.456 senza il margine della barra fissa) | CTA a 407 (V3.1: 405) |
+| 430 | 7.087 | 7.536 | CTA a 396 (V3.1: 394) |
+| 834 | 5.277 | 5.526 | |
+| 1440 | 5.263 | 5.577 | |
+
+Scarto del 5-6%: viene da (1) lo screenshot del pannello di Luca al posto del segnaposto, (2) lo schema di Lazzi al posto di Milano, (3) le aree di tocco portate a 44 px sui link (+8 px per link). Nessuno scroll orizzontale a nessuna larghezza. Il visual più alto è identico alla V3.1 (scheda A casa mia a 298 px a 430).
+
+**Audit.** `controlla-testi.py` sulla home a 360/390/430/834/1440: zero problemi nel nostro contenuto. Gli unici 16 rilievi sono il testo del banner cookie di `consent.js` (legacy, non toccato su tua richiesta). `audit-design.py`: zero errori; restano avvisi voluti dalla V3.1 (etichette da 11px, spaziature fuori scala delle tavole) e da Fase 5 (titolo home di 66 caratteri, `apple-touch-icon`).
+
+**Difetti trovati e corretti durante la costruzione:** blocchi desktop visibili su mobile per un conflitto di specificità CSS; asterisco dei campi su una riga a sé; titolo "Prima di scrivermi" legato in un blocco da 384px che sforava la colonna (ora "Prima / di scrivermi"); "negli / orari" a fine riga; colonna del titolo "Da dove parti?" troppo stretta a 1440; elenco "Cosa può fare" riscritto come lista di definizioni.
+
+### Cose per cui servono decisioni tue (non le ho prese io)
+
+1. **Copy delle schede lavoro.** Per Luca, A casa mia e Taiko ho usato i testi **dei prototipi V3.1** (misurati e approvati). Il Brief §7 ne ha di diversi (es. Luca: "Ho costruito lucacalifornia.it e un sistema gestionale…"). Le frasi del Brief sono già nei dati (`brief` in `src/dati/lavori.mjs`): cambiare copy è una riga. Per Lazzi, che la V3.1 non disegna, ho usato il testo del Brief.
+2. **Pannello di Luca.** Il segnaposto tratteggiato della V3.1 è stato sostituito da `05-richieste-nuove.png` (dati di esempio), ritagliato in alto, con la didascalia "Schermata con dati di esempio." Il ritaglio è mio. Su mobile aggiunge circa 215 px. Se lo vuoi più piccolo o diverso è una scelta di design.
+3. **Lazzi.** Stesso schema delle altre schede, ma: l'etichetta a destra è vuota perché il luogo non è nei materiali; su mobile il secondo visual è un ritaglio del pannello ordini (solo statistiche e filtri, **senza le righe con i clienti**); niente link al sito esterno finché non verifico l'indirizzo.
+4. **Link ai case study.** Nella V3.1 le schede linkano solo ai siti dei clienti. Per raggiungere i case study (Brief §22) ho reso link il **nome** del progetto (stesso aspetto) e le voci di "Cosa può fare", con sottolineatura sottile. È un'aggiunta minima ma è mia.
+5. **Processo.** Il Brief scrive "01 Guardo, 02 Ti dico cosa serve…"; il prototipo V3.1 non mostra i numeri. Ho seguito il prototipo (lista ordinata, senza numeri visibili).
+6. **Titolo home.** 66 caratteri, sopra i 60 ideali. È la proposta del piano; la rivediamo in Fase 5.
+
+### Da fare PRIMA del lancio (obbligatorio)
+
+- **`llms.txt`**: contiene ancora "A partire da 200 euro" per i siti. Il Brief vieta prezzi non approvati. Non modificato ora, per richiesta.
+- Informativa privacy da rivedere e testo di consenso del form (M7). Verificare che `/privacy/` descriva Formspree.
+- Impostare `SW_INDICIZZA=1` solo dopo approvazione del lancio; passare a `vercel.v31.json`.
+- Deploy da cartella locale (il file Satoshi non è in git).
+- Foto del fondatore: sostituire quella temporanea.
+- Immagini OG per home e case study (Fase 5). `apple-touch-icon`.
+- Verificare indirizzi: Lazzi, Milano (con o senza "s"), IKTA.
+- Conferme dei clienti (M8).
+- Rivedere il banner cookie di `consent.js` (le righe vanno a capo male) quando si potrà toccare.
+- Il form oggi invia a Formspree reale: **non provare l'invio** finché Fase 4 non è collegata.

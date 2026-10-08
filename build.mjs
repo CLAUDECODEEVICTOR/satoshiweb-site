@@ -11,7 +11,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { sito, nav, hero, footer, barraFissa } from './src/dati/sito.mjs';
+import { sito, footer, barraFissa } from './src/dati/sito.mjs';
+import { navLinea, navMenu } from './src/dati/home.mjs';
 import { lavori } from './src/dati/lavori.mjs';
 import { home, indiceLavori, caso, grazie, non_trovata } from './src/tmpl/pagine.mjs';
 
@@ -45,28 +46,33 @@ for (const f of LEGACY_FILE) {
   fs.copyFileSync(path.join(RADICE, f), path.join(OUT, f));
 }
 
-// 2. Font: solo quelli presenti in src/font/ (nome: famiglia-peso.woff2). Senza file si usa il fallback di sistema.
+// 2. Font: solo quelli presenti in src/font/ (nome: famiglia-peso.woff2, oppure famiglia-min-max.woff2 per i variabili).
+// Satoshi (licenza ITF FFL: self-hosting ok, ridistribuzione e subsetting vietati) resta FUORI da git perché il repo è pubblico:
+// il file ufficiale non modificato sta solo in locale e arriva a Vercel con il deploy da cartella.
 const FAMIGLIE = { 'bricolage-grotesque': 'Bricolage Grotesque', geist: 'Geist', satoshi: 'Satoshi' };
-const PRELOAD = new Set(['bricolage-grotesque-800', 'geist-400']);
+const PRELOAD = new Set(['bricolage-grotesque-200-800', 'geist-400']);
 let cssFont = '';
 const fontPreload = [];
 const dirFont = path.join(SRC, 'font');
 if (fs.existsSync(dirFont)) {
   for (const f of fs.readdirSync(dirFont).filter((x) => x.endsWith('.woff2'))) {
     const base = f.replace('.woff2', '');
-    const m = /^(.*)-(\d{3})$/.exec(base);
+    const m = /^(.*?)-(\d{3})(?:-(\d{3}))?$/.exec(base);
     if (!m || !FAMIGLIE[m[1]]) continue;
     const buf = fs.readFileSync(path.join(dirFont, f));
     const nome = `/font/${base}.${hash(buf)}.woff2`;
     scrivi(nome.slice(1), buf);
-    cssFont += `@font-face{font-family:"${FAMIGLIE[m[1]]}";font-weight:${m[2]};font-style:normal;font-display:swap;src:url(${nome}) format("woff2")}\n`;
+    cssFont += `@font-face{font-family:"${FAMIGLIE[m[1]]}";font-weight:${m[3] ? `${m[2]} ${m[3]}` : m[2]};font-style:normal;font-display:swap;src:url(${nome}) format("woff2")}\n`;
     if (PRELOAD.has(base)) fontPreload.push(nome);
   }
 }
 
+const famigliePresenti = new Set([...cssFont.matchAll(/font-family:"([^"]+)"/g)].map((x) => x[1]));
+for (const f of Object.values(FAMIGLIE)) if (!famigliePresenti.has(f)) console.warn(`ATTENZIONE: font "${f}" assente in src/font/, uso il fallback di sistema.`);
+
 // 3. CSS e JS con hash nel nome (cache lunga e sicura).
 const minCss = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}').trim();
-const css = minCss(cssFont + ['base.css', 'componenti.css'].map((f) => fs.readFileSync(path.join(SRC, 'css', f), 'utf8')).join('\n'));
+const css = minCss(cssFont + ['base.css', 'componenti.css', 'home.css'].map((f) => fs.readFileSync(path.join(SRC, 'css', f), 'utf8')).join('\n'));
 const cssNome = `/css/sito.${hash(css)}.css`;
 scrivi(cssNome.slice(1), css);
 const js = fs.readFileSync(path.join(SRC, 'js/sito.js'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s+/gm, '').replace(/\n+/g, '\n');
@@ -79,7 +85,7 @@ const immagini = JSON.parse(fs.readFileSync(path.join(dirImg, 'manifest.json'), 
 for (const f of fs.readdirSync(dirImg).filter((x) => x !== 'manifest.json')) scrivi(`img/${f}`, fs.readFileSync(path.join(dirImg, f)));
 
 // 5. Pagine. Il contesto è un oggetto passato alle funzioni pure: nessuno stato condiviso tra pagine.
-const ctx = { sito, nav, hero, footer, barraFissa, immagini, indicizza: INDICIZZA, asset: { css: cssNome, js: jsNome, fontPreload } };
+const ctx = { sito, navLinea, navMenu, footer, barraFissa, immagini, indicizza: INDICIZZA, asset: { css: cssNome, js: jsNome, fontPreload } };
 const pagine = new Map(); // percorso URL -> html
 pagine.set('/', home(ctx));
 pagine.set('/lavori/', indiceLavori(ctx));

@@ -62,6 +62,24 @@
     });
   }
 
+  /* Campi facoltativi del form: senza JavaScript sono sempre visibili. Su mobile e tablet (< 1200) si chiudono
+     dietro "Aggiungi dettagli", sul desktop restano aperti (come nelle tavole V3.1). */
+  var det = document.getElementById('dettagli');
+  var tog = document.getElementById('dettagli-toggle');
+  if (det && tog && window.matchMedia) {
+    var largo = matchMedia('(min-width: 1200px)');
+    var aggiorna = function () {
+      if (largo.matches) { det.hidden = false; tog.hidden = true; }
+      else { tog.hidden = false; det.hidden = tog.getAttribute('aria-expanded') !== 'true'; }
+    };
+    tog.addEventListener('click', function () {
+      tog.setAttribute('aria-expanded', tog.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+      aggiorna();
+    });
+    if (largo.addEventListener) largo.addEventListener('change', aggiorna);
+    aggiorna();
+  }
+
   /* Pagina grazie: nome e attività arrivano da sessionStorage, mai dall'URL (Fase 4). */
   void ridotto;
 })();

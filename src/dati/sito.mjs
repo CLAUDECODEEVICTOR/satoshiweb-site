@@ -21,35 +21,19 @@ export const sito = {
   },
 };
 
-export const nav = [
-  { href: '/lavori/', testo: 'Lavori' },
-  { href: '/#processo', testo: 'Come lavoro' },
-  { href: '/#contatti', testo: 'Contatti' },
-];
-
-export const hero = {
-  etichetta: 'Siti web per attività e professionisti',
-  // Gruppi che non si spezzano; l'evidenziatore ambra sta su "il sito giusto".
-  titolo: [
-    { testo: 'Costruisco' },
-    { testo: 'il sito giusto', evidenzia: true },
-    { testo: 'per la tua attività.' },
-  ],
-  sottotitolo: 'Su misura e pensato per il telefono. Quando serve, collegato a prenotazioni, vendite e gestione.',
-  cta: 'Parliamo del tuo progetto →',
-  secondaria: 'Hai già un sito? Ti dico cosa migliorerei, gratis',
-  fascia: { etichetta: 'Un mio lavoro', riferimento: 'A casa mia · Civitavecchia' },
-};
-
 export const footer = {
   descrizione: 'Siti web su misura per attività e professionisti. Civitavecchia.',
-  link: [
-    { href: '/lavori/', testo: 'Lavori' },
-    { href: 'https://instagram.com/satoshidev', testo: 'Instagram' },
-    { href: '/#processo', testo: 'Come lavoro' },
-    { href: 'https://wa.me/393341989193', testo: 'WhatsApp' },
-    { href: '/#contatti', testo: 'Contatti' },
-    { href: '/privacy/', testo: 'Privacy e cookie' },
+  colonne: [
+    [
+      { href: '/lavori/', testo: 'Lavori' },
+      { href: '/#processo', testo: 'Come lavoro' },
+      { href: '/#contatti', testo: 'Contatti' },
+    ],
+    [
+      { href: 'https://instagram.com/satoshidev', testo: 'Instagram' },
+      { href: 'https://wa.me/393341989193', testo: 'WhatsApp' },
+      { href: '/privacy/', testo: 'Privacy e cookie' },
+    ],
   ],
 };
 

@@ -13,10 +13,10 @@
   .griglia--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 834px) {
-  .sezione { padding-block: 80px 0; }
+  .sezione { padding-block: 56px 0; }
 }
 @media (min-width: 1200px) {
-  .sezione { padding-block: 112px 0; }
+  .sezione { padding-block: 80px 0; }
 }
 
 /* Etichette */
@@ -42,7 +42,6 @@
 .marchio { display: flex; align-items: center; gap: 9px; padding-block: var(--s2); text-decoration: none; }
 .marchio img { width: 26px; height: 28px; }
 .marchio__nome { font-family: var(--f-wordmark); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
-.nav-linea { display: none; }
 .btn-menu {
   width: var(--tocco); height: var(--tocco); padding: 0; background: none; border: 0;
   display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 6px;
@@ -66,35 +65,7 @@ body.menu-aperto { overflow: hidden; }
 
 @media (min-width: 834px) {
   .btn-menu, .menu { display: none !important; }
-  .nav-linea { display: flex; gap: var(--s7); }
-  .nav-linea a { display: inline-flex; align-items: center; min-height: var(--tocco); text-decoration: none; font-weight: 500; }
 }
-
-/* Hero (mobile). Adattamenti tablet e desktop: Fase 2, sulle tavole V3.1 corrispondenti. */
-.hero { padding-top: 22px; }
-.hero__titolo { margin-top: var(--s3); font-weight: 800; font-size: clamp(40px, 11.6vw, 52px); line-height: 0.97; letter-spacing: -0.04em; }
-.hero__sotto { margin-top: 14px; font-size: 17px; line-height: 1.4; }
-.hero .btn { margin-top: 18px; }
-.hero__secondaria { display: block; text-align: center; margin-top: var(--s1); padding: var(--s3) 0; font-size: 15px; font-weight: 600; }
-
-.fascia-lavoro { margin-top: 10px; padding-top: var(--s3); background: var(--ambra); }
-.fascia-lavoro__testa { display: flex; justify-content: space-between; gap: var(--s3); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
-.fascia-lavoro__testa span:last-child { text-transform: none; letter-spacing: 0; }
-.telefono {
-  margin-top: 10px; aspect-ratio: 350 / 215; overflow: hidden;
-  border: 2px solid var(--inchiostro); border-bottom: 0; border-radius: 18px 18px 0 0; background: var(--inchiostro);
-}
-.telefono img { width: 100%; height: auto; }
-
-/* Footer */
-.pie { padding: var(--s7) 0 28px; font-size: 15px; }
-.pie__marchio { display: flex; align-items: center; gap: 9px; }
-.pie__marchio img { width: 24px; height: 26px; }
-.pie__nome { font-family: var(--f-wordmark); font-weight: 700; font-size: 18px; }
-.pie__desc { margin-top: 6px; color: var(--testo-2); }
-.pie__nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--s3); }
-.pie__nav a { display: flex; align-items: center; min-height: var(--tocco); text-decoration: none; }
-.pie__legale { margin-top: var(--s3); font-size: 12px; color: var(--testo-3); }
 
 /* Barra fissa: solo mobile, compare dopo la CTA hero (sito.js). Senza JS resta nascosta. Nessuna ombra. */
 .barra {
