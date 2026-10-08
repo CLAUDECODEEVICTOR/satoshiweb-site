@@ -24,12 +24,13 @@ function head(ctx, p) {
 <meta property="og:title" content="${esc(og.titolo || p.titolo)}">
 <meta property="og:description" content="${esc(og.descrizione || p.descrizione)}">
 <meta property="og:url" content="${url}">
-${og.immagine ? `<meta property="og:image" content="${sito.url}${og.immagine}">\n<meta name="twitter:card" content="summary_large_image">` : '<meta name="twitter:card" content="summary">'}
+${og.immagine ? `<meta property="og:image" content="${sito.url}${og.immagine}">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta property="og:image:alt" content="${esc(og.alt || p.titolo)}">\n<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:image" content="${sito.url}${og.immagine}">` : '<meta name="twitter:card" content="summary">'}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 ${asset.fontPreload.map((f) => `<link rel="preload" href="${f}" as="font" type="font/woff2" crossorigin>`).join('\n')}
 <link rel="stylesheet" href="${asset.css}">
-${p.jsonld ? `<script type="application/ld+json">${JSON.stringify(p.jsonld)}</script>` : ''}
+${p.jsonld ? `<script type="application/ld+json">${JSON.stringify(p.jsonld).replace(/</g, '\\u003c')}</script>` : ''}
 <script>window.SW=${JSON.stringify({ sito: sito.tracking.sito, beacon: sito.tracking.beacon })};window.SW_GA_ID=${JSON.stringify(sito.gaId)};</script>
 <script src="${sito.tracking.script}" data-site="${sito.tracking.sito}" defer></script>
 <script src="/consent.js" defer></script>
@@ -37,12 +38,12 @@ ${p.jsonld ? `<script type="application/ld+json">${JSON.stringify(p.jsonld)}</sc
 </head>`;
 }
 
-function testataCaso(ctx, indietro = true) {
+function testataCaso(ctx, indietro = { href: '/lavori/', testo: '← Tutti i lavori' }) {
   const { sito } = ctx;
   return `<header class="testata testata--caso">
 <div class="contenitore testata__riga">
 <a class="marchio" href="/" aria-label="${esc(sito.nome)}, home"><img src="/img/satoshi-mark.svg" alt="" width="26" height="28"><span class="marchio__nome">${esc(sito.nome)}</span></a>
-${indietro ? '<a class="testata__indietro" href="/lavori/">← Tutti i lavori</a>' : ''}
+${indietro ? `<a class="testata__indietro" href="${indietro.href}">${esc(indietro.testo)}</a>` : ''}
 </div>
 </header>`;
 }
@@ -100,7 +101,7 @@ export function pagina(ctx, p) {
 ${head(ctx, p)}
 <body${p.conBarra ? ' class="con-barra"' : ''}>
 <a class="salta" href="#principale">Vai al contenuto</a>
-${p.testataCaso ? testataCaso(ctx) : p.testataSemplice ? testataCaso(ctx, false) : testata(ctx)}
+${p.testataCaso ? testataCaso(ctx) : p.testataSemplice ? testataCaso(ctx, p.indietro || null) : testata(ctx)}
 <main id="principale">
 ${p.corpo}
 </main>

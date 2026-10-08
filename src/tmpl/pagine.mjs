@@ -4,6 +4,7 @@ import { esc, t, img } from './util.mjs';
 import { sezioneHero, sezioneDaDoveParti, sezioneLavori, sezioneCapacita, sezioneProcesso, sezioneFondatore, sezioneFaq, sezioneContatti } from './sezioni.mjs';
 import { pagina } from './layout.mjs';
 import { lavoriIndice } from '../dati/lavori.mjs';
+import { titoloHome, descrizioneHome, titoloLavori, descrizioneLavori, jsonldHome, jsonldLavori } from './seo.mjs';
 
 export function home(ctx) {
   const corpo = [
@@ -18,20 +19,12 @@ export function home(ctx) {
   ].join('\n');
   return pagina(ctx, {
     percorso: '/',
-    titolo: 'Satoshi Web: siti web per attività e professionisti, Civitavecchia',
-    descrizione:
-      'Costruisco il sito giusto per la tua attività: su misura, pensato per il telefono, con prenotazioni, shop e gestione quando servono. Civitavecchia.',
+    titolo: titoloHome,
+    descrizione: descrizioneHome,
+    og: { immagine: ctx.og.home, alt: 'Satoshi Web: costruisco il sito giusto per la tua attività' },
     corpo,
     conBarra: true,
-    jsonld: {
-      '@context': 'https://schema.org',
-      '@type': 'ProfessionalService',
-      name: ctx.sito.nome,
-      url: ctx.sito.url + '/',
-      areaServed: 'Civitavecchia',
-      founder: { '@type': 'Person', name: ctx.sito.titolare },
-      sameAs: [ctx.sito.instagram],
-    },
+    jsonld: jsonldHome(ctx),
   });
 }
 
@@ -54,9 +47,11 @@ ${voci}
 </section>`;
   return pagina(ctx, {
     percorso: '/lavori/',
-    titolo: 'Lavori: siti e sistemi per attività | Satoshi Web',
-    descrizione: 'Sei progetti reali: un caffè, un PR, un club, un barbiere, una federazione. Cosa serviva e cosa ho costruito.',
+    titolo: titoloLavori,
+    descrizione: descrizioneLavori,
+    og: { immagine: ctx.og.home, alt: 'Satoshi Web: i lavori' },
     corpo,
+    jsonld: jsonldLavori(ctx),
   });
 }
 

@@ -5,6 +5,7 @@ import { esc, t, img } from './util.mjs';
 import { pagina } from './layout.mjs';
 import { lavoriIndice, lavoroPerSlug } from '../dati/lavori.mjs';
 import { casi } from '../dati/casi.mjs';
+import { jsonldCaso } from './seo.mjs';
 
 const num = (i) => String(i + 1).padStart(2, '0');
 const pos = (p) => (p === undefined ? '' : ` style="object-position: 50% ${p}%"`);
@@ -112,12 +113,13 @@ ${blocchi.join('\n')}
 ${linkProssimo}
 </div>
 </section>`;
-  const frase = c.lead.length > 155 ? c.lead.slice(0, 152).trimEnd() + '...' : c.lead;
   return pagina(ctx, {
     percorso: `/lavori/${slug}/`,
-    titolo: `${l.nome}: ${l.categoria.toLowerCase()} | Satoshi Web`,
-    descrizione: frase,
+    titolo: l.seo.titolo,
+    descrizione: l.seo.descrizione,
+    og: { immagine: ctx.og[slug], alt: `${l.nome}: ${l.categoria.toLowerCase()}` },
     corpo,
     testataCaso: true,
+    jsonld: jsonldCaso(ctx, l, l.seo.descrizione),
   });
 }

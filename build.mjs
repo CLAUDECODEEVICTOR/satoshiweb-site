@@ -16,6 +16,8 @@ import { navLinea, navMenu } from './src/dati/home.mjs';
 import { lavori } from './src/dati/lavori.mjs';
 import { home, indiceLavori, grazie, non_trovata } from './src/tmpl/pagine.mjs';
 import { caso } from './src/tmpl/caso.mjs';
+import { pagPrivacy } from './src/tmpl/privacy.mjs';
+import { llms } from './src/tmpl/llms.mjs';
 
 const RADICE = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(RADICE, 'src');
@@ -27,8 +29,9 @@ const INDICIZZA = process.env.SW_INDICIZZA === '1';
 const ANCORE_OBBLIGATORIE = process.env.SW_ANCORE === '1';
 
 // File e cartelle del sito attuale che devono restare raggiungibili (Q1). Allowlist esplicita.
-const LEGACY_CARTELLE = ['privacy', 'realizzazione-siti-web-civitavecchia', 'sviluppo-app-civitavecchia', 'chatbot-whatsapp', 'farsi-trovare-dalle-ai'];
-const LEGACY_FILE = ['consent.js', 'widows.js', 'favicon.png', 'favicon.svg', 'llms.txt', 'pannello.html', 'og-image.png', 'logo/satoshidev-removebg-preview.ico', 'logo/satoshi-mark.svg', 'logo/satoshi-mark.png'];
+const LEGACY_CARTELLE = ['realizzazione-siti-web-civitavecchia', 'sviluppo-app-civitavecchia', 'chatbot-whatsapp', 'farsi-trovare-dalle-ai'];
+// (privacy e llms.txt non sono più copiati: li genera il build. Niente file che .vercelignore esclude, come satoshi-*.png.)
+const LEGACY_FILE = ['consent.js', 'widows.js', 'favicon.png', 'favicon.svg', 'pannello.html', 'og-image.png', 'logo/satoshidev-removebg-preview.ico'];
 
 const hash = (buf) => createHash('sha1').update(buf).digest('hex').slice(0, 8);
 const scrivi = (rel, contenuto) => {
@@ -85,12 +88,26 @@ const dirImg = path.join(SRC, 'img');
 const immagini = JSON.parse(fs.readFileSync(path.join(dirImg, 'manifest.json'), 'utf8'));
 for (const f of fs.readdirSync(dirImg).filter((x) => x !== 'manifest.json')) scrivi(`img/${f}`, fs.readFileSync(path.join(dirImg, f)));
 
+// 4b. Immagini OG (scripts/og.py) con hash nel nome, e apple-touch-icon.
+const og = {};
+const dirOg = path.join(SRC, 'og');
+if (fs.existsSync(dirOg)) {
+  for (const f of fs.readdirSync(dirOg).filter((x) => x.endsWith('.jpg'))) {
+    const buf = fs.readFileSync(path.join(dirOg, f));
+    const nome = `/og/${f.replace('.jpg', '')}.${hash(buf)}.jpg`;
+    scrivi(nome.slice(1), buf);
+    og[f.replace('.jpg', '')] = nome;
+  }
+}
+scrivi('apple-touch-icon.png', fs.readFileSync(path.join(SRC, 'brand/apple-touch-icon.png')));
+
 // 5. Pagine. Il contesto è un oggetto passato alle funzioni pure: nessuno stato condiviso tra pagine.
-const ctx = { sito, navLinea, navMenu, footer, barraFissa, immagini, indicizza: INDICIZZA, asset: { css: cssNome, js: jsNome, fontPreload } };
+const ctx = { sito, navLinea, navMenu, footer, barraFissa, immagini, og, indicizza: INDICIZZA, asset: { css: cssNome, js: jsNome, fontPreload } };
 const pagine = new Map(); // percorso URL -> html
 pagine.set('/', home(ctx));
 pagine.set('/lavori/', indiceLavori(ctx));
 for (const l of lavori) pagine.set(`/lavori/${l.slug}/`, caso(ctx, l.slug));
+pagine.set('/privacy/', pagPrivacy(ctx));
 pagine.set('/grazie/', grazie(ctx));
 pagine.set('/404.html', non_trovata(ctx));
 for (const [url, html] of pagine) scrivi(url.endsWith('/') ? `${url.slice(1)}index.html` : url.slice(1), html);
@@ -101,6 +118,7 @@ const robots = INDICIZZA
   ? `User-agent: *\nAllow: /\nDisallow: /demo/\nDisallow: /grazie/\nDisallow: /pannello\nDisallow: /api/\n\n# Crawler AI: esplicitamente consentiti (senza questi non possono citarti)\n${CRAWLER_AI.map((c) => `User-agent: ${c}\nAllow: /\nDisallow: /demo/\nDisallow: /grazie/`).join('\n\n')}\n\nSitemap: ${sito.url}/sitemap.xml\n`
   : 'User-agent: *\nDisallow: /\n';
 scrivi('robots.txt', robots);
+scrivi('llms.txt', llms(ctx));
 const urlSitemap = [...[...pagine.keys()].filter((u) => u !== '/grazie/' && u !== '/404.html'), ...LEGACY_CARTELLE.map((c) => `/${c}/`)];
 scrivi('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlSitemap.map((u) => `  <url><loc>${sito.url}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
@@ -151,6 +169,40 @@ for (const [url, html] of pagine) {
   }
   statistiche.push([url, testo.length]);
 }
+
+// SEO: lunghezze, unicità, OG, JSON-LD, sitemap, llms.txt.
+const titoli = new Map();
+const descrizioni = new Map();
+for (const [url, html] of pagine) {
+  if (url === '/404.html') continue;
+  const dove = (msg) => `${url}: ${msg}`;
+  const titolo = (/<title>([^<]*)<\/title>/.exec(html) || [])[1] || '';
+  const desc = (/<meta name="description" content="([^"]*)"/.exec(html) || [])[1] || '';
+  if (titolo.length > 60) errori.push(dove(`title di ${titolo.length} caratteri (max 60)`));
+  if (desc.length < 70 || desc.length > 160) errori.push(dove(`description di ${desc.length} caratteri (70-160)`));
+  if (titoli.has(titolo)) errori.push(dove(`title uguale a ${titoli.get(titolo)}`)); else titoli.set(titolo, url);
+  if (descrizioni.has(desc)) errori.push(dove(`description uguale a ${descrizioni.get(desc)}`)); else descrizioni.set(desc, url);
+  const canonical = (/<link rel="canonical" href="([^"]*)"/.exec(html) || [])[1];
+  if (canonical !== sito.url + url) errori.push(dove(`canonical ${canonical}`));
+  const imgOg = (/<meta property="og:image" content="https:\/\/satoshiweb\.it([^"]*)"/.exec(html) || [])[1];
+  if (url === '/grazie/') { /* pagina di servizio: noindex, nessuna anteprima social */ }
+  else if (!imgOg || !fs.existsSync(path.join(OUT, imgOg))) errori.push(dove('immagine OG mancante'));
+  else if (fs.statSync(path.join(OUT, imgOg)).size > 300 * 1024) avvisi.push(dove('immagine OG sopra i 300 KB'));
+  if (!/rel="apple-touch-icon"/.test(html)) errori.push(dove('apple-touch-icon mancante'));
+  for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    try {
+      const d = JSON.parse(m[1]);
+      if (!d['@context']) errori.push(dove('JSON-LD senza @context'));
+      if (/AggregateRating|Review|priceRange|"price"/.test(m[1])) errori.push(dove('JSON-LD con recensioni o prezzi'));
+    } catch (e) { errori.push(dove('JSON-LD non valido')); }
+  }
+}
+const mappa = fs.readFileSync(path.join(OUT, 'sitemap.xml'), 'utf8');
+for (const u of urlSitemap) if (!mappa.includes(`<loc>${sito.url}${u}</loc>`)) errori.push(`sitemap: manca ${u}`);
+if (/\/(grazie|demo)\//.test(mappa)) errori.push('sitemap: contiene pagine non indicizzabili');
+const testoLlms = fs.readFileSync(path.join(OUT, 'llms.txt'), 'utf8');
+if (/€|euro|a partire da/i.test(testoLlms)) errori.push('llms.txt: contiene un prezzo');
+if (testoLlms.includes('\u2014')) errori.push('llms.txt: trattino lungo');
 
 // Le pagine legacy devono continuare a trovare tutte le loro risorse locali.
 for (const c of LEGACY_CARTELLE) {

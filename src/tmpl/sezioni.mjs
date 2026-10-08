@@ -11,8 +11,8 @@ const iconaWhatsapp =
   '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5z"/></svg>';
 
 const linkCaso = (l, testo) => `<a href="/lavori/${l.slug}/" data-track="portfolio_click">${testo}</a>`;
-const linkEsterno = (l) =>
-  l.link ? `<a class="lavoro__link" href="${l.link.href}" rel="noopener" data-track="portfolio_sito">${esc(l.link.testo)} →</a>` : '';
+const linkEsterno = (l, extra = '') =>
+  l.link ? `<a class="lavoro__link${extra ? ' ' + extra : ''}" href="${l.link.href}" rel="noopener" data-track="portfolio_sito">${esc(l.link.testo)} →</a>` : '';
 
 // 1. HERO (header e barra fissa stanno nel layout)
 export function sezioneHero(ctx) {
@@ -145,6 +145,7 @@ function schedaLazzi(ctx, l) {
 ${testaScheda(l, s.destra)}
 ${nomeScheda(l)}
 <p class="lavoro__testo v-mt">${t(s.testo)}</p>
+${linkEsterno(l, 'v-t')}
 </div>
 <div class="shop__visual">${img(ctx, 'lazzi/vetrina', { alt: 'Lo shop online di Lazzi Barbershop su computer: vetrina con i prodotti', sizes: '(min-width: 1200px) 380px, (min-width: 834px) 440px, 350px' })}</div>
 <div class="design__riga v-m">
@@ -152,6 +153,7 @@ ${nomeScheda(l)}
 <p>${t(s.testoLato)}</p>
 </div>
 <p class="lavoro__testo v-d">${t(s.testo)}</p>
+${linkEsterno(l, 'v-m')}${linkEsterno(l, 'v-d')}
 </article>`;
 }
 

@@ -13,6 +13,7 @@
 export const lavori = [
   {
     slug: 'luca-california',
+    seo: { titolo: 'Luca California: sito e pannello richieste | Satoshi Web', descrizione: "Ho costruito lucacalifornia.it e un pannello da telefono per ricevere e gestire le richieste: conferma, WhatsApp già scritto e lettore all'ingresso." },
     nome: 'Luca California',
     categoria: 'Un sistema',
     mestiere: 'PR e organizzatore di eventi',
@@ -39,6 +40,7 @@ export const lavori = [
   },
   {
     slug: 'a-casa-mia',
+    seo: { titolo: 'A casa mia: sito per un caffè a Civitavecchia | Satoshi Web', descrizione: 'Un sito pensato per il telefono per un caffè di Civitavecchia: orari con il giorno di oggi, barra contatti sempre visibile, italiano e inglese.' },
     nome: 'A casa mia',
     categoria: "Un'attività locale",
     mestiere: 'Caffè e brunch',
@@ -58,6 +60,7 @@ export const lavori = [
   },
   {
     slug: 'taiko',
+    seo: { titolo: 'Taiko: sito e pannello richieste, in anteprima | Satoshi Web', descrizione: "Anteprima di un sito con richiesta d'accesso e un pannello webapp per gestire richieste ed eventi. Direzione visiva e design su misura." },
     nome: 'Taiko',
     categoria: 'Design e sistema',
     mestiere: 'Serate house',
@@ -82,10 +85,11 @@ export const lavori = [
   },
   {
     slug: 'lazzi',
+    seo: { titolo: 'Lazzi Barbershop: shop online con pannello | Satoshi Web', descrizione: 'Il sito e lo shop online di Lazzi Barbershop, a Civitavecchia, con ordini, prodotti e inventario gestiti dal browser attraverso il pannello.' },
     nome: 'Lazzi Barbershop',
     categoria: 'E-commerce',
     mestiere: 'Barbiere',
-    luogo: '',
+    luogo: 'Civitavecchia', // dal titolo del sito pubblico del cliente; nella scheda in home la label resta "Shop online"
     homePos: 4,
     ordine: 4,
     frase: 'Ho progettato e sviluppato il sito e lo shop online di Lazzi Barbershop, con gestione dal pannello.',
@@ -101,12 +105,13 @@ export const lavori = [
       testo: 'Ho progettato e sviluppato il sito e lo shop online di Lazzi Barbershop, con gestione dal pannello.',
       testoLato: 'Il sito e lo shop possono essere gestiti direttamente dal browser attraverso il pannello.',
     },
-    link: null, // indirizzo pubblico da verificare prima di linkare
+    link: { href: 'https://lazzibarbershop.it', testo: 'lazzibarbershop.it' }, // verificato: 200, "LAZZI Barbershop Civitavecchia"
     stato: 'produzione',
-    daConfermare: ['indirizzo pubblico del sito', 'autorizzazione del cliente', 'luogo per l’etichetta'],
+    daConfermare: ['autorizzazione del cliente'],
   },
   {
     slug: 'milano-clubs',
+    seo: { titolo: 'Milano Clubs Reservation: richieste dal sito | Satoshi Web', descrizione: 'Le richieste di tavolo arrivano dal sito e si gestiscono da un pannello, anche dal telefono: richieste nuove e confermate, e la serata in corso.' },
     nome: 'Milano Clubs Reservation',
     categoria: 'Un contesto premium',
     mestiere: 'PR e concierge',
@@ -116,12 +121,13 @@ export const lavori = [
     frase:
       'Ho trasformato il flusso: oggi le richieste arrivano dal sito e il titolare può gestirle comodamente dal pannello, anche dal telefono.',
     contesto: 'Prima le richieste arrivavano tramite messaggi: centinaia al giorno, dato stimato.',
-    link: null, // dominio da verificare: milanoclubreservation.it o milanoclubsreservation.it
+    link: { href: 'https://milanoclubsreservation.it', testo: 'milanoclubsreservation.it' }, // verificato: 200 (la versione senza "s" non risponde)
     stato: 'produzione',
-    daConfermare: ['dominio corretto', 'nome del referente', 'autorizzazione del cliente', 'mascheramento numeri nelle schermate'],
+    daConfermare: ['nome del referente', 'autorizzazione del cliente'],
   },
   {
     slug: 'ikta',
+    seo: { titolo: 'IKTA: un sito che organizza la complessità | Satoshi Web', descrizione: 'Il sito di una federazione di kick boxing e muay thai: discipline, gare ed eventi in ordine, con una navigazione chiara.' },
     nome: 'IKTA',
     categoria: 'Organizzare la complessità',
     mestiere: 'Federazione sportiva',
@@ -130,9 +136,9 @@ export const lavori = [
     ordine: 6,
     frase:
       'IKTA non aveva bisogno soltanto di una nuova homepage. Il sito doveva mettere ordine tra discipline, persone, palestre, formazione, gare ed eventi.',
-    link: null,
+    link: { href: 'https://iktaworld.com', testo: 'iktaworld.com' }, // verificato: 200, "IKTA Italia | Federazione Kick Boxing, Muay Thai, MMA e Krav Maga"
     stato: 'produzione',
-    daConfermare: ['indirizzo pubblico', 'volti riconoscibili nelle schermate', 'autorizzazione del cliente'],
+    daConfermare: ['liberatorie per i volti degli hero', 'autorizzazione del cliente'],
   },
 ];
 

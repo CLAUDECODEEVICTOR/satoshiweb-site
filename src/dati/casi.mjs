@@ -176,6 +176,7 @@ export const casi = {
         elenco: ['Gestione di ordini e prodotti dal pannello', 'Prezzi e magazzino controllati lato server'],
       },
     ],
+    oggi: { testo: 'Il sito è online. Aprilo dal telefono e giudica tu.' },
   },
 
   'milano-clubs': {
@@ -212,6 +213,7 @@ export const casi = {
         },
       },
     ],
+    oggi: { testo: 'Il sito è online. Aprilo dal telefono e giudica tu.' },
   },
 
   ikta: {
@@ -233,5 +235,6 @@ export const casi = {
         visual: { tipo: 'schermo', items: [{ img: 'ikta/gare', alt: 'La pagina Gare del sito IKTA World con le locandine degli eventi' }], didascalia: 'Locandine sfocate in questa anteprima.' },
       },
     ],
+    oggi: { testo: 'Il sito è online. Aprilo dal telefono e giudica tu.' },
   },
 };
