@@ -1,0 +1,131 @@
+/* Componenti della foundation: layout, header, menu, hero, pulsanti, footer, barra fissa.
+   Le altre sezioni (Fase 2) e i case study (Fase 3) si aggiungono in sezioni.css e caso.css. */
+
+/* Layout: un contenitore, un ritmo verticale */
+.contenitore { width: 100%; max-width: calc(var(--contenitore) + 2 * var(--gutter)); margin-inline: auto; padding-inline: var(--gutter); }
+.griglia { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
+.griglia > *, .riga > *, .pila > * { min-width: 0; }
+.riga { display: flex; gap: var(--s3); }
+.pila > * + * { margin-top: var(--s3); }
+.sezione { padding-block: var(--s8) 0; }
+
+@media (min-width: 600px) {
+  .griglia--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 834px) {
+  .sezione { padding-block: 80px 0; }
+}
+@media (min-width: 1200px) {
+  .sezione { padding-block: 112px 0; }
+}
+
+/* Etichette */
+.etichetta { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Pulsanti: primario sempre nero (V3.1 punto 2). */
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: var(--s3);
+  min-height: var(--tocco); padding: 18px var(--s5);
+  background: var(--inchiostro); color: var(--carta);
+  font-weight: 600; font-size: 17px; text-decoration: none; border: 1px solid var(--inchiostro);
+  transition: transform 120ms var(--curva);
+}
+.btn:hover { color: var(--carta); }
+.btn:active { transform: scale(0.98); }
+.btn--bordo { background: transparent; color: var(--inchiostro); }
+.btn--bordo:hover { color: var(--inchiostro); }
+.link-forte { display: inline-block; font-weight: 600; padding-block: var(--s3); }
+
+/* Header */
+.testata { border-bottom: 1px solid var(--inchiostro); background: var(--carta); }
+.testata__riga { display: flex; align-items: center; justify-content: space-between; padding-block: 6px; }
+.marchio { display: flex; align-items: center; gap: 9px; padding-block: var(--s2); text-decoration: none; }
+.marchio img { width: 26px; height: 28px; }
+.marchio__nome { font-family: var(--f-wordmark); font-weight: 700; font-size: 19px; letter-spacing: -0.02em; }
+.nav-linea { display: none; }
+.btn-menu {
+  width: var(--tocco); height: var(--tocco); padding: 0; background: none; border: 0;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 6px;
+}
+.btn-menu span { display: block; width: 26px; height: 2px; background: var(--inchiostro); transition: transform 200ms var(--curva), opacity 200ms; }
+.btn-menu[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.btn-menu[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* Menu mobile: carta, filetti neri, titoli Bricolage (regole V3.1; nessun elemento nuovo). */
+.menu { position: fixed; inset: 0; z-index: 50; background: var(--carta); padding: var(--s2) var(--gutter) var(--s7); overflow-y: auto; }
+.menu[hidden] { display: none; }
+.menu__testa { display: flex; align-items: center; justify-content: space-between; padding-block: 6px; border-bottom: 1px solid var(--inchiostro); }
+.menu__voci { margin-top: var(--s5); }
+.menu__voci a {
+  display: block; padding: var(--s4) 0; border-top: 1px solid var(--inchiostro); text-decoration: none;
+  font-family: var(--f-titoli); font-weight: 700; font-size: 28px; letter-spacing: -0.03em;
+}
+.menu__voci li:last-child a { border-bottom: 1px solid var(--inchiostro); }
+.menu__contatto { margin-top: var(--s6); }
+body.menu-aperto { overflow: hidden; }
+
+@media (min-width: 834px) {
+  .btn-menu, .menu { display: none !important; }
+  .nav-linea { display: flex; gap: var(--s7); }
+  .nav-linea a { display: inline-flex; align-items: center; min-height: var(--tocco); text-decoration: none; font-weight: 500; }
+}
+
+/* Hero (mobile). Adattamenti tablet e desktop: Fase 2, sulle tavole V3.1 corrispondenti. */
+.hero { padding-top: 22px; }
+.hero__titolo { margin-top: var(--s3); font-weight: 800; font-size: clamp(40px, 11.6vw, 52px); line-height: 0.97; letter-spacing: -0.04em; }
+.hero__sotto { margin-top: 14px; font-size: 17px; line-height: 1.4; }
+.hero .btn { margin-top: 18px; }
+.hero__secondaria { display: block; text-align: center; margin-top: var(--s1); padding: var(--s3) 0; font-size: 15px; font-weight: 600; }
+
+.fascia-lavoro { margin-top: 10px; padding-top: var(--s3); background: var(--ambra); }
+.fascia-lavoro__testa { display: flex; justify-content: space-between; gap: var(--s3); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.fascia-lavoro__testa span:last-child { text-transform: none; letter-spacing: 0; }
+.telefono {
+  margin-top: 10px; aspect-ratio: 350 / 215; overflow: hidden;
+  border: 2px solid var(--inchiostro); border-bottom: 0; border-radius: 18px 18px 0 0; background: var(--inchiostro);
+}
+.telefono img { width: 100%; height: auto; }
+
+/* Footer */
+.pie { padding: var(--s7) 0 28px; font-size: 15px; }
+.pie__marchio { display: flex; align-items: center; gap: 9px; }
+.pie__marchio img { width: 24px; height: 26px; }
+.pie__nome { font-family: var(--f-wordmark); font-weight: 700; font-size: 18px; }
+.pie__desc { margin-top: 6px; color: var(--testo-2); }
+.pie__nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: var(--s3); }
+.pie__nav a { display: flex; align-items: center; min-height: var(--tocco); text-decoration: none; }
+.pie__legale { margin-top: var(--s3); font-size: 12px; color: var(--testo-3); }
+
+/* Barra fissa: solo mobile, compare dopo la CTA hero (sito.js). Senza JS resta nascosta. Nessuna ombra. */
+.barra {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  display: none; gap: var(--s2); padding: 7px 12px calc(7px + env(safe-area-inset-bottom));
+  background: var(--carta); border-top: 1px solid var(--inchiostro);
+  transform: translateY(100%); transition: transform 200ms var(--curva);
+}
+.barra[data-visibile="true"] { display: flex; transform: none; }
+.barra a {
+  display: flex; align-items: center; justify-content: center; gap: var(--s2);
+  height: var(--tocco); border: 1px solid var(--inchiostro); font-weight: 600; font-size: 15px; text-decoration: none;
+}
+.barra__wa { flex: 0 0 118px; }
+.barra__cta { flex: 1; background: var(--inchiostro); color: var(--carta); }
+.barra__cta:hover { color: var(--carta); }
+body.tastiera-aperta .barra { display: none; }
+@media (min-width: 834px) { .barra { display: none !important; } }
+
+/* Pagine interne (foundation): testata di indice e di case study */
+.testata-pagina { padding-top: var(--s7); }
+.testata-pagina h1 { margin-top: var(--s3); font-size: clamp(40px, 10vw, 64px); line-height: 0.96; }
+.testata-pagina .lead { margin-top: var(--s3); font-size: 18px; line-height: 1.35; }
+.stato { display: inline-block; margin-top: var(--s3); padding: 2px var(--s2); border: 1px solid var(--inchiostro); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.indice-lavori { margin-top: var(--s7); border-top: 2px solid var(--inchiostro); }
+.indice-lavori li { border-bottom: 1px solid var(--filetto); }
+.indice-lavori a { display: block; padding: var(--s5) 0; text-decoration: none; }
+.indice-lavori h2 { margin-top: var(--s2); font-size: 34px; }
+.indice-lavori p { margin-top: var(--s2); color: var(--testo-2); }
+.chiusura { margin-top: var(--s8); padding: var(--s8) 0; background: var(--inchiostro); color: var(--carta); }
+.chiusura h2 { font-size: 34px; line-height: 0.98; }
+.chiusura .btn { margin-top: 22px; background: var(--carta); color: var(--inchiostro); border-color: var(--carta); }
+.chiusura .btn:hover { color: var(--inchiostro); }
+.chiusura .link-forte, .chiusura .link-forte:hover { color: var(--carta); }

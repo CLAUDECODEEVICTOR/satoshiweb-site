@@ -1,0 +1,16 @@
+{
+  "acasamia/acm-mobile": {
+    "w": 780,
+    "h": 1688,
+    "varianti": [
+      {
+        "w": 390,
+        "url": "/img/acasamia-acm-mobile-390.bd9a33.webp"
+      },
+      {
+        "w": 780,
+        "url": "/img/acasamia-acm-mobile-780.bd9a33.webp"
+      }
+    ]
+  }
+}
