@@ -107,7 +107,7 @@ export const contatti = {
   dopoTitolo: 'Cosa succede dopo',
   dopo: [
     "Leggo cosa mi hai scritto e guardo quello che hai già online, se c'è.",
-    'Ti scrivo io su WhatsApp. Ti rispondo personalmente entro 1 giorno lavorativo.',
+    'Ti scrivo io su WhatsApp.',
     'Decidi tu se andare avanti.',
   ],
   form: {

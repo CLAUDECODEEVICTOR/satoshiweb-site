@@ -175,8 +175,9 @@
         attivita: form.elements.attivita.value.replace(/^\s+|\s+$/g, '')
       };
       track('form_submit');
-      /* Anti-spam: casella trappola compilata o invio sotto 3 secondi dal caricamento = scartato in silenzio. */
-      if (form.elements._gotcha.value || Date.now() - avvio < 3000) { finito(dati); return; }
+      /* Casella trappola compilata: scartato in silenzio. Invio troppo rapido: messaggio semplice, nessun invio. */
+      if (form.elements._gotcha.value) { finito(dati); return; }
+      if (Date.now() - avvio < 3000) { messaggio('Aspetta un momento e riprova.', false); return; }
       if (navigator.onLine === false) {
         track('form_error', { motivo: 'rete' });
         messaggio('Sembra che non ci sia connessione. Riprova tra poco, oppure scrivimi su WhatsApp.', true);
