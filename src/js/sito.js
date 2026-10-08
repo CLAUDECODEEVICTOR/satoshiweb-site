@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   var cfg = window.SW || {};
+  document.documentElement.setAttribute('data-js', '');
   var ridotto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Tracking: [data-track="evento"] su qualunque elemento. Beacon già in uso (Victor Analytics)
@@ -62,15 +63,28 @@
     });
   }
 
+  /* Case study: i blocchi numerati entrano quando arrivano nella schermata (solo con .anim, cioè senza movimento ridotto). */
+  var blocchi = document.querySelectorAll('.caso-blocco');
+  if (blocchi.length && document.documentElement.classList.contains('anim')) {
+    var vista = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) { if (v.isIntersecting) { v.target.classList.add('visto'); vista.unobserve(v.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    blocchi.forEach(function (b) { vista.observe(b); });
+  }
+
   /* Campi facoltativi del form: senza JavaScript sono sempre visibili. Su mobile e tablet (< 1200) si chiudono
-     dietro "Aggiungi dettagli", sul desktop restano aperti (come nelle tavole V3.1). */
+     dietro "Aggiungi dettagli", sul desktop restano aperti (come nelle tavole V3.1). Chiusi = inert, fuori dalla tastiera. */
   var det = document.getElementById('dettagli');
   var tog = document.getElementById('dettagli-toggle');
   if (det && tog && window.matchMedia) {
     var largo = matchMedia('(min-width: 1200px)');
+    var chiudi = function (si) {
+      if (si) { det.setAttribute('data-chiuso', ''); det.setAttribute('inert', ''); }
+      else { det.removeAttribute('data-chiuso'); det.removeAttribute('inert'); }
+    };
     var aggiorna = function () {
-      if (largo.matches) { det.hidden = false; tog.hidden = true; }
-      else { tog.hidden = false; det.hidden = tog.getAttribute('aria-expanded') !== 'true'; }
+      if (largo.matches) { chiudi(false); tog.hidden = true; }
+      else { tog.hidden = false; chiudi(tog.getAttribute('aria-expanded') !== 'true'); }
     };
     tog.addEventListener('click', function () {
       tog.setAttribute('aria-expanded', tog.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');

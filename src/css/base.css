@@ -61,6 +61,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Geist ha 400, 500 e 600: il grassetto del testo è 600 (nessun grassetto sintetico). I titoli in Bricolage dichiarano il loro peso. */
+strong, b, th { font-weight: 600; }
+
 img, svg, video { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 a:hover { color: var(--testo-3); }

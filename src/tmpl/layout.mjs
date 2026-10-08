@@ -31,6 +31,7 @@ ${og.immagine ? `<meta property="og:image" content="${sito.url}${og.immagine}">\
 ${asset.fontPreload.map((f) => `<link rel="preload" href="${f}" as="font" type="font/woff2" crossorigin>`).join('\n')}
 <link rel="stylesheet" href="${asset.css}">
 ${p.jsonld ? `<script type="application/ld+json">${JSON.stringify(p.jsonld).replace(/</g, '\\u003c')}</script>` : ''}
+<script>(function(d){if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window){d.classList.add('anim');setTimeout(function(){if(!d.hasAttribute('data-js'))d.classList.remove('anim')},3000)}})(document.documentElement)</script>
 <script>window.SW=${JSON.stringify({ sito: sito.tracking.sito, beacon: sito.tracking.beacon })};window.SW_GA_ID=${JSON.stringify(sito.gaId)};</script>
 <script src="${sito.tracking.script}" data-site="${sito.tracking.sito}" defer></script>
 <script src="/consent.js" defer></script>

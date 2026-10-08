@@ -273,10 +273,10 @@ ${gruppo('nome', testoCampo(f.nome, obbligatorio), `<input ${dir('nome')} type="
 ${gruppo('attivita', testoCampo(f.attivita, obbligatorio), `<input ${dir('attivita')} type="text" name="attivita" placeholder="${esc(f.attivitaEsempio)}" autocomplete="organization" maxlength="120" required>`, { errore: true })}
 ${gruppo('telefono', testoCampo(f.telefono, obbligatorio), `<input ${dir('telefono')} type="tel" name="telefono" inputmode="tel" autocomplete="tel" maxlength="30" required>`, { errore: true })}
 <button class="dettagli__toggle" id="dettagli-toggle" type="button" aria-expanded="false" aria-controls="dettagli" hidden>${esc(f.dettagli)}</button>
-<div class="dettagli" id="dettagli">
+<div class="dettagli" id="dettagli"><div class="dettagli__int">
 <label class="campo campo--facoltativo">${testoCampo(f.sito, '<span class="v-d"> (facoltativo)</span>')}<input type="text" name="sito" autocomplete="url" maxlength="200"></label>
 <label class="campo campo--facoltativo">${testoCampo(f.nota, '<span class="v-d"> (facoltativo)</span>')}<textarea name="nota" rows="2" maxlength="1000"></textarea></label>
-</div>
+</div></div>
 <input class="solo-sr" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Lascia vuoto">
 <input type="hidden" name="_subject" value="Nuova richiesta da satoshiweb.it">
 <button class="btn" type="submit" id="form-invia" data-etichetta="${esc(f.invia)}">${t(f.invia)}</button>

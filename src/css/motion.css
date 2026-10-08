@@ -1,0 +1,40 @@
+/* MOTION: solo i 5 momenti approvati (REPORT-V3 §4, design.md). Curva unica (--curva). Solo opacity e transform,
+   salvo l'altezza di FAQ e campi facoltativi (è proprio ciò che si apre). Su mobile più discreto: spostamenti di 8 px, non 16.
+   Con prefers-reduced-motion il blocco globale di base.css azzera animazioni e transizioni: tutto è visibile subito. */
+
+/* 1. Il lavoro nell'hero (home e testata dei case study) entra dopo il testo: sale e passa da opacità 0 a 1 */
+@keyframes entra { from { opacity: 0; transform: translateY(var(--dy, 8px)); } to { opacity: 1; transform: none; } }
+.fascia-lavoro__visual > *, .caso-fascia__visual > * { --dy: 8px; animation: entra 400ms var(--curva) 150ms both; }
+.fascia-lavoro__visual > * + *, .caso-fascia__visual > * + * { animation-delay: 230ms; } /* 80 ms tra una schermata e l'altra */
+@media (min-width: 834px) {
+  .fascia-lavoro__visual > *, .caso-fascia__visual > * { --dy: 16px; animation-duration: 500ms; }
+}
+
+/* 2. Case study: i blocchi numerati entrano uno dopo l'altro quando arrivano nella schermata (sito.js aggiunge .visto).
+   La classe .anim la mette uno script minimo nell'<head> solo se il browser lo permette e il movimento non è ridotto. */
+.caso-blocco__testo, .caso-blocco__visual { transition: opacity 260ms var(--curva), transform 260ms var(--curva); }
+.caso-blocco__visual { transition-delay: 80ms; }
+.anim .caso-blocco:not(.visto) .caso-blocco__testo, .anim .caso-blocco:not(.visto) .caso-blocco__visual { --dy: 8px; opacity: 0; transform: translateY(var(--dy)); }
+@media (min-width: 834px) { .anim .caso-blocco:not(.visto) .caso-blocco__testo, .anim .caso-blocco:not(.visto) .caso-blocco__visual { --dy: 12px; } }
+
+/* 3. Barra fissa: vedi componenti.css (scorre dal basso in 200 ms, resta nascosta per i lettori di schermo e la tastiera). */
+
+/* 4. Pulsanti e link con freccia: pressione leggera, la freccia avanza di 4 px con il cursore o il focus da tastiera */
+.freccia { display: inline-block; transition: transform 120ms var(--curva); }
+@media (hover: hover) { a:hover > .freccia { transform: translateX(4px); } }
+a:focus-visible > .freccia { transform: translateX(4px); }
+.fondatore__wa, .hero__secondaria, .percorso a, .lavoro__link { transition: transform 120ms var(--curva); }
+.fondatore__wa:active { transform: scale(0.98); }
+
+/* 5. FAQ e campi facoltativi: si aprono in altezza in 200 ms (dove il browser lo permette; altrimenti istantaneo) */
+.faq details { interpolate-size: allow-keywords; }
+.faq details::details-content { height: 0; overflow: clip; opacity: 0; transition: height 200ms var(--curva), opacity 200ms var(--curva), content-visibility 200ms allow-discrete; }
+.faq details[open]::details-content { height: auto; opacity: 1; }
+.dettagli { transition: grid-template-rows 200ms var(--curva), opacity 200ms var(--curva); }
+.dettagli[data-chiuso] { grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 200ms var(--curva), opacity 200ms var(--curva), visibility 0s linear 200ms; }
+
+/* Movimento ridotto: la regola globale di base.css non arriva a ::details-content (è uno pseudo-elemento di cui * non fa parte). */
+@media (prefers-reduced-motion: reduce) {
+  .faq details::details-content { transition: none !important; }
+  .dettagli, .dettagli[data-chiuso], .barra, .freccia { transition: none !important; }
+}

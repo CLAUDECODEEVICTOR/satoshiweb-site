@@ -76,7 +76,7 @@ for (const f of Object.values(FAMIGLIE)) if (!famigliePresenti.has(f)) console.w
 
 // 3. CSS e JS con hash nel nome (cache lunga e sicura).
 const minCss = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s*([{};,>])\s*/g, '$1').replace(/;}/g, '}').trim();
-const css = minCss(cssFont + ['base.css', 'componenti.css', 'home.css', 'caso.css'].map((f) => fs.readFileSync(path.join(SRC, 'css', f), 'utf8')).join('\n'));
+const css = minCss(cssFont + ['base.css', 'componenti.css', 'home.css', 'caso.css', 'motion.css'].map((f) => fs.readFileSync(path.join(SRC, 'css', f), 'utf8')).join('\n'));
 const cssNome = `/css/sito.${hash(css)}.css`;
 scrivi(cssNome.slice(1), css);
 const js = fs.readFileSync(path.join(SRC, 'js/sito.js'), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s+/gm, '').replace(/\n+/g, '\n');
@@ -110,6 +110,8 @@ for (const l of lavori) pagine.set(`/lavori/${l.slug}/`, caso(ctx, l.slug));
 pagine.set('/privacy/', pagPrivacy(ctx));
 pagine.set('/grazie/', grazie(ctx));
 pagine.set('/404.html', non_trovata(ctx));
+const conFrecce = (html) => html.replace(/ →<\/a>/g, '<span class="freccia" aria-hidden="true">&nbsp;→</span></a>');
+for (const [url, html] of pagine) pagine.set(url, conFrecce(html));
 for (const [url, html] of pagine) scrivi(url.endsWith('/') ? `${url.slice(1)}index.html` : url.slice(1), html);
 
 // 6. robots.txt e sitemap.xml. Prima del lancio: tutto chiuso. Dopo: crawler AI consentiti come oggi.
