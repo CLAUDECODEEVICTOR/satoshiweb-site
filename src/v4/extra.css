@@ -1,0 +1,45 @@
+/* Pagine con testo lungo (privacy) e ritocchi di layout per le pagine lavoro su schermi larghi. */
+.leg-p{margin:10px 0 0;font-size:16px;color:#4A453D}
+.leg-p strong{color:#17130F}
+.leg-lista{margin:10px 0 0;padding-left:20px;color:#4A453D}
+.leg-lista li{margin-top:6px}
+.leg-elenco{margin:10px 0 0;display:grid;gap:10px}
+.leg-elenco div{display:grid;gap:2px}
+.leg-elenco dt{font-weight:700;color:#17130F;font-size:14px}
+.leg-elenco dd{margin:0;color:#4A453D}
+.leg-tab{margin-top:12px;overflow-x:auto}
+.leg-tab table{border-collapse:collapse;width:100%;min-width:480px;font-size:15px}
+.leg-tab th,.leg-tab td{text-align:left;padding:10px 12px;border-bottom:1px solid #E4DDD0;vertical-align:top}
+.leg-tab thead th{font-size:13px;color:#5E574C}
+.leg-data{margin:6px 0 0;font-size:14px;color:#5E574C}
+
+/* Strumenti: un solo markup. Telefono = riga (icona, testo, spunta). Da 768 px = scheda in colonna. */
+.strum{position:relative;display:flex;align-items:center;gap:12px;text-align:left;font:inherit;cursor:pointer;border:0;border-radius:16px;padding:12px 14px 12px 12px;min-height:64px}
+.strum-ico{flex:none;display:inline-flex;width:40px;height:40px;border-radius:10px;background:#fff;align-items:center;justify-content:center}
+.strum-ico svg{width:24px;height:24px}
+.strum-testo{flex:1 1 0;min-width:0}
+.strum strong{font-family:'Satoshi','Hanken Grotesk',system-ui,sans-serif;font-weight:700;letter-spacing:-.03em;display:block;font-size:17px;line-height:1.15}
+.strum .sub{display:block;margin-top:2px;font-size:13px;line-height:1.35}
+.strum-check{flex:none;position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1.5px solid #B9B2A4;box-sizing:border-box}
+.spunta{position:absolute;inset:-1.5px;border-radius:50%;background:#F5A623;display:flex;align-items:center;justify-content:center}
+@media (min-width:768px){
+  .strum{display:block;border-radius:20px;padding:22px;min-height:44px}
+  .strum-ico{width:44px;height:44px;border-radius:12px}
+  .strum-ico svg{width:28px;height:28px}
+  .strum strong{margin-top:12px;font-size:22px;line-height:1.1}
+  .strum .sub{margin-top:6px;font-size:15px;line-height:inherit}
+  .strum-check{position:absolute;top:14px;right:14px;width:26px;height:26px}
+}
+
+/* Testo che compare solo da 768 px (es. "Scrivimi su" davanti a "WhatsApp"). */
+.sd{display:none}
+@media (min-width:768px){.sd{display:inline}}
+.sm{display:inline}
+@media (min-width:768px){.sm{display:none}}
+
+/* Pagine interne (lavori, privacy, grazie, 404): disegnate a 390 px, su schermi larghi restano in una colonna centrata. */
+@media (min-width:768px){
+  .int header{max-width:1240px;margin:0 auto;padding:8px 40px}
+  .int main>section,.int main>div,.int main>h1,.int main>p{max-width:600px;margin-left:auto;margin-right:auto}
+  .int main>section{padding-left:0;padding-right:0}
+}

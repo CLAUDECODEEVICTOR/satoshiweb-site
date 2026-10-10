@@ -1,0 +1,58 @@
+/* Satoshi Web, direzione "Di persona". Le classi uN sono generate da _lavorazione/conv.py a partire dai file di design
+   (src/v4/pagine.css); qui stanno le regole che il design non esprime: base, stati, movimento ridotto. */
+html{-webkit-text-size-adjust:100%;scroll-padding-top:72px}
+body{margin:0;background:#fff}
+a{color:inherit}a:hover{opacity:.8}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #F5A623;outline-offset:2px}
+picture{display:contents}
+source{display:none}
+img{max-width:100%}
+h1,h2,h3{hyphens:none;text-wrap:balance}
+p,blockquote,figcaption{text-wrap:pretty}
+.tex{background-image:url(/img/n-tex.webp);background-size:640px}
+@keyframes sw-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes sw-pop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:no-preference){.tl{transform-origin:left center;animation:sw-draw .9s cubic-bezier(.65,0,.35,1) .4s both}.tn2{animation:sw-pop .35s cubic-bezier(.34,1.56,.64,1) 1.2s both}}
+.salta{position:absolute;left:8px;top:-60px;z-index:20;background:#17130F;color:#fff;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:600}
+.salta:focus{top:8px}
+.hp-campo{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* Come funziona: passo attivo. L'interfaccia parte dal passo 1, il JavaScript aggiorna gli attributi. */
+.barra{width:var(--p,0%);transition:width .6s cubic-bezier(.65,0,.35,1)}
+.nodo{color:#8F877A;transition:color .4s}
+.nodo[aria-current=step]{color:#fff}
+.pallino{background:#17130F;transition:transform .4s cubic-bezier(.34,1.56,.64,1),background .4s}
+.nodo[data-fatto] .pallino{background:#F5A623}
+.nodo[aria-current=step] .pallino{transform:scale(1.35)}
+.slide{grid-area:1/1;visibility:hidden;opacity:0;transform:translateX(28px);transition:opacity .5s,transform .6s cubic-bezier(.22,1,.36,1),visibility .5s}
+.slide[data-stato=passato]{transform:translateX(-28px)}
+.slide[data-stato=attivo]{visibility:visible;opacity:1;transform:none}
+.numero{grid-area:1/1;opacity:0;transition:opacity .5s}
+.numero[data-attivo]{opacity:1}
+
+/* Strumenti */
+.strum{background:#F3F1EC;color:#17130F;transition:background .3s,color .3s}
+.strum[aria-pressed=true]{background:#17130F;color:#fff}
+.strum .sub{color:#5E574C;transition:color .3s}
+.strum[aria-pressed=true] .sub{color:#CFC7B8}
+.spunta{opacity:0;transition:opacity .3s}
+.strum[aria-pressed=true] .spunta{opacity:1}
+
+/* Domande */
+.faq-r{display:none}
+.faq-r[data-aperta]{display:flex}
+.plus{transition:transform .3s}
+[aria-expanded=true]>.plus{transform:rotate(45deg)}
+
+/* Form */
+.form-errore{margin-top:6px;font-size:14px;font-weight:700;color:#17130F}
+[aria-invalid=true]{border-width:2px!important;border-color:#17130F!important}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* Senza JavaScript: tutti i passi e tutte le risposte restano leggibili. */
+html:not([data-js]) .slide{grid-area:auto;visibility:visible;opacity:1;transform:none;margin-bottom:24px}
+html:not([data-js]) .faq-r{display:flex}
+html:not([data-js]) .numero{display:none}

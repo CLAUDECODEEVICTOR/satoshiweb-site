@@ -1,0 +1,187 @@
+{
+ "acm-desktop": {
+  "w": 1440,
+  "h": 900,
+  "larghezze": [
+   800,
+   1440
+  ]
+ },
+ "acm-m-orari": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "acm-mobile": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "ant-panel-date": {
+  "w": 700,
+  "h": 1249,
+  "larghezze": [
+   400,
+   700
+  ]
+ },
+ "ant-site": {
+  "w": 700,
+  "h": 1279,
+  "larghezze": [
+   400,
+   700
+  ]
+ },
+ "avatar2": {
+  "w": 400,
+  "h": 400,
+  "larghezze": [
+   400
+  ]
+ },
+ "luca-d-serate": {
+  "w": 1440,
+  "h": 900,
+  "larghezze": [
+   800,
+   1440
+  ]
+ },
+ "luca-serate": {
+  "w": 780,
+  "h": 1340,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-ikta-hero": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-ikta-sedi": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-lg-acm2": {
+  "w": 512,
+  "h": 512,
+  "larghezze": [
+   512
+  ]
+ },
+ "n-lg-ant2": {
+  "w": 256,
+  "h": 256,
+  "larghezze": [
+   256
+  ]
+ },
+ "n-lg-ikt2": {
+  "w": 512,
+  "h": 512,
+  "larghezze": [
+   512
+  ]
+ },
+ "n-lg-luca2": {
+  "w": 512,
+  "h": 512,
+  "larghezze": [
+   512
+  ]
+ },
+ "n-lg-mil2": {
+  "w": 512,
+  "h": 512,
+  "larghezze": [
+   512
+  ]
+ },
+ "n-lg-tai": {
+  "w": 256,
+  "h": 256,
+  "larghezze": [
+   256
+  ]
+ },
+ "n-lpf": {
+  "w": 700,
+  "h": 1430,
+  "larghezze": [
+   400,
+   700
+  ]
+ },
+ "n-lrf": {
+  "w": 700,
+  "h": 1430,
+  "larghezze": [
+   400,
+   700
+  ]
+ },
+ "n-mf": {
+  "w": 700,
+  "h": 1515,
+  "larghezze": [
+   400,
+   700
+  ]
+ },
+ "n-mils": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-taiko-form": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-taiko-hero": {
+  "w": 780,
+  "h": 1688,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-tpe": {
+  "w": 780,
+  "h": 1594,
+  "larghezze": [
+   400,
+   780
+  ]
+ },
+ "n-tpr": {
+  "w": 780,
+  "h": 1594,
+  "larghezze": [
+   400,
+   780
+  ]
+ }
+}
