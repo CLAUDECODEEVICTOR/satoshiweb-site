@@ -36,7 +36,7 @@ with sync_playwright() as p:
         # strumenti
         pg.locator('#strumenti .strum').nth(1).click(); pg.locator('#strumenti .strum').nth(2).click()
         href=pg.locator('#strumenti a[href^="https://wa.me"]').last.get_attribute('href')
-        t(f'[{rid}] WhatsApp strumenti',urllib.parse.unquote(href).endswith('mi servono: prenotazioni, pannello gestione.'),urllib.parse.unquote(href))
+        t(f'[{rid}] WhatsApp strumenti',urllib.parse.unquote(href).endswith('mi servono: prenotazioni, pannello di gestione.'),urllib.parse.unquote(href))
         t(f'[{rid}] conteggio','2 strumenti scelti' in pg.locator('#strumenti [aria-live]').inner_text())
         # faq
         q=pg.locator('#domande button[aria-controls]'); q.nth(0).click(); q.nth(1).click()

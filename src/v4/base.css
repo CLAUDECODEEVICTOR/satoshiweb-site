@@ -1,6 +1,7 @@
 /* Satoshi Web, direzione "Di persona". Le classi uN sono generate da _lavorazione/conv.py a partire dai file di design
    (src/v4/pagine.css); qui stanno le regole che il design non esprime: base, stati, movimento ridotto. */
 html{-webkit-text-size-adjust:100%;scroll-padding-top:72px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:#fff}
 a{color:inherit}a:hover{opacity:.8}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #F5A623;outline-offset:2px}

@@ -11,7 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { legaParole } from './src/lib/lega-parole.mjs';
 import { pagine, jsonldHome, SITO } from './src/v4/meta.mjs';
-import { privacy } from './src/dati/privacy.mjs';
+import { privacy } from './src/v4/privacy.mjs';
 
 const RADICE = path.dirname(fileURLToPath(import.meta.url));
 const V4 = path.join(RADICE, 'src/v4');
@@ -77,7 +77,7 @@ scrivi(jsNome.slice(1), js);
 for (const f of fs.readdirSync(path.join(V4, 'img')).filter((x) => x !== 'manifest.json')) scrivi(`img/${f}`, fs.readFileSync(path.join(V4, 'img', f)));
 
 // 5. Testo: spazi indivisibili sulle parole brevi (tipografia-web), solo nei nodi di testo del corpo.
-function legaHtml(html) {
+function legaHtml(html, vedova = false) {
   let fuori = 0; // dentro <script>, <style>, <svg>, <textarea>
   return html
     .split(/(<[^>]+>)/)
@@ -87,12 +87,12 @@ function legaHtml(html) {
         else if (/^<\/(script|style|svg|textarea)\b/i.test(pezzo)) fuori--;
         return pezzo;
       }
-      return fuori > 0 || !pezzo.trim() ? pezzo : legaParole(pezzo, { vedova: false });
+      return fuori > 0 || !pezzo.trim() ? pezzo : legaParole(pezzo, { vedova });
     })
     .join('');
 }
 
-// 6. Privacy: struttura del design, testo dell'informativa già pubblicata (src/dati/privacy.mjs). Il testo legale non è mio.
+// 6. Privacy: struttura del design, testo della bozza in src/v4/privacy.mjs (non certificata legalmente).
 function corpoPrivacy(frammento) {
   const cls = (re) => (re.exec(frammento) || [])[1] || '';
   const sez = cls(/<section class="([^"]+)"><h2/);
@@ -155,12 +155,17 @@ ${analitica}
 </head>`;
 }
 
+const STELLE = '<svg class="stelle" viewBox="0 0 120 24" width="5em" height="1em" aria-hidden="true" focusable="false"><polygon points="12.0,1.6 14.8,8.8 22.5,9.2 16.5,14.1 18.5,21.5 12.0,17.3 5.5,21.5 7.5,14.1 1.5,9.2 9.2,8.8"/><polygon points="36.0,1.6 38.8,8.8 46.5,9.2 40.5,14.1 42.5,21.5 36.0,17.3 29.5,21.5 31.5,14.1 25.5,9.2 33.2,8.8"/><polygon points="60.0,1.6 62.8,8.8 70.5,9.2 64.5,14.1 66.5,21.5 60.0,17.3 53.5,21.5 55.5,14.1 49.5,9.2 57.2,8.8"/><polygon points="84.0,1.6 86.8,8.8 94.5,9.2 88.5,14.1 90.5,21.5 84.0,17.3 77.5,21.5 79.5,14.1 73.5,9.2 81.2,8.8"/><polygon points="108.0,1.6 110.8,8.8 118.5,9.2 112.5,14.1 114.5,21.5 108.0,17.3 101.5,21.5 103.5,14.1 97.5,9.2 105.2,8.8"/></svg>';
 const html = new Map(); // percorso URL -> html
 for (const p of pagine) {
   let frammento = fs.readFileSync(path.join(V4, 'pagine', `${p.file}.html`), 'utf8');
   if (p.file === 'privacy') frammento = corpoPrivacy(frammento);
-  frammento = legaHtml(frammento);
-  html.set(p.url, `<!doctype html>\n<html lang="it">\n${testa(p)}\n<body${p.file === 'home' ? '' : ' class="int"'}>\n<a class="salta" href="#principale">Vai al contenuto</a>\n${frammento}\n</body>\n</html>\n`);
+  // Stelle delle recensioni: grafica vettoriale con contorno scuro (il testo ★ arancione su bianco dà 2:1), arancione ufficiale invariato.
+  frammento = frammento.replaceAll('★★★★★', STELLE).replaceAll(' aria-label="5 stelle su 5"', ' role="img" aria-label="5 stelle su 5"');
+  frammento = legaHtml(frammento, p.file === 'privacy');
+  // Link verso altri siti (non WhatsApp): si aprono in una nuova scheda, il visitatore resta sul portfolio.
+  frammento = frammento.replace(/<a href="(https?:\/\/(?!wa\.me)[^"]+)"/g, '<a href="$1" target="_blank" rel="noopener noreferrer"');
+  html.set(p.url, `<!doctype html>\n<html lang="it">\n${testa(p)}\n<body${p.file === 'home' ? '' : ` class="int pg-${p.file}"`}>\n<a class="salta" href="#principale">Vai al contenuto</a>\n${frammento}\n</body>\n</html>\n`);
 }
 // Con cleanUrls di Vercel, /lavori/taiko è servito da lavori/taiko.html; la 404 è 404.html.
 for (const [url, h] of html) scrivi(url === '/' ? 'index.html' : `${url.slice(1)}.html`, h);

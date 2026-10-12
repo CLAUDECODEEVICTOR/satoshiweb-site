@@ -20,8 +20,8 @@
 .strum-testo{flex:1 1 0;min-width:0}
 .strum strong{font-family:'Satoshi','Hanken Grotesk',system-ui,sans-serif;font-weight:700;letter-spacing:-.03em;display:block;font-size:17px;line-height:1.15}
 .strum .sub{display:block;margin-top:2px;font-size:13px;line-height:1.35}
-.strum-check{flex:none;position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1.5px solid #B9B2A4;box-sizing:border-box}
-.spunta{position:absolute;inset:-1.5px;border-radius:50%;background:#F5A623;display:flex;align-items:center;justify-content:center}
+.strum-check{flex:none;position:relative;display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #B9B2A4}
+.spunta{position:absolute;inset:0;border-radius:50%;background:#F5A623;display:flex;align-items:center;justify-content:center}
 @media (min-width:768px){
   .strum{display:block;border-radius:20px;padding:22px;min-height:44px}
   .strum-ico{width:44px;height:44px;border-radius:12px}
@@ -43,3 +43,8 @@
   .int main>section,.int main>div,.int main>h1,.int main>p{max-width:600px;margin-left:auto;margin-right:auto}
   .int main>section{padding-left:0;padding-right:0}
 }
+#come [aria-live]{overflow-x:clip}
+#form-contatto a{display:inline-block;padding:3px 0}
+.stelle{vertical-align:-.12em;fill:#F5A623;stroke:#17130F;stroke-width:1.3;stroke-linejoin:round}
+.faq-r a{text-decoration:underline;font-weight:600}
+.pg-grazie main,.pg-404 main{padding-bottom:64px}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "node build-v4.mjs",
+  "outputDirectory": "public",
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/lavori",
+      "destination": "/#lavori",
+      "permanent": false
+    },
+    {
+      "source": "/lavori/",
+      "destination": "/#lavori",
+      "permanent": false
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.satoshiweb.it"
+        }
+      ],
+      "destination": "https://satoshiweb.it/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/pannello",
+      "destination": "/pannello.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(css|js|img|font)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

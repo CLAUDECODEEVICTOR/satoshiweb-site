@@ -59,7 +59,7 @@
   /* STRUMENTI. La lista scelta diventa il testo precompilato del messaggio WhatsApp. */
   var strumenti = document.getElementById('strumenti');
   if (strumenti) {
-    var nomi = ['sito web su misura', 'prenotazioni', 'pannello gestione', 'pagamenti integrati', 'area clienti'];
+    var nomi = ['sito web su misura', 'prenotazioni', 'pannello di gestione', 'area clienti'];
     var bott = $$('.strum', strumenti);
     var conta = $('[aria-live]', strumenti);
     var wa = $$('a[href^="https://wa.me"]', strumenti).pop();
