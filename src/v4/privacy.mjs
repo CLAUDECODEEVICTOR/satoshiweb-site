@@ -22,7 +22,7 @@ export const privacy = {
     {
       titolo: '2. Quali dati raccolgo',
       blocchi: [
-        { b: 'Il modulo di contatto.', p: 'Se lo compili mi lasci nome, un contatto (telefono o email) e il messaggio che scrivi. Mi servono solo per risponderti.' },
+        { b: 'Il modulo di contatto.', p: 'Se lo compili mi lasci nome, un contatto (telefono o email) e il messaggio che scrivi. Mi servono solo per risponderti. Compilare il modulo è facoltativo: puoi anche scrivermi su WhatsApp. Senza questi dati, però, non posso rispondere alla richiesta fatta con il modulo.' },
         { b: 'WhatsApp.', p: 'I pulsanti WhatsApp aprono la tua app con un messaggio già scritto. Da quel momento la conversazione passa dal servizio WhatsApp, che ha una propria informativa.' },
         { b: 'Dati tecnici di navigazione.', p: 'Come avviene per ogni sito, il servizio che lo ospita può registrare dati tecnici delle richieste, come indirizzo IP, tipo di browser e pagina richiesta, per far funzionare e proteggere il sito.' },
         { b: 'Nel tuo browser.', p: 'Le pagine principali del sito non impostano cookie e non salvano dati nel browser. Un caso diverso riguarda alcune pagine di approfondimento, descritto nella sezione 5.' },
@@ -33,6 +33,7 @@ export const privacy = {
       blocchi: [
         { b: 'Rispondere alle tue richieste ed eventualmente prepararti un preventivo.', p: 'Base giuridica: le misure precontrattuali che chiedi tu stesso scrivendomi e, dove serve, il tuo consenso.' },
         { b: 'Far funzionare e proteggere il sito.', p: 'Base giuridica: il mio legittimo interesse a tenere il sito funzionante e sicuro.' },
+        { p: 'Non faccio profilazione e non prendo decisioni basate su trattamenti automatizzati.' },
       ],
     },
     {
@@ -73,6 +74,7 @@ export const privacy = {
           'farli correggere o aggiornare;',
           'chiederne la cancellazione;',
           'limitarne il trattamento od opporti;',
+          'ricevere i dati che mi hai fornito in un formato di uso comune, dove applicabile;',
           'revocare il consenso che hai dato, senza che questo tocchi ciò che è stato fatto prima.',
         ] },
         { p: 'Per esercitare questi diritti scrivi a info@satoshiweb.it o su WhatsApp al +39 334 198 9193. Ti rispondo io, di persona. Se ritieni che il trattamento non sia corretto, puoi rivolgerti al Garante per la protezione dei dati personali.' },
