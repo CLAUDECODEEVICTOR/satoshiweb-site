@@ -165,6 +165,14 @@
   .today-head{display:flex; align-items:baseline; gap:10px; margin-bottom:10px; flex-wrap:wrap}
   .today-head h2{font-size:1.06rem}
   .today-date{color:var(--muted); font-size:.8rem; text-transform:capitalize}
+  .rin-riga{display:flex; align-items:baseline; gap:10px; padding:9px 0; border-top:1px solid var(--line-2); flex-wrap:wrap}
+  .rin-riga:first-of-type{border-top:0}
+  .rin-nome{font-weight:600}
+  .rin-data{color:var(--muted); font-size:.84rem}
+  .rin-quando{margin-left:auto; font-family:var(--disp); font-weight:700}
+  .rin-quando.vicino{color:var(--accent)}
+  .rin-quando.scaduto{color:var(--bad, #b3261e)}
+  .rin-nota{color:var(--muted); font-size:.8rem; margin-top:8px}
   .today-goal{margin-left:auto; font-family:var(--disp); font-weight:700; font-size:1.25rem}
   .today-goal small{color:var(--muted); font-weight:600; font-size:.82rem}
   .today-goal.done{color:var(--good)}
@@ -294,6 +302,7 @@
   <div class="banner" id="banner" hidden></div>
   <div class="view" id="v-oggi">
     <section class="today" id="today"></section>
+    <section class="today" id="rinnovi"></section>
     <section class="stats" id="stats"></section>
   </div>
   <div class="view" id="v-clienti" hidden>
@@ -505,7 +514,7 @@ async function loadAll(){
   snaps = Object.entries(d.analytics||{}).map(([id,v])=>({id,...v}));
   attivita = d.attivita||{};
   progressi = d.studio||{};
-  render(); renderToday(); renderTools(); renderAnx(); renderRoadmap();
+  render(); renderToday(); renderRinnovi(); renderTools(); renderAnx(); renderRoadmap();
 }
 
 // ---- attività giornaliera ----
@@ -549,6 +558,38 @@ function renderToday(){
   const wk=el('div','today-week');
   wk.innerHTML = `Questa settimana: <b class="tnum">${weekTotal()}</b> contatti.` + (done ? ' <span class="ok">Obiettivo di oggi fatto ✓</span>' : ` Mancano <b>${GOAL-tot}</b> per l'obiettivo di oggi.`);
   box.appendChild(wk);
+}
+
+// ---- canoni annuali: scadono 365 giorni dopo il primo incasso (regola del preventivo) ----
+function renderRinnovi(){
+  const box=$('#rinnovi'); if(!box) return; box.innerHTML='';
+  const oggi=new Date(); oggi.setHours(0,0,0,0);
+  const annuali=clienti.filter(c=>!c.gratis && c.canone>0 && (c.periodo||'anno')==='anno');
+  const pagati=annuali.filter(c=>c.stato==='Consegnato' && parseD(c.dincasso)).map(c=>{
+    const sc=parseD(c.dincasso); sc.setDate(sc.getDate()+365);
+    return {c, sc, gg:Math.round((sc-oggi)/86400000)};
+  }).sort((a,b)=>a.sc-b.sc);
+  const attesa=annuali.filter(c=>!pagati.some(r=>r.c.id===c.id) && OPEN.includes(c.stato));
+  const head=el('div','today-head'); head.appendChild(el('h2',null,'Canoni da incassare'));
+  const tot=pagati.reduce((t,r)=>t+r.c.canone,0);
+  const goal=el('div','today-goal'); goal.innerHTML=`${eur(tot)} <small>nei prossimi 12 mesi</small>`; head.appendChild(goal);
+  box.appendChild(head);
+  if(!pagati.length && !attesa.length){ box.appendChild(el('div','rin-nota','Nessun canone annuale in programma.')); return; }
+  pagati.forEach(r=>{
+    const row=el('div','rin-riga');
+    row.appendChild(el('span','rin-nome',r.c.nome||'Senza nome'));
+    row.appendChild(el('span','rin-data',`${eur(r.c.canone)} · primo incasso ${fmtD(r.c.dincasso)} → scade ${r.sc.toLocaleDateString('it-IT',{day:'numeric',month:'short',year:'numeric'})}`));
+    const q=el('span','rin-quando'+(r.gg<0?' scaduto':r.gg<=30?' vicino':''), r.gg<0?`scaduto da ${-r.gg} gg`:r.gg===0?'oggi':`tra ${r.gg} gg`);
+    row.appendChild(q); box.appendChild(row);
+  });
+  attesa.forEach(c=>{
+    const row=el('div','rin-riga');
+    row.appendChild(el('span','rin-nome',c.nome||'Senza nome'));
+    row.appendChild(el('span','rin-data',`${eur(c.canone)} · parte 365 giorni dopo il primo pagamento`));
+    row.appendChild(el('span','rin-quando','in attesa'));
+    box.appendChild(row);
+  });
+  box.appendChild(el('div','rin-nota','Quando scade, emetti la fattura del canone (più 2 € di bollo se lo addebiti).'));
 }
 
 const TIPI=['Tutti','PR','Locale','Shop B2B','App propria'];
@@ -634,7 +675,7 @@ function renderList(){
   v.forEach(c=>list.appendChild(card(c)));
 }
 
-function render(){ renderStats(); renderList(); }
+function render(){ renderStats(); renderList(); renderRinnovi(); }
 
 // ---- modal cliente ----
 const dlg=$('#dlg');
